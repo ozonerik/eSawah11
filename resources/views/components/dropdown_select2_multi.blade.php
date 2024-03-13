@@ -10,6 +10,7 @@
     </div>
     @if($errors->has( $name ))<div class="invalid-feedback">{{ $errors->first($name) }}</div>@endif
 </div>
+@push('js')
 <script>
 document.addEventListener('livewire:load', function () {
     $('#{{$ids}}').select2({
@@ -34,3 +35,4 @@ window.addEventListener('run_select2', event => {
     });
 });
 </script>
+@endpush

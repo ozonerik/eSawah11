@@ -11,6 +11,7 @@
     </div>
 </div>
 
+@push('js')
 <script>
 document.addEventListener('livewire:load', function () {
     $('#{{$ids}}').select2({
@@ -36,3 +37,4 @@ window.addEventListener('run_select2', event => {
     });
 });
 </script>
+@endpush

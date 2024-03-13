@@ -1,6 +1,7 @@
 @push('css')
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">
 @endpush
+@push('js')
 <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" ></script>
 <script>
 function showMaps($emitname, $lat, $long, $ac, $iddiv, $dragable,$popup){
@@ -48,3 +49,4 @@ function showMaps($emitname, $lat, $long, $ac, $iddiv, $dragable,$popup){
     }
 }
 </script>
+@endpush
