@@ -1,1 +1,1 @@
-<strong>Copyright &copy; {{ date('Y') }} <a href="{{ url_copyright() }}">{{ get_copyright() }}</a>.</strong> All rights reserved.
+<strong>Copyright eSawah <span style="color:red">{{get_version()}}</span> &copy; {{ date('Y') }} <a href="{{ url_copyright() }}">{{ get_copyright() }}</a>.</strong> All rights reserved.
