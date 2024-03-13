@@ -15,7 +15,7 @@
             {{ __('Before proceeding, please check your email for a verification link.') }}
             {{ __('If you did not receive the email') }},
         </div>
-        <form method="POST" action="{{ route('verification.resend') }}">
+        <form method="POST" action="{{ route('verification.send') }}">
             @csrf
             <div class="row">
             <!-- /.col -->
