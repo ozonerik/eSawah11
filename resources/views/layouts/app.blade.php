@@ -36,6 +36,9 @@
         </x-sidebar>
         <div class="content-wrapper">
             <div class="content">
+                @if( isset($slot) )
+                    {{ $slot }}
+                @endif
                 @yield('content')
             </div>
         </div>

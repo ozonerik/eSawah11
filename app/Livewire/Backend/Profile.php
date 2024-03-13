@@ -77,7 +77,7 @@ class Profile extends Component
         $myfile = User::findOrFail(Auth::user()->id);
         $this->oldpath = $myfile->photo;
         //dd($this->oldpath);
-        $dir='photos'; 
+        // $dir='photos'; 
         if(!empty($this->oldpath)){
             $this->newpath="data:image/png;base64,".base64_encode(file_get_contents($this->photo->path()));
 /*             $this->newpath=$this->photo->store($dir,'public'); //setingan di confi/filesystem
