@@ -3,6 +3,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/bindings/inputmask.binding.min.js" integrity="sha512-TGXLFBp6KE2kQHdH2lH1ysWKWKeuV013LpSktndHu9j3fT8tI7kqz4bWiOIIyFdn3Q65RcdrT/OkdL4LJPEGXQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     $(document).ready(function(){
+        $('#tanggal').datepicker({
+            autoclose:true,
+            format:'dd/mm/yyyy',
+            orientation:'bottom',
+            highlight:true,
+            language:'id',
+            todayHighlight:true,
+            todayBtn:true,
+        }).on('changeDate', function(e) {
+            let nilai=$('#tanggal').val();
+            @this.set('tanggal', nilai);
+        });
         $('#luas').inputmask({
             'autoUnmask': true, 
             'suffix': ' m2','alias': 

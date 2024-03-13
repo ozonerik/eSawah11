@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-- Theme style -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css" integrity="sha512-IuO+tczf4J43RzbCMEFggCWW5JuX78IrCJRFFBoQEXNvGI6gkUw4OjuwMidiS4Lm9Q2lILzpJwZuMWuSEeT9UQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<!-- toogle switch -->
+<!-- toogle switch darkmode -->
 <link rel="stylesheet" href="{{ asset('dist/css/toogle-switch.css') }}">
 <!-- overlayScrollbars -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/2.6.1/styles/overlayscrollbars.min.css" integrity="sha512-uZiMbG+1/j7fCeJdEq6+GVjZfqcr9MmFKch8cEX+Mvpu0ZgzPLnNtj9HMhdk9nP2SGImMiQIk82xNoziMClVrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
