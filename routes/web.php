@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Backend\Profile;
 use App\Livewire\Backend\Dashboard;
 use App\Livewire\Frontend\Home;
+use App\Livewire\Test;
 
 /* Route::get('/', function () {
     return view('welcome');
@@ -15,6 +16,7 @@ use App\Livewire\Frontend\Home;
 })->middleware(['auth', 'verified'])->name('dashboard'); */
 
 Route::get('/', Home::class);
+Route::get('/test', Test::class);
 Route::get('/home', Home::class)->name('home');
 
 Route::group(['middleware' => ['auth','verified']], function () {

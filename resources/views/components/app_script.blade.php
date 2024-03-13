@@ -10,7 +10,7 @@
 <!-- Bootstrap 4 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js" integrity="sha512-igl8WEUuas9k5dtnhKqyyld6TzzRjvMqLC79jkgT3z02FvJyHAuUtyemm/P/jYSne1xwFI06ezQxEwweaiV7VA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- overlayScrollbars -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/2.6.1/overlayscrollbars.cjs.min.js" integrity="sha512-YvETuktydSSxyuah3Xv7TFAgVhrxtVsk41UtOfN3jRjtAKV1EOg9PG+Wl7t09JXMJ+SS7qgLppah9w9svwgTFA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/2.6.1/browser/overlayscrollbars.browser.es6.min.js" integrity="sha512-48eUZ9NudvASJ8GfcUVVjSHtR+7L5R22m5/WipgfwYceuGh0oaGddD2mY4Btl42dNw4x6rKH2zrgwi9lIshUBg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- toastr -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- bs-datepicker -->
