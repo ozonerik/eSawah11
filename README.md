@@ -1,66 +1,55 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><img src="public/logo/esawah-logo.png" width="100"></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## About esawah
 
-## About Laravel
+<b>esawah</b> adalah aplikasi manajemen penyewaan sawah berbasis web.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Next Fitures 11
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<b><i>Fitur For 11</i></b>
+<ul>
+<li>CRUD Pawongan</li>
+<li>CRUD Lanja</li>
+<li>CRUD Pajak</li>
+<li>CRUD Zakat</li>
+<li>API Harga Emas untuk Zakat</li>
+<li>Harga Pasaran Sawah Per Bata untuk Nilai Aset</li>
+</ul>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Changelogs
 
-## Learning Laravel
+<b><i>v11</i></b>
+<ul>
+<li><b>New</b> Laravel v11</li>
+<li><b>New</b> Livewire v3</li>
+<li><b>New</b> Fontawesome v6</li>
+<li><b>New</b> Spatie Permission V6</li>
+<li><b>New</b> Admin LTE v3.2</li>
+<li><b>New</b> jantinnerezo/livewire-alert</li>
+<li><b>New</b> uxsolutions/bootstrap-datepicker</li>
+<li><b>New</b> leafletjs.com</li>
+<li><b>New</b> ljagis/leaflet-measure</li>
+<li><b>New</b> leaflet-googlemap</li>
+</ul>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Packages
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **[Laravel 11](https://laravel.com/docs/11.x/releases)**
+- **[Livewire 3](https://livewire.laravel.com/docs/quickstart)**
+- **[Bootstrap 4.6](https://getbootstrap.com/docs/4.6/getting-started/introduction/)**
+- **[Fontawesome 6](https://fontawesome.com/icons)**
+- **[Spatie Permission 6](https://spatie.be/docs/laravel-permission/v6/introduction)**
+- **[Admin LTE 3.2](https://github.com/ColorlibHQ/AdminLTE/releases/tag/v3.2.0)**
+- **[Grayscale Template](https://startbootstrap.com/theme/grayscale)**
+- **[jantinnerezo/livewire-alert](https://github.com/jantinnerezo/livewire-alert)**
+- **[uxsolutions/bootstrap-datepicker](https://github.com/uxsolutions/bootstrap-datepicker)**
+- **[leafletjs.com](https://leafletjs.com/)**
+- **[ljagis/leaflet-measure](https://github.com/ljagis/leaflet-measure/)**
+- **[leaflet-googlemap](https://stackoverflow.com/questions/9394190/leaflet-map-api-with-google-satellite-layer)**
+- **[select2/select2](https://github.com/select2/select2)**
+- **[CodeSeve/toastr](https://github.com/CodeSeven/toastr)**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+## Developer
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Aplikasi ini dibuat oleh  [M. Ade Erik](mailto:ozonerik@gmail.com)
