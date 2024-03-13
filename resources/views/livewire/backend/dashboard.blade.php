@@ -46,6 +46,8 @@
                 <label for="result" class="form-label">Result : </label>
                 <input wire:model="result" name="result" type="text" class="form-control" id="result">
             </div>
+            <x-dropdown_select2 ids="user" label="User" name="user" :data="$user" values="id" showval="name"/>
+            <x-dropdown_select2_multi ids="user_multi" label="User Multi" name="user_multi" :data="$user" values="id" showval="name"/>
         </x-card_form>
     </div>
 </div>
