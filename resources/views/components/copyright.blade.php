@@ -1,0 +1,1 @@
+<strong>Copyright &copy; {{ date('Y') }} <a href="{{ url_copyright() }}">{{ get_copyright() }}</a>.</strong> All rights reserved.

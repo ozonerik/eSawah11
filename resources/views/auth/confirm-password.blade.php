@@ -1,27 +1,49 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+@extends('layouts.guest')
+@section('content')
+<div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+        <x-logo_guest/>
+        <div class="card-body">
+            <p class="login-box-msg">{{ __('Confirm Password') }}</p>
+            <span>{{ __('Please confirm your password before continuing.') }}</span>
+            <form method="POST" action="{{ route('password.confirm') }}">
+                @csrf
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="{{ __('Password') }}" name="password" required autocomplete="current-password">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">{{ __('Confirm Password') }}</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+            @if (Route::has('password.request'))
+                <p class="mb-1">
+                    <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
+                </p>
+            @endif
+            @if (Route::has('register'))
+                <p class="mb-0">
+                    <a href="{{ route('register') }}" class="text-center">{{ __('Register a new membership') }}</a>
+                </p>
+            @endif
+        </div>
+        <!-- /.card-body -->
     </div>
-
-    <form method="POST" action="{{ route('password.confirm') }}">
-        @csrf
-
-        <!-- Password -->
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <div class="flex justify-end mt-4">
-            <x-primary-button>
-                {{ __('Confirm') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    <!-- /.card -->
+</div>
+<!-- /.login-box -->
+@endsection
