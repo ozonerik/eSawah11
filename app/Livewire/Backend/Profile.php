@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Illuminate\Support\Str;
 
 class Profile extends Component
 {
@@ -27,11 +28,11 @@ class Profile extends Component
         $this->resetValidation();
     }
 
-    private function deletefile($pathfile){
+/*     private function deletefile($pathfile){
         if(Storage::disk('public')->exists($pathfile)){
             Storage::disk('public')->delete($pathfile);
         }
-    }
+    } */
 
     public function mount()
     {
@@ -78,13 +79,14 @@ class Profile extends Component
         //dd($this->oldpath);
         $dir='photos'; 
         if(!empty($this->oldpath)){
-            $this->newpath=$this->photo->store($dir,'public'); //setingan di confi/filesystem
-            $this->deletefile($this->oldpath);
+            $this->newpath="data:image/png;base64,".base64_encode(file_get_contents($this->photo->path()));
+/*             $this->newpath=$this->photo->store($dir,'public'); //setingan di confi/filesystem
+            $this->deletefile($this->oldpath); */
             User::updateOrCreate(['id' => Auth::user()->id], [
                 'photo' => $this->newpath
             ]);
         }else{
-            $this->newpath=$this->photo->store($dir,'public');
+            $this->newpath="data:image/png;base64,".base64_encode(file_get_contents($this->photo->path()));
            //dd($this->newpath);
             User::updateOrCreate(['id' => Auth::user()->id], [
                 'photo' => $this->newpath
