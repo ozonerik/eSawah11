@@ -8,18 +8,15 @@ use Livewire\Attributes\Layout;
 class Test extends Component
 {
     #[Layout('components.layouts.app')] 
-    public $count = 1;
- 
-    public function increment()
-    {
-        $this->count++;
-    }
- 
-    public function decrement()
-    {
-        $this->count--;
+    public $luas,$tanggal,$result;
+
+    public function updatedLuas($value){
+        $this->result=$value;
     }
 
+    public function updatedTanggal($value){
+        $this->result=$value;
+    }
     
     public function render()
     {
