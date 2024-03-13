@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Backend\Profile;
+use App\Livewire\Backend\Dashboard;
 use App\Livewire\Frontend\Home;
 
 /* Route::get('/', function () {
@@ -17,7 +18,7 @@ Route::get('/', Home::class);
 Route::get('/home', Home::class)->name('home');
 
 Route::group(['middleware' => ['auth','verified']], function () {
-    Route::get('/dashboard', Profile::class)->name('dashboard');
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::get('/result', Profile::class)->name('result');
     Route::get('/sawahs', Profile::class)->name('sawahs');
     Route::get('/profile', Profile::class)->name('profile');
