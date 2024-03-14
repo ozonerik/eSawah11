@@ -108,5 +108,8 @@
         }
     }
 
-    toggleSwitch.addEventListener('change', switchTheme, false);
+    if(toggleSwitch != null){
+        toggleSwitch.addEventListener('change', switchTheme, false);
+    }
+    
 </script>
