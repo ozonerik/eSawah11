@@ -1,43 +1,55 @@
-@push('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/bindings/inputmask.binding.min.js" integrity="sha512-TGXLFBp6KE2kQHdH2lH1ysWKWKeuV013LpSktndHu9j3fT8tI7kqz4bWiOIIyFdn3Q65RcdrT/OkdL4LJPEGXQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-    $(document).ready(function(){
-        $('#luas').inputmask({
-            'autoUnmask': true, 
-            'suffix': ' m2','alias': 
-            'decimal', 'radixPoint':',', 
-            'groupSeparator': '.', 
-            'autoGroup': true, 
-            'digits': 2, 
-            'digitsOptional': false, 
-            'rightAlign': false 
-        }).on('keyup', function(e) {
-            let nilai=$('#luas').val();
-            @this.set('luas', nilai);
-        });
-        $('#tanggal').inputmask({
-            'alias': 'datetime', 
-            'inputFormat': 'dd/mm/yyyy',
-            'rightAlign': false 
-        }).on('keyup', function(e) {
-            let nilai=$('#tanggal').val();
-            @this.set('tanggal', nilai);
-        });
-    });
-</script>
+@push('css')
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
+  <link rel="stylesheet" href="https://ljagis.github.io/leaflet-measure/leaflet-measure.css">
+  <style>
+    #map {
+      height: 500px;
+      margin: 20px 20px 0 0;
+    }
+  </style>
 @endpush
 <div>
-    <div class="mb-3">
-        <label for="luas" class="form-label">Luas : </label>
-        <input wire:model.live="luas" name="luas" type="text" class="form-control" id="luas">
-    </div>
-    <div class="mb-3">
-        <label for="tanggal" class="form-label">Tanggal : </label>
-        <input wire:model.live="tanggal" name="tanggal" type="text" class="form-control" id="tanggal">
-    </div>
-    <div class="mb-3">
-        <label for="result" class="form-label">Result : </label>
-        <input wire:model="result" name="result" type="text" class="form-control" id="result">
-    </div>
+  <h1>leaflet-measure</h1>
+  <p class="github"><a href="//github.com/ljagis/leaflet-measure">github.com/ljagis/leaflet-measure</a></p>
+  <div id="map"></div>
+  <h2><code>measurefinish</code> event data:</h2>
+  <pre id="eventoutput">...</pre>
 </div>
+@push('js')
+  <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+  <script src="https://ljagis.github.io/leaflet-measure/leaflet-measure.js"></script>
+  <script>
+    (function(L, document) {
+      var map = L.map('map', {
+        center: [29.749817, -95.080757],
+        zoom: 16,
+        measureControl: true
+      });
+      L.tileLayer('//server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        minZoom: 14,
+        maxZoom: 18,
+        attribution: '&copy; Esri &mdash; Sources: Esri, DigitalGlobe, Earthstar Geographics, CNES/Airbus DS, GeoEye, USDA FSA, USGS, Getmapping, Aerogrid, IGN, IGP, swisstopo, and the GIS User Community'
+      }).addTo(map);
+
+      map.on('measurefinish', function(evt) {
+        writeResults(evt);
+      });
+
+      function writeResults(results) {
+        document.getElementById('eventoutput').innerHTML = JSON.stringify(
+          {
+            area: results.area,
+            areaDisplay: results.areaDisplay,
+            lastCoord: results.lastCoord,
+            length: results.length,
+            lengthDisplay: results.lengthDisplay,
+            pointCount: results.pointCount,
+            points: results.points
+          },
+          null,
+          2
+        );
+      }
+    })(window.L, window.document);
+  </script>
+@endpush
