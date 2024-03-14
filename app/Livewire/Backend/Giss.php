@@ -119,14 +119,14 @@ class Giss extends Component
     public function onHitung(){
          $this->validate(
              [ 
-                 'luas' => 'numeric|nullable',
-                 'luasbata' => 'numeric|nullable',
+                 'luas' => 'nullable',
+                 'luasbata' => 'nullable',
                  'hgpadi' => 'required',
-                 'lanja' => 'required|numeric',
+                 'lanja' => 'required',
              ]);
             $luas=$this->luas;
             $luasbata=$this->luasbata;
-            $hgpadi=$this->hgpadi;
+            $hgpadi=conv_inputmask($this->hgpadi);
             $lanja=$this->lanja;
             $this->lanjakw= get_lanja($luas,$lanja);
             $this->lanjarp= get_nlanja($luas,$lanja,$hgpadi);
