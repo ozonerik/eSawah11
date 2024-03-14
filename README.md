@@ -48,7 +48,7 @@
 - **[leaflet-googlemap](https://stackoverflow.com/questions/9394190/leaflet-map-api-with-google-satellite-layer)**
 - **[select2/select2](https://github.com/select2/select2)**
 - **[CodeSeve/toastr](https://github.com/CodeSeven/toastr)**
-
+- **[Spatie/Geocoder](https://github.com/spatie/geocoder)**
 
 ## Developer
 

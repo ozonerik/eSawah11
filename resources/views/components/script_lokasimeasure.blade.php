@@ -1,17 +1,19 @@
 @push('css')
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">
+<link rel="stylesheet" href="{{ asset('plugins/leaflet-maps/leaflet-measure.css') }}">
 @endpush
-@push('js')
 <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" ></script>
+<script src="{{ asset('plugins/leaflet-maps/leaflet-measure.js') }}"></script>
 <script>
-function showMaps($emitname, $lat, $long, $ac, $iddiv, $dragable,$popup){
+function showMeasureMaps($emitname, $lat, $long, $ac, $iddiv, $dragable,$popup){
     const container = document.getElementById($iddiv)
     if(container) {
         var map_init=null;
         var marker,vlat,vlong,circle;
         map_init = L.map($iddiv, {
             center: [$lat, $long],
-            zoom: 18
+            zoom: 18,
+            measureControl: true
         });
 
         //https://stackoverflow.com/questions/9394190/leaflet-map-api-with-google-satellite-layer
@@ -46,7 +48,16 @@ function showMaps($emitname, $lat, $long, $ac, $iddiv, $dragable,$popup){
             var featureGroup = L.featureGroup([marker, circle]).addTo(map_init);
             map_init.fitBounds(featureGroup.getBounds());
         }
+
+        map_init.on('measurefinish', function(evt) {
+            writeResults(evt);
+        });
     }
+    
+}
+function writeResults(results) {
+    @this.set('luas', results.area.toFixed(2));
+    @this.set('luasbata', ((results.area)/14).toFixed(2));
+    @this.set('keliling', results.length.toFixed(2));
 }
 </script>
-@endpush

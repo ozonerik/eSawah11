@@ -1,7 +1,12 @@
 @push('js')
     <script>
         function myFunction() {
-            Livewire.dispatch('testEmit',['hallo']);
+            Livewire.dispatch('testEmit',[{'lat': '123', 'long': '12345'}]);
+        } 
+    </script>
+        <script>
+        function myFunction2() {
+            Livewire.dispatch('testEmit2',['hallo2']);
         } 
     </script>
 @endpush
@@ -13,6 +18,7 @@
         <x-card_form name="Daftar Lanja" width="12" order="1" smallorder="1" closeto="onRead">
             <h1>Ini Dashboard</h1>
             <button onclick="myFunction()">Click Emit</button>
+            <button onclick="myFunction2()">Click Emit 2</button>
             <x-input_mask typemask="luas" disabled="false" ids="luas" label="Luas" types="text" name="luas" placeholder="Type Luas" />
             <x-input_mask typemask="tanggal" disabled="false" ids="tanggal" label="Tanggal" types="text" name="tanggal" placeholder="Type tanggal" />
             <x-input_mask typemask="text" disabled="true" ids="result" label="Result" types="text" name="result" placeholder="Type Result" />

@@ -45,3 +45,54 @@ if (!function_exists('get_version')) {
         return 'v11';
     }
 }
+
+if (!function_exists('get_floatttorp')) {
+    function get_floatttorp($val){
+        $val = floatval($val);
+        $a = new NumberFormatter("id-ID", NumberFormatter::CURRENCY);
+        $a->setAttribute( $a::FRACTION_DIGITS, 0 );
+        $result=$a->formatCurrency($val,"IDR");
+        return $result;
+    }
+}
+
+if (!function_exists('get_hargapadi')) {
+    function get_hargapadi(){
+        //$harga=750000;
+        $harga=Appconfig::find(1)->hargapadi;
+        return $harga;
+    }
+}
+
+if (!function_exists('get_nilailanja')) {
+    function get_nilailanja(){
+        //$lanja=5;
+        $lanja=Appconfig::find(1)->nilailanja;
+        return $lanja;
+    }
+}
+
+if (!function_exists('get_lanja')) {
+    function get_lanja($meter,$kw){
+        $a = new NumberFormatter("id-ID", NumberFormatter::DECIMAL);
+        $kw=intval($kw);
+        $bata=floatval($meter)/14.00;
+        $lanja=$bata/100;
+        $val=round($lanja*$kw,2);
+        $nlanjakw=$a->format($val);
+        $lanjatext=$nlanjakw." kw";
+        return $lanjatext;
+    }
+}
+
+if (!function_exists('get_nlanja')) {
+    function get_nlanja($meter,$kw,$harga){
+        $kw=intval($kw);
+        $harga=intval($harga);
+        $bata=floatval($meter)/14.00;
+        $lanja=$bata/100;
+        $nlanjarp=round($lanja*$kw,2)*$harga;
+        $nlanjatext=get_floatttorp($nlanjarp);
+        return $nlanjatext;
+    }
+}

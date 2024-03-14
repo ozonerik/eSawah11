@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Backend\Profile;
 use App\Livewire\Backend\Dashboard;
+use App\Livewire\Backend\Giss;
 use App\Livewire\Frontend\Home;
 use App\Livewire\Test;
 
@@ -28,13 +29,13 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/lanjas', Profile::class)->name('lanjas');
     Route::get('/bayarlanjas', Profile::class)->name('bayarlanjas');
     Route::group(['middleware' => ['role:pro']], function () {
-        Route::get('/giss', Profile::class)->name('giss');
+        Route::get('/giss', Giss::class)->name('giss');
     });
     Route::group(['middleware' => ['role:admin']], function () {
         Route::get('/referensi', Profile::class)->name('referensi');
         Route::get('/users', Profile::class)->name('users');
         Route::get('/infos', Profile::class)->name('infos');
-        Route::get('/giss', Profile::class)->name('giss');
+        Route::get('/giss', Giss::class)->name('giss');
     });
 });
 

@@ -21,6 +21,12 @@ class Dashboard extends Component
         dd($data);
     }
 
+    #[On('testEmit2')] 
+    public function nilaiEmit2($data)
+    {
+        dd($data);
+    }
+
     public function updatedLuas($value){
         $this->result=$value;
     }
