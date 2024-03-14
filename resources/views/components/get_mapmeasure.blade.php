@@ -5,7 +5,6 @@ window.addEventListener(@js($eventname), event => {
         var lg=position.coords.longitude;
         var ac = position.coords.accuracy;
         var mapname= @js($mapname)+'-'+event.detail.map_id;
-        console.log(mapname);
         Livewire.dispatch(@js($emitname), [{'lat': lt, 'long': lg}]);
         showMeasureMaps(@js($emitname),lt,lg,ac,mapname,'true','Your Location') 
     }

@@ -1,6 +1,6 @@
 <script>
-document.addEventListener('livewire:init', function () {
-    Livewire.dispatch('onGetAdress');
+document.addEventListener('livewire:initialized', () => {
+        Livewire.dispatch('onGetAdress');
 })
 </script>
 <script>
