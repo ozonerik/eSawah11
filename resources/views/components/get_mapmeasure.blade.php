@@ -1,5 +1,5 @@
 <script>
-window.addEventListener(@js($eventname), event => {
+document.addEventListener(@js($eventname), event => {
     function getPosition(position) {
         var lt=position.coords.latitude;
         var lg=position.coords.longitude;

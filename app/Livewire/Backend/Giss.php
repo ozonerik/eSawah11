@@ -11,10 +11,8 @@ class Giss extends Component
     public $latlang,$luas,$luasbata,$keliling,$lokasi;
     public $mode='read';
     public $map_id = 0;
-    public $hgpadi;
-    public $lanja;
-    public $lanjakw;
-    public $lanjarp;
+    public $hgpadi,$lanja,$lanjakw,$lanjarp;
+    public $loadmap;
 
     //autocomplete address
     #[On('onGetAdress')]

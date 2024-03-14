@@ -15,7 +15,8 @@
         @if($mode=='read')
         <x-card_section2 name="GIS - Sawah" type="primary" width="12" order="1" smallorder="1">
             <form wire:submit.prevent="onHitung">
-                <div wire:ignore id="gismap-{{$map_id}}" class="w-100 rounded bg-blank" style="height: 400px;"></div>
+            {{$map_id}}
+                <div wire.model.live="loadmap" wire:ignore id="gismap-{{$map_id}}" class="w-100 rounded bg-blank" style="height: 400px;"></div>
                 <x-input_form wajib="" disabled="" ids="lokasi" label="Lokasi" types="text" name="lokasi" placeholder="Get Lokasi" />
                 <x-inputlokasi_form action="onGetlokasi" labelbtn="Get My Location" wajib="" disabled="" ids="latlang" label="Koordinat" types="text" name="latlang" placeholder="Get Koordinat" />
                 <x-input_form wajib="" disabled="" ids="luas" label="Luas (m2)" types="text" name="luas" placeholder="Get Luas (m2)" />
