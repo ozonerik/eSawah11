@@ -46,22 +46,27 @@ class Giss extends Component
                 $this->lokasi=  $geocoder ;
             }else{
                 $this->lokasi=  '' ;
-                $this->dispatch('getaddress',[
-                    'map_id' => $this->map_id,
-                    'lt' => 0,
-                    'lg' => 0,
-                    'kordinat' => '',
-                ]);   
+                $this->dispatch('getaddress',
+                    map_id:$this->map_id,
+                    lt:0,
+                    lg:0,
+                    kordinat:'',
+                );   
             }    
         }else{
             $this->lokasi=$data['lokasi'];
             $this->map_id++;
-            $this->dispatch('getaddress',[
-                'map_id' => $this->map_id,
-                'lt' => $data['lat'],
-                'lg' => $data['long'],
-                'kordinat' => $this->latlang,
-            ]);
+            $nilai=['map_id' => $this->map_id,
+            'lt' => $data['lat'],
+            'lg' => $data['long'],
+            'kordinat' => $this->latlang];
+            //dd($nilai);
+            $this->dispatch('getaddress',
+            map_id:$this->map_id,
+            lt:$data['lat'],
+            lg:$data['long'],
+            kordinat:$this->latlang
+            ); //ini yag trouble
         }
     }
 

@@ -13,6 +13,8 @@ document.addEventListener(@js($eventname), event => {
     var kordinat=event.detail.kordinat;
     var mapname=@js($mapname)+'-'+map_id;
     if (!(lt === undefined || lg === undefined || lt === 0 || lg === 0)){
+        let nilai = [@js($emitname),lt,lg,ac,mapname,'true',kordinat]
+        console.log(nilai);
         showMeasureMaps(@js($emitname),lt,lg,ac,mapname,'true',kordinat);
     }else{
         showMeasureMaps(@js($emitname),lt,lg,ac,'nomap'+'-'+map_id,'true','NoMap');
