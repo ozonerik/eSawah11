@@ -17,6 +17,6 @@ class Test extends Component
     }
     public function render()
     {
-        return view('livewire.test')->layout('components.layouts.app');
+        return view('livewire.test')->layout('layouts.app');
     }
 }
