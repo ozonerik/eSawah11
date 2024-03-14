@@ -219,9 +219,9 @@ if (!function_exists('get_lanja')) {
         $bata=floatval($meter)/14.00;
         $lanja=$bata/100;
         $val=round($lanja*$kw,2);
-        $nlanjakw=$a->format($val);
-        $lanjatext=$nlanjakw." kw";
-        return $lanjatext;
+        //$nlanjakw=$a->format($val);
+        //$lanjatext=$nlanjakw." kw";
+        return $val;
     }
 }
 
@@ -232,8 +232,8 @@ if (!function_exists('get_nlanja')) {
         $bata=floatval($meter)/14.00;
         $lanja=$bata/100;
         $nlanjarp=round($lanja*$kw,2)*$harga;
-        $nlanjatext=get_floatttorp($nlanjarp);
-        return $nlanjatext;
+        //$nlanjatext=get_floatttorp($nlanjarp);
+        return $nlanjarp;
     }
 }
 
