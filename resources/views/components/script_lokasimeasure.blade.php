@@ -1,9 +1,3 @@
-@push('css')
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">
-<link rel="stylesheet" href="{{ asset('plugins/leaflet-maps/leaflet-measure.css') }}">
-@endpush
-<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" ></script>
-<script src="{{ asset('plugins/leaflet-maps/leaflet-measure.js') }}"></script>
 <script>
 function showMeasureMaps($emitname, $lat, $long, $ac, $iddiv, $dragable,$popup){
     const container = document.getElementById($iddiv)

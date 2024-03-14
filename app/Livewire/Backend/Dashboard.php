@@ -12,7 +12,7 @@ class Dashboard extends Component
 {
     
     #[Layout('layouts.app')] 
-    public $user,$luas,$tanggal,$result;
+    public $user,$luas,$tanggal,$result,$address;
     public $user_multi=[];
 
     #[On('testEmit')] 

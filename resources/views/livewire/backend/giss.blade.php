@@ -1,3 +1,11 @@
+@push('css')
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">
+<link rel="stylesheet" href="{{ asset('plugins/leaflet-maps/leaflet-measure.css') }}">
+@endpush
+@push('js')
+<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" ></script>
+<script src="{{ asset('plugins/leaflet-maps/leaflet-measure.js') }}"></script>
+@endpush
 @push('js')
 <!-- edit -->
 <x-get_measureaddress eventname="getaddress" emitname="getLatlangInput" inputname="lokasi" mapname="gismap" kordinatname="latlang"/>

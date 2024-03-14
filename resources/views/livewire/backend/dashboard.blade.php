@@ -1,14 +1,150 @@
+@push('css')
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">
+<link rel="stylesheet" href="{{ asset('plugins/leaflet-maps/leaflet-measure.css') }}">
+<style>
+    #mymap {
+      height: 500px;
+      margin: 20px 20px 0 0;
+    }
+</style>
+@endpush
 @push('js')
-    <script>
-        function myFunction() {
-            Livewire.dispatch('testEmit',[{'lat': '123', 'long': '12345'}]);
-        } 
-    </script>
-        <script>
-        function myFunction2() {
-            Livewire.dispatch('testEmit2',['hallo2']);
-        } 
-    </script>
+<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" ></script>
+<script src="{{ asset('plugins/leaflet-maps/leaflet-measure.js') }}"></script>
+</script>
+<!-- <script>
+    document.addEventListener('livewire:initialized', () => {
+        showMaps();
+    });
+</script> -->
+<!-- <script>
+    function showMaps() {
+      var map = L.map('mymap', {
+        center: [29.749817, -95.080757],
+        zoom: 16,
+        measureControl: true
+      });
+      L.tileLayer('//server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        minZoom: 14,
+        maxZoom: 18,
+        attribution: '&copy; Esri &mdash; Sources: Esri, DigitalGlobe, Earthstar Geographics, CNES/Airbus DS, GeoEye, USDA FSA, USGS, Getmapping, Aerogrid, IGN, IGP, swisstopo, and the GIS User Community'
+      }).addTo(map);
+
+      map.on('measurefinish', function(evt) {
+        writeResults(evt);
+      });
+
+      function writeResults(results) {
+        document.getElementById('eventoutput').innerHTML = JSON.stringify(
+          {
+            area: results.area,
+            areaDisplay: results.areaDisplay,
+            lastCoord: results.lastCoord,
+            length: results.length,
+            lengthDisplay: results.lengthDisplay,
+            pointCount: results.pointCount,
+            points: results.points
+          },
+          null,
+          2
+        );
+      }
+    }
+</script> -->
+<script>
+document.addEventListener('livewire:initialized', () => {
+    navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
+    initAutocomplete();
+})
+</script>
+<script>
+function geo_getPosition(position) {
+    var lt=position.coords.latitude;
+    var lg=position.coords.longitude;
+    var ac = position.coords.accuracy;
+    if(ac >  90){
+        toastr.warning("Location is not accurate ");
+    }else{
+        toastr.success("Location is accurate ");
+    }
+    var mapname='mymap';
+    showMaps(lt,lg,ac,mapname,'true','Your Location') 
+}   
+function geo_errorCallback(error){
+    toastr.error("Geolocation is not supported by this browser. ");
+};
+function geo_options() {
+    enableHighAccuracy: true;
+    timeout: 10000;
+};
+async function initAutocomplete() {
+    var input = document.getElementById('address');
+    const options = {
+        componentRestrictions: { country: "id" },
+        fields: ["formatted_address", "geometry", "name"],
+    };
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
+    autocomplete.addListener('place_changed', function () {
+        var place = autocomplete.getPlace();
+        if(!place.geometry){
+            var lokasi=document.getElementById('address').value;
+        }else{
+            var lt=place.geometry['location'].lat();
+            var lg=place.geometry['location'].lng();
+            var lokasi=document.getElementById('address').value;
+            var ac=90;
+        }
+    }); 
+}
+function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
+    const container = document.getElementById($iddiv)
+    if(container) {
+        var map_init=null;
+        var marker,vlat,vlong,circle;
+        map_init = L.map($iddiv, {
+            center: [$lat, $long],
+            zoom: 18,
+            measureControl: true
+        }); 
+        //https://stackoverflow.com/questions/9394190/leaflet-map-api-with-google-satellite-layer
+        googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+        maxZoom: 22,
+        subdomains:['mt0','mt1','mt2','mt3']
+        }).addTo(map_init);
+        
+        if (marker) {
+            map_init.removeLayer(marker)
+        }
+
+        if($dragable!==''){
+            marker = new L.marker([$lat, $long], {
+                draggable: 'true'
+            }).addTo(map_init).bindPopup($popup).openPopup();
+        }else{
+            marker = new L.marker([$lat, $long], {
+            }).addTo(map_init).bindPopup($popup).openPopup();
+        }
+        
+        marker.on('dragend', function(event) {
+            var position = marker.getLatLng();
+            marker.setLatLng(position, {
+            draggable: 'true'
+            }).bindPopup(position.lat.toFixed(7)+","+position.lng.toFixed(7)).openPopup().update();
+        });
+
+        if($ac!==''){
+            circle = L.circle([$lat, $long], { radius: $ac });
+            var featureGroup = L.featureGroup([marker, circle]).addTo(map_init);
+            map_init.fitBounds(featureGroup.getBounds());
+        }
+
+        map_init.on('measurefinish', function(evt) {
+            writeResults(evt);
+        });
+    }
+    
+}
+</script>
 @endpush
 <div>
     <x-content_header name="Dashboard" >
@@ -17,8 +153,8 @@
     <div class="row mx-1">
         <x-card_form name="Daftar Lanja" width="12" order="1" smallorder="1" closeto="onRead">
             <h1>Ini Dashboard</h1>
-            <button onclick="myFunction()">Click Emit</button>
-            <button onclick="myFunction2()">Click Emit 2</button>
+            <div wire:ignore id="mymap"></div>
+            <x-input_mask typemask="text" disabled="false" ids="address" label="Address" types="text" name="address" placeholder="Type address" />
             <x-input_mask typemask="luas" disabled="false" ids="luas" label="Luas" types="text" name="luas" placeholder="Type Luas" />
             <x-input_mask typemask="tanggal" disabled="false" ids="tanggal" label="Tanggal" types="text" name="tanggal" placeholder="Type tanggal" />
             <x-input_mask typemask="text" disabled="true" ids="result" label="Result" types="text" name="result" placeholder="Type Result" />
