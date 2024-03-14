@@ -7,6 +7,7 @@
 <script>
 function showMeasureMaps($emitname, $lat, $long, $ac, $iddiv, $dragable,$popup){
     const container = document.getElementById($iddiv)
+    console.log([$emitname, $lat, $long, $ac, $iddiv, $dragable,$popup]);
     if(container) {
         var map_init=null;
         var marker,vlat,vlong,circle;
@@ -14,8 +15,7 @@ function showMeasureMaps($emitname, $lat, $long, $ac, $iddiv, $dragable,$popup){
             center: [$lat, $long],
             zoom: 18,
             measureControl: true
-        });
-
+        }); 
         //https://stackoverflow.com/questions/9394190/leaflet-map-api-with-google-satellite-layer
         googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
         maxZoom: 22,

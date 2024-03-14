@@ -30,6 +30,7 @@ class Giss extends Component
     #[On('getLatlangInput')]
     public function getLatlangInput($data)
     {
+        //dd($data);
         if($data['lat']==0 || $data['long']==0){
             $this->latlang='';
             $this->lt=0;
@@ -62,10 +63,10 @@ class Giss extends Component
             'kordinat' => $this->latlang];
             //dd($nilai);
             $this->dispatch('getaddress',
-            map_id:$this->map_id,
-            lt:$data['lat'],
-            lg:$data['long'],
-            kordinat:$this->latlang
+                map_id:$this->map_id,
+                lt:$data['lat'],
+                lg:$data['long'],
+                kordinat:$this->latlang
             ); //ini yag trouble
         }
     }

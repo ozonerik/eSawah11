@@ -14,9 +14,9 @@ document.addEventListener(@js($eventname), event => {
     var mapname=@js($mapname)+'-'+map_id;
     if (!(lt === undefined || lg === undefined || lt === 0 || lg === 0)){
         let nilai = [@js($emitname),lt,lg,ac,mapname,'true',kordinat]
-        console.log(nilai);
         showMeasureMaps(@js($emitname),lt,lg,ac,mapname,'true',kordinat);
     }else{
+        let nilai = [@js($emitname),lt,lg,ac,mapname,'true',kordinat]
         showMeasureMaps(@js($emitname),lt,lg,ac,'nomap'+'-'+map_id,'true','NoMap');
     }
 });
