@@ -5,6 +5,7 @@ namespace App\Livewire\Backend;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use App\Models\User;
+use Geocoder;
 
 class Dashboard extends Component
 {
@@ -24,6 +25,7 @@ class Dashboard extends Component
 
     public function render()
     {
+        dd(Geocoder::getCoordinatesForAddress('Jakarta'));
         $this->dispatch('run_select2');
         return view('livewire.backend.dashboard');
     }
