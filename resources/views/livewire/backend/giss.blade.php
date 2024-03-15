@@ -14,7 +14,7 @@
                 lt= {{ $lt }}, lg= {{ $lg }}, area= {{ $mluas }} m2, keliling= {{ $mkel }} m
                 <x-input_mask typemask="notlive" wajib="" disabled="" ids="lokasi" label="Lokasi" types="text" name="lokasi" placeholder="Get Lokasi" />
                 <x-inputlokasi_form action="onCurrentlokasi" labelbtn="Get My Location" wajib="" disabled="" ids="latlang" label="Koordinat" types="text" name="latlang" placeholder="Get Koordinat" />
-                <x-input_form typemask="luas" wajib="" disabled="" ids="luas" label="Luas (m2)" types="text" name="luas" placeholder="Get Luas (m2)" />
+                <x-input_mask typemask="luas" wajib="" disabled="" ids="luas" label="Luas (m2)" types="text" name="luas" placeholder="Get Luas (m2)" />
                 <x-input_mask typemask="bata" wajib="" disabled="" ids="luasbata" label="Luas (bata)" types="text" name="luasbata" placeholder="Get Luas (bata)" />
                 <x-input_mask typemask="panjang" wajib="" disabled="" ids="keliling" label="Keliling (m)" types="text" name="keliling" placeholder="Get Keliling (m)" />
                 <x-input_mask typemask="harga" wajib="true" ids="hgpadi" label="Harga 1kw Gabah Kering (Rp)" types="text" name="hgpadi" placeholder="Enter Harga 1kw Gabah Kering" disabled="false"/>

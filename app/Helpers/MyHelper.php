@@ -5,6 +5,13 @@ use App\Models\Appconfig;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
+if (!function_exists('conv_measure')) {
+    function conv_measure($val){
+        $nilai = str_replace(".",",",$val);
+        return $nilai;
+    }
+}
+
 if (!function_exists('conv_inputmask')) {
     function conv_inputmask($string){
         $nilai = '';

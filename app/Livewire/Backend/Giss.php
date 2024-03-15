@@ -23,8 +23,8 @@ class Giss extends Component
     #[On('getMeasureData')]
     public function getMeasureData($data){
         //dd($data);
-        $this->luas=$data['ls'];
-        $this->keliling=$data['kl'];
+        $this->luas=conv_measure($data['ls']);
+        $this->keliling=conv_measure($data['kl']);
     }
     public function onCurrentlokasi()
     {
