@@ -12,7 +12,7 @@ class Giss extends Component
     public $mode='read';
     public $hgpadi,$lanja,$lanjakw,$lanjarp;
     public $map_id;
-    public $lt,$lg;
+    public $lt,$lg,$ac;
     public $mluas=0;
     public $mkel=0;
     

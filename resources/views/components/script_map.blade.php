@@ -11,6 +11,7 @@ function geo_getPosition(position) {
     let ac = position.coords.accuracy;
     @this.set('{{ $lt }}', lt);
     @this.set('{{ $lg }}', lg);
+    @this.set('{{ $ac }}', ac);
     if(ac >  90){
         toastr.warning("Location is not accurate ");
     }else{
@@ -20,6 +21,7 @@ function geo_getPosition(position) {
 }   
 function geo_errorCallback(error){
     toastr.error("Geolocation is not supported by this browser. ");
+    @this.set('{{ $ac }}', null);
 };
 function geo_options() {
     enableHighAccuracy: true;
