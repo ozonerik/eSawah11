@@ -1,19 +1,3 @@
-@push('css')
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">
-<link rel="stylesheet" href="{{ asset('plugins/leaflet-maps/leaflet-measure.css') }}">
-@endpush
-@push('js')
-<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" ></script>
-<script src="{{ asset('plugins/leaflet-maps/leaflet-measure.js') }}"></script>
-@endpush
-@push('js')
-<!-- edit -->
-<x-get_measureaddress eventname="getaddress" emitname="getLatlangInput" inputname="lokasi" mapname="gismap" kordinatname="latlang"/>
-<x-get_mapmeasure eventname="resetLocation" emitname="getResetlocation" mapname="resetmap"/>
-<x-get_mapmeasure eventname="getLocation" emitname="getLatlangInput" mapname="gismap"/>
-<!-- init map -->
-<x-script_lokasimeasure/>
-@endpush
 <div>
     <x-content_header name="GIS" >
         <li class="breadcrumb-item active">Sawah</li>
@@ -23,7 +7,6 @@
         @if($mode=='read')
         <x-card_section2 name="GIS - Sawah" type="primary" width="12" order="1" smallorder="1">
             <form wire:submit.prevent="onHitung">
-            {{$map_id}}
                 <div wire.model.live="loadmap" wire:ignore id="gismap-{{$map_id}}" class="w-100 rounded bg-blank" style="height: 400px;"></div>
                 <x-input_form wajib="" disabled="" ids="lokasi" label="Lokasi" types="text" name="lokasi" placeholder="Get Lokasi" />
                 <x-inputlokasi_form action="onGetlokasi" labelbtn="Get My Location" wajib="" disabled="" ids="latlang" label="Koordinat" types="text" name="latlang" placeholder="Get Koordinat" />

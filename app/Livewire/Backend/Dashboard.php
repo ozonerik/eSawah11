@@ -37,6 +37,7 @@ class Dashboard extends Component
 
     public function render()
     {
+        $this->luas=$this->area;
         $this->dispatch('run_select2');
         return view('livewire.backend.dashboard');
     }

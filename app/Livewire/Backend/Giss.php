@@ -10,22 +10,13 @@ class Giss extends Component
 {
     public $latlang,$luas,$luasbata,$keliling,$lokasi;
     public $mode='read';
-    public $map_id = 0;
     public $hgpadi,$lanja,$lanjakw,$lanjarp;
-    public $loadmap;
-
-    //autocomplete address
-    #[On('onGetAdress')]
-    public function onGetAdress(){
-        $this->dispatch('getaddress',map_id : $this->map_id);    
-    }
-    //end autocomplete address
+    public $map_id;
     
     public function mount(){
         $this->resetForm();
     }
 
-    #[On('getLatlangInput')]
     public function getLatlangInput($data)
     {
         //dd($data);
@@ -69,12 +60,7 @@ class Giss extends Component
         }
     }
 
-    public function onGetlokasi(){
-        $this->map_id++;
-        $this->dispatch('getLocation',map_id:$this->map_id);
-    }
-
-    public function getResetlocation($data)
+    public function getResetlocation()
     {
         $this->latlang='';
     }
@@ -86,7 +72,7 @@ class Giss extends Component
     }
 
     private function resetForm(){
-        $this->dispatch('resetLocation',map_id:$this->map_id);
+        $this->dispatch('resetLocation');
         $this->latlang='';
         $this->lokasi='';
         $this->map_id=0;
@@ -108,11 +94,9 @@ class Giss extends Component
         $this->onHitung();
     }
     public function updatedHgpadi($value){
-        //dd($value);
         $this->onHitung();
     }
     public function updatedLanja($value){
-        //dd($value);
         $this->onHitung();
     }
 
@@ -126,7 +110,7 @@ class Giss extends Component
              ]);
             $luas=$this->luas;
             $luasbata=$this->luasbata;
-            $hgpadi=conv_inputmask($this->hgpadi);
+            $hgpadi=$this->hgpadi;
             $lanja=$this->lanja;
             $this->lanjakw= get_lanja($luas,$lanja);
             $this->lanjarp= get_nlanja($luas,$lanja,$hgpadi);
