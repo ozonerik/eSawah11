@@ -12,20 +12,8 @@ class Dashboard extends Component
 {
     
     #[Layout('layouts.app')] 
-    public $user,$luas,$tanggal,$result,$address;
+    public $user,$luas,$tanggal,$result,$address,$lt,$lg;
     public $user_multi=[];
-
-    #[On('testEmit')] 
-    public function nilaiEmit($data)
-    {
-        dd($data);
-    }
-
-    #[On('testEmit2')] 
-    public function nilaiEmit2($data)
-    {
-        dd($data);
-    }
 
     public function updatedLuas($value){
         $this->result=$value;
@@ -42,7 +30,6 @@ class Dashboard extends Component
 
     public function render()
     {
-        //dd(Geocoder::getCoordinatesForAddress('Jakarta'));
         $this->dispatch('run_select2');
         return view('livewire.backend.dashboard');
     }

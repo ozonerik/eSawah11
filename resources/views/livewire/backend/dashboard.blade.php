@@ -19,7 +19,7 @@
 </script> -->
 <!-- <script>
     function showMaps() {
-      var map = L.map('mymap', {
+      let map = L.map('mymap', {
         center: [29.749817, -95.080757],
         zoom: 16,
         measureControl: true
@@ -59,16 +59,17 @@ document.addEventListener('livewire:initialized', () => {
 </script>
 <script>
 function geo_getPosition(position) {
-    var lt=position.coords.latitude;
-    var lg=position.coords.longitude;
-    var ac = position.coords.accuracy;
+    let lt=position.coords.latitude;
+    let lg=position.coords.longitude;
+    let ac = position.coords.accuracy;
+    @this.set('lt', lt);
+    @this.set('lg', lg);
     if(ac >  90){
         toastr.warning("Location is not accurate ");
     }else{
         toastr.success("Location is accurate ");
     }
-    var mapname='mymap';
-    showMaps(lt,lg,ac,mapname,'true','Your Location') 
+    showMaps(lt,lg,ac,'mymap','true','Your Location') 
 }   
 function geo_errorCallback(error){
     toastr.error("Geolocation is not supported by this browser. ");
@@ -78,34 +79,39 @@ function geo_options() {
     timeout: 10000;
 };
 async function initAutocomplete() {
-    var input = document.getElementById('address');
+    let input = document.getElementById('address');
     const options = {
         componentRestrictions: { country: "id" },
         fields: ["formatted_address", "geometry", "name"],
     };
-    var autocomplete = new google.maps.places.Autocomplete(input, options);
+    let autocomplete = new google.maps.places.Autocomplete(input, options);
     autocomplete.addListener('place_changed', function () {
-        var place = autocomplete.getPlace();
+        let place = autocomplete.getPlace();
         if(!place.geometry){
-            var lokasi=document.getElementById('address').value;
+            let lokasi=document.getElementById('address').value;
         }else{
-            var lt=place.geometry['location'].lat();
-            var lg=place.geometry['location'].lng();
-            var lokasi=document.getElementById('address').value;
-            var ac=90;
+            let lt=place.geometry['location'].lat();
+            let lg=place.geometry['location'].lng();
+            let ac=90;
+            @this.set('lt', lt);
+            @this.set('lg', lg);
+            showMaps(lt,lg,ac,'tempatmap','true','Change Location')  
         }
     }); 
 }
 function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
-    const container = document.getElementById($iddiv)
+    $("#tempatMap").html("<div id='mymap'></div>");
+    const container = document.getElementById('tempatMap')
     if(container) {
-        var map_init=null;
-        var marker,vlat,vlong,circle;
-        map_init = L.map($iddiv, {
+        let map_init=null;
+        let marker,vlat,vlong,circle;
+        
+        map_init = L.map('mymap', {
             center: [$lat, $long],
             zoom: 18,
             measureControl: true
         }); 
+        console.log(map_init)
         //https://stackoverflow.com/questions/9394190/leaflet-map-api-with-google-satellite-layer
         googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
         maxZoom: 22,
@@ -126,7 +132,7 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
         }
         
         marker.on('dragend', function(event) {
-            var position = marker.getLatLng();
+            let position = marker.getLatLng();
             marker.setLatLng(position, {
             draggable: 'true'
             }).bindPopup(position.lat.toFixed(7)+","+position.lng.toFixed(7)).openPopup().update();
@@ -134,7 +140,7 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
 
         if($ac!==''){
             circle = L.circle([$lat, $long], { radius: $ac });
-            var featureGroup = L.featureGroup([marker, circle]).addTo(map_init);
+            let featureGroup = L.featureGroup([marker, circle]).addTo(map_init);
             map_init.fitBounds(featureGroup.getBounds());
         }
 
@@ -153,7 +159,8 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
     <div class="row mx-1">
         <x-card_form name="Daftar Lanja" width="12" order="1" smallorder="1" closeto="onRead">
             <h1>Ini Dashboard</h1>
-            <div wire:ignore id="mymap"></div>
+            <div wire:ignore id="tempatMap"></div>
+            lt= {{ $lt }}, lg= {{ $lg }}
             <x-input_mask typemask="text" disabled="false" ids="address" label="Address" types="text" name="address" placeholder="Type address" />
             <x-input_mask typemask="luas" disabled="false" ids="luas" label="Luas" types="text" name="luas" placeholder="Type Luas" />
             <x-input_mask typemask="tanggal" disabled="false" ids="tanggal" label="Tanggal" types="text" name="tanggal" placeholder="Type tanggal" />
