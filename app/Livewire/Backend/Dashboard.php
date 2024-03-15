@@ -14,7 +14,8 @@ class Dashboard extends Component
     #[Layout('layouts.app')] 
     public $user,$luas,$tanggal,$result,$address,$lt,$lg;
     public $user_multi=[];
-    public $area;
+    public $area=0;
+    public $keliling=0;
 
     #[On('testEmit')]
     public function testEmit($data)

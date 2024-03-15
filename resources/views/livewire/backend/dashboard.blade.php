@@ -52,13 +52,22 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
     const container = document.getElementById('tempatMap')
     if(container) {
         let map_init=null;
+        let measureControl = null;
         let marker,vlat,vlong,circle;
         
         map_init = L.map('mymap', {
             center: [$lat, $long],
             zoom: 18,
-            measureControl: true
         });
+        measureControl = new L.Control.Measure({ 
+            position: 'topright', 
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map_init);
+
         //https://stackoverflow.com/questions/9394190/leaflet-map-api-with-google-satellite-layer
         googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
         maxZoom: 22,
@@ -93,6 +102,7 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
 
         map_init.on('measurefinish', function(hasil) {
             @this.set('area', hasil.area.toFixed(2));
+            @this.set('keliling', hasil.length.toFixed(2));
         });
     }
     
@@ -111,7 +121,7 @@ function myFunction(){
             <h1>Ini Dashboard</h1>
             <button onclick="myFunction()">Click me</button>
             <div wire:ignore id="tempatMap"></div>
-            lt= {{ $lt }}, lg= {{ $lg }}, area= {{ $area }}
+            lt= {{ $lt }}, lg= {{ $lg }}, area= {{ $area }}, keliling= {{ $keliling }}
             <x-input_mask typemask="text" disabled="false" ids="address" label="Address" types="text" name="address" placeholder="Type address" />
             <x-input_mask typemask="luas" disabled="false" ids="luas" label="Luas" types="text" name="luas" placeholder="Type Luas" />
             <x-input_mask typemask="tanggal" disabled="false" ids="tanggal" label="Tanggal" types="text" name="tanggal" placeholder="Type tanggal" />
