@@ -1,5 +1,5 @@
 @push('js')
-<x-script_map eventDrag="getDragData" eventMeasure="getMeasureData" ac="ac" lt="lt" lg="lg" autoalamat="lokasi" mapid="gismap" area="mluas" length="mkel" />
+<x-script_map geoalertId="alert" eventDrag="getDragData" eventMeasure="getMeasureData" ac="ac" lt="lt" lg="lg" autoalamat="lokasi" mapid="gismap" area="mluas" length="mkel" />
 <x-script_currentlocation dispatchname="getLokasiSaatini" />
 @endpush
 <div>
@@ -11,7 +11,7 @@
         @if($mode=='read')
         <x-card_section2 name="GIS - Sawah" type="primary" width="12" order="1" smallorder="1">
             <form wire:submit.prevent="onHitung">
-                <x-bs_alert ac="ac" />
+                <div wire:ignore id="alert"></div>
                 <div wire:ignore id="gismap"></div>
                 <x-input_mask typemask="notlive" wajib="" disabled="" ids="lokasi" label="Lokasi" types="text" name="lokasi" placeholder="Get Lokasi" />
                 <x-inputlokasi_form action="onCurrentlokasi" labelbtn="Get My Location" wajib="" disabled="" ids="latlang" label="Koordinat" types="text" name="latlang" placeholder="Get Koordinat" />
