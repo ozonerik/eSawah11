@@ -8,18 +8,24 @@ use Spatie\Geocoder\Geocoder;
 
 class Giss extends Component
 {
-    public $latlang,$luas,$luasbata,$lokasi;
+    public $latlang,$luas,$luasbata,$lokasi,$keliling;
     public $mode='read';
     public $hgpadi,$lanja,$lanjakw,$lanjarp;
     public $map_id;
     public $lt,$lg;
-    public $area=0;
-    public $keliling=0;
+    public $mluas=0;
+    public $mkel=0;
     
     public function mount(){
         $this->resetForm();
     }
 
+    #[On('getMeasureData')]
+    public function getMeasureData($data){
+        //dd($data);
+        $this->luas=$data['ls'];
+        $this->keliling=$data['kl'];
+    }
     public function onCurrentlokasi()
     {
        dd('onCurrentlokasi');
@@ -74,9 +80,9 @@ class Giss extends Component
 
     public function render()
     {
-            $this->lokasi=$this->onGetGeocoder($this->lt,$this->lg);
+/*             $this->lokasi=$this->onGetGeocoder($this->lt,$this->lg);
             $this->latlang=$this->lt.','.$this->lg;
-            $this->luas=$this->area;
+            $this->luas=$this->area; */
             return view('livewire.backend.giss')->layout('layouts.app');
     }
 }

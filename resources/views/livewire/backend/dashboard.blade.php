@@ -114,7 +114,8 @@ function sendData(){
 }
 document.addEventListener('livewire:init', () => {
     Livewire.on('getDataFromComponent', (event) => {
-        console.log('data1= '+event.data1+' , '+'data2= '+event.data2);
+        let nilai=[event.data1,event.data2];
+        console.log(nilai);
     });
 });
 function getData(){

@@ -106,8 +106,11 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
         }
 
         map_init.on('measurefinish', function(hasil) {
-            @this.set('{{ $area }}', hasil.area.toFixed(2));
-            @this.set('{{ $length }}', hasil.length.toFixed(2));
+            let ls=hasil.area.toFixed(2);
+            let kl=hasil.length.toFixed(2);
+            Livewire.dispatch('{{ $eventname }}',{ data:{'ls':ls, 'kl':kl}});
+            @this.set('{{ $area }}', ls);
+            @this.set('{{ $length }}', kl);
         });
     }
 }
