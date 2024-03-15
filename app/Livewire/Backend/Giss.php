@@ -29,8 +29,8 @@ class Giss extends Component
 
     public function onCurrentlokasi()
     {
-        dd('cari lokasi saat ini');
-        $this->dispatch('getCurrenctLocation');
+        //dd('cari lokasi saat ini');
+        $this->dispatch('panggiljs');
     }
 
     public function onRead(){
@@ -99,9 +99,8 @@ class Giss extends Component
 
     public function render()
     {
-/*             $this->lokasi=$this->onGetGeocoder($this->lt,$this->lg);
+            $this->lokasi=$this->onGetGeocoder($this->lt,$this->lg);
             $this->latlang=$this->lt.','.$this->lg;
-            $this->luas=$this->area; */
             return view('livewire.backend.giss')->layout('layouts.app');
     }
 }
