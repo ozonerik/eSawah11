@@ -14,6 +14,17 @@ class Dashboard extends Component
     #[Layout('layouts.app')] 
     public $user,$luas,$tanggal,$result,$address,$lt,$lg;
     public $user_multi=[];
+    public $area;
+
+    #[On('testEmit')]
+    public function testEmit($data)
+    {
+        dd($data);
+    }
+
+    public function mount(){
+        $this->user = User::get();  
+    }
 
     public function updatedLuas($value){
         $this->result=$value;
@@ -21,11 +32,6 @@ class Dashboard extends Component
 
     public function updatedTanggal($value){
         $this->result=$value;
-    }
-
-    public function mount()
-    {
-        $this->user = User::get();          
     }
 
     public function render()

@@ -17,3 +17,6 @@
 <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4-modif.css') }}">
 <!-- custom css -->
 <link rel="stylesheet" href="{{ asset('css/custom-esawah.css') }}">
+<!-- leaflet maps -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">
+<link rel="stylesheet" href="{{ asset('plugins/leaflet-maps/leaflet-measure.css') }}">

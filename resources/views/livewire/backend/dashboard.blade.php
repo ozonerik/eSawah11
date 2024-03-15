@@ -1,56 +1,4 @@
-@push('css')
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">
-<link rel="stylesheet" href="{{ asset('plugins/leaflet-maps/leaflet-measure.css') }}">
-<style>
-    #mymap {
-      height: 500px;
-      margin: 20px 20px 0 0;
-    }
-</style>
-@endpush
 @push('js')
-<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" ></script>
-<script src="{{ asset('plugins/leaflet-maps/leaflet-measure.js') }}"></script>
-</script>
-<!-- <script>
-    document.addEventListener('livewire:initialized', () => {
-        showMaps();
-    });
-</script> -->
-<!-- <script>
-    function showMaps() {
-      let map = L.map('mymap', {
-        center: [29.749817, -95.080757],
-        zoom: 16,
-        measureControl: true
-      });
-      L.tileLayer('//server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        minZoom: 14,
-        maxZoom: 18,
-        attribution: '&copy; Esri &mdash; Sources: Esri, DigitalGlobe, Earthstar Geographics, CNES/Airbus DS, GeoEye, USDA FSA, USGS, Getmapping, Aerogrid, IGN, IGP, swisstopo, and the GIS User Community'
-      }).addTo(map);
-
-      map.on('measurefinish', function(evt) {
-        writeResults(evt);
-      });
-
-      function writeResults(results) {
-        document.getElementById('eventoutput').innerHTML = JSON.stringify(
-          {
-            area: results.area,
-            areaDisplay: results.areaDisplay,
-            lastCoord: results.lastCoord,
-            length: results.length,
-            lengthDisplay: results.lengthDisplay,
-            pointCount: results.pointCount,
-            points: results.points
-          },
-          null,
-          2
-        );
-      }
-    }
-</script> -->
 <script>
 document.addEventListener('livewire:initialized', () => {
     navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
@@ -110,8 +58,7 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
             center: [$lat, $long],
             zoom: 18,
             measureControl: true
-        }); 
-        console.log(map_init)
+        });
         //https://stackoverflow.com/questions/9394190/leaflet-map-api-with-google-satellite-layer
         googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
         maxZoom: 22,
@@ -144,11 +91,14 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
             map_init.fitBounds(featureGroup.getBounds());
         }
 
-        map_init.on('measurefinish', function(evt) {
-            writeResults(evt);
+        map_init.on('measurefinish', function(hasil) {
+            @this.set('area', hasil.area.toFixed(2));
         });
     }
     
+}
+function myFunction(){
+    Livewire.dispatch('testEmit',{ data: 'coba aja' });
 }
 </script>
 @endpush
@@ -159,8 +109,9 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
     <div class="row mx-1">
         <x-card_form name="Daftar Lanja" width="12" order="1" smallorder="1" closeto="onRead">
             <h1>Ini Dashboard</h1>
+            <button onclick="myFunction()">Click me</button>
             <div wire:ignore id="tempatMap"></div>
-            lt= {{ $lt }}, lg= {{ $lg }}
+            lt= {{ $lt }}, lg= {{ $lg }}, area= {{ $area }}
             <x-input_mask typemask="text" disabled="false" ids="address" label="Address" types="text" name="address" placeholder="Type address" />
             <x-input_mask typemask="luas" disabled="false" ids="luas" label="Luas" types="text" name="luas" placeholder="Type Luas" />
             <x-input_mask typemask="tanggal" disabled="false" ids="tanggal" label="Tanggal" types="text" name="tanggal" placeholder="Type tanggal" />
