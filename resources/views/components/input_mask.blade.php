@@ -209,7 +209,13 @@
 @endpush
 <div class="form-group">
     <label for="{{ $ids }}" class="form-label @if(!empty($wajib)) text-danger  @endif">{{ $label }}</label>
+    
+    @if($typemask == 'notlive')
+    <input wire:ignore wire:model="{{ $name }}" name="{{ $name }}" id="{{ $ids }}" @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif type="{{ $types }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    @else
     <input wire:model.live="{{ $name }}" name="{{ $name }}" id="{{ $ids }}" @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif type="{{ $types }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    @endif
+
     @if($errors->has( $name ))
         <span class="invalid-feedback" role="alert">
             {{ $errors->first($name) }}

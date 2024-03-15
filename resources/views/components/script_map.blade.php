@@ -95,6 +95,8 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
             marker.setLatLng(position, {
             draggable: 'true'
             }).bindPopup(position.lat.toFixed(7)+","+position.lng.toFixed(7)).openPopup().update();
+            @this.set('{{ $lt }}', position.lat.toFixed(7));
+            @this.set('{{ $lg }}', position.lng.toFixed(7));
         });
 
         if($ac!==''){

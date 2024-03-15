@@ -17,10 +17,18 @@ class Dashboard extends Component
     public $area=0;
     public $keliling=0;
 
-    #[On('testEmit')]
-    public function testEmit($data)
+    #[On('KirimData')]
+    public function KirimData($data1,$data2)
     {
+        $data=[$data1,$data2];
         dd($data);
+    }
+
+    #[On('AmbilData')]
+    public function AmbilData()
+    {
+        //dd('ambil data');
+        $this->dispatch('getDataFromComponent',data1:'data1 dari component',data2:'data2 dari component');
     }
 
     public function mount(){

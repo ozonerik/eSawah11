@@ -8,63 +8,22 @@ use Spatie\Geocoder\Geocoder;
 
 class Giss extends Component
 {
-    public $latlang,$luas,$luasbata,$keliling,$lokasi;
+    public $latlang,$luas,$luasbata,$lokasi;
     public $mode='read';
     public $hgpadi,$lanja,$lanjakw,$lanjarp;
     public $map_id;
+    public $lt,$lg;
+    public $area=0;
+    public $keliling=0;
     
     public function mount(){
         $this->resetForm();
     }
 
-    public function getLatlangInput($data)
+    public function onCurrentlokasi()
     {
-        //dd($data);
-        if($data['lat']==0 || $data['long']==0){
-            $this->latlang='';
-            $this->lt=0;
-            $this->lg=0;
-        }else{
-            $this->latlang=$data['lat'].','.$data['long'];
-            $this->lt=$data['lat'];
-            $this->lg=$data['long'];
-        }
-   
-        if(empty($data['lokasi'])){
-            $geocoder=$this->onGetGeocoder($data['lat'],$data['long']);
-            if($geocoder !== 'result_not_found'){
-                $this->lokasi=  $geocoder ;
-            }else{
-                $this->lokasi=  '' ;
-                $this->dispatch('getaddress',
-                    map_id:$this->map_id,
-                    lt:0,
-                    lg:0,
-                    kordinat:'',
-                );   
-            }    
-        }else{
-            $this->lokasi=$data['lokasi'];
-            $this->map_id++;
-            $nilai=['map_id' => $this->map_id,
-            'lt' => $data['lat'],
-            'lg' => $data['long'],
-            'kordinat' => $this->latlang];
-            //dd($nilai);
-            $this->dispatch('getaddress',
-                map_id:$this->map_id,
-                lt:$data['lat'],
-                lg:$data['long'],
-                kordinat:$this->latlang
-            ); //ini yag trouble
-        }
+       dd('onCurrentlokasi');
     }
-
-    public function getResetlocation()
-    {
-        $this->latlang='';
-    }
-
 
     public function onRead(){
         $this->mode='read';
@@ -72,7 +31,6 @@ class Giss extends Component
     }
 
     private function resetForm(){
-        $this->dispatch('resetLocation');
         $this->latlang='';
         $this->lokasi='';
         $this->map_id=0;
@@ -83,21 +41,6 @@ class Giss extends Component
         $this->lanja=get_nilailanja();
         $this->lanjakw=get_lanja($this->luas,$this->lanja);
         $this->lanjarp=get_nlanja($this->luas,$this->lanja,$this->hgpadi);
-    }
-
-    public function updatedLuas($value){
-        $this->luasbata= get_Nconvtobata($this->luas);
-        $this->onHitung();
-    }
-    public function updatedLuasbata($value){
-        $this->luas= get_NBatatoluas($this->luasbata);
-        $this->onHitung();
-    }
-    public function updatedHgpadi($value){
-        $this->onHitung();
-    }
-    public function updatedLanja($value){
-        $this->onHitung();
     }
 
     public function onHitung(){
@@ -124,13 +67,16 @@ class Giss extends Component
         $client = new \GuzzleHttp\Client();
         $geocoder = new Geocoder($client);
         $geocoder->setApiKey(config('geocoder.key'));
-        $g=collect($geocoder->getAddressForCoordinates($lat,$lng));
-        $lokasi= $g->get('formatted_address');
-        return $lokasi;
+        $g=collect($geocoder->getAddressForCoordinates(floatval($lat),floatval($lng)));
+        $location= $g->get('formatted_address');
+        return $location;
     }
 
     public function render()
     {
-        return view('livewire.backend.giss')->layout('layouts.app');
+            $this->lokasi=$this->onGetGeocoder($this->lt,$this->lg);
+            $this->latlang=$this->lt.','.$this->lg;
+            $this->luas=$this->area;
+            return view('livewire.backend.giss')->layout('layouts.app');
     }
 }
