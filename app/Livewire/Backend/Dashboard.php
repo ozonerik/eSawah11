@@ -29,6 +29,7 @@ class Dashboard extends Component
     {
         //dd('ambil data');
         $this->dispatch('getDataFromComponent',data1:'data1 dari component',data2:'data2 dari component');
+        $this->dispatch('panggiljs');
     }
 
     public function mount(){

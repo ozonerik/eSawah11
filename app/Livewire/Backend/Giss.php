@@ -26,9 +26,11 @@ class Giss extends Component
         $this->luas=conv_measure($data['ls']);
         $this->keliling=conv_measure($data['kl']);
     }
+
     public function onCurrentlokasi()
     {
-       dd('onCurrentlokasi');
+        dd('cari lokasi saat ini');
+        $this->dispatch('getCurrenctLocation');
     }
 
     public function onRead(){
@@ -47,6 +49,23 @@ class Giss extends Component
         $this->lanja=get_nilailanja();
         $this->lanjakw=get_lanja($this->luas,$this->lanja);
         $this->lanjarp=get_nlanja($this->luas,$this->lanja,$this->hgpadi);
+    }
+
+    public function updatedLuas($value){
+        $this->luasbata= get_Nconvtobata($this->luas);
+        $this->onHitung();
+    }
+    public function updatedLuasbata($value){
+        $this->luas= get_NBatatoluas($this->luasbata);
+        $this->onHitung();
+    }
+    public function updatedHgpadi($value){
+        //dd($value);
+        $this->onHitung();
+    }
+    public function updatedLanja($value){
+        //dd($value);
+        $this->onHitung();
     }
 
     public function onHitung(){

@@ -117,10 +117,10 @@ document.addEventListener('livewire:init', () => {
         let nilai=[event.data1,event.data2];
         console.log(nilai);
     });
+    Livewire.on('panggiljs', () => {
+        console.log('memanggil javascript');
+    });
 });
-function getData(){
-    Livewire.dispatch('AmbilData');
-}
 </script>
 @endpush
 <div>
@@ -131,7 +131,7 @@ function getData(){
         <x-card_form name="Daftar Lanja" width="12" order="1" smallorder="1" closeto="onRead">
             <h1>Ini Dashboard</h1>
             <button onclick="sendData()" class="btn btn-primary mb-3">Send To Component</button><br>
-            <button onclick="getData()" class="btn btn-primary mb-3">Get from Component</button>
+            <button wire:click="AmbilData"class="btn btn-primary mb-3">Get from Component</button>
             <div wire:ignore id="tempatMap"></div>
             lt= {{ $lt }}, lg= {{ $lg }}, area= {{ $area }} m2, keliling= {{ $keliling }} m
             <x-input_mask typemask="text" disabled="false" ids="address" label="Address" types="text" name="address" placeholder="Type address" />
