@@ -1,6 +1,6 @@
 @push('js')
-<x-script_map eventname="getMeasureData" lt="lt" lg="lg" autoalamat="lokasi" mapid="gismap" area="mluas" length="mkel" />
-<x-script_currentlocation />
+<x-script_map eventDrag="getDragData" eventMeasure="getMeasureData" lt="lt" lg="lg" autoalamat="lokasi" mapid="gismap" area="mluas" length="mkel" />
+<x-script_currentlocation dispatchname="getLokasiSaatini" />
 @endpush
 <div>
     <x-content_header name="GIS" >

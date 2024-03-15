@@ -20,17 +20,23 @@ class Giss extends Component
         $this->resetForm();
     }
 
+    #[On('getDragData')]
+    public function getDragData($data){
+        $this->lokasi=google_alamat($data['lt'],$data['lg']);
+    }
+
     #[On('getMeasureData')]
     public function getMeasureData($data){
         //dd($data);
         $this->luas=conv_measure($data['ls']);
+        $this->luasbata= get_Nconvtobata($this->luas);
         $this->keliling=conv_measure($data['kl']);
+        $this->onHitung();
     }
 
     public function onCurrentlokasi()
     {
-        //dd('cari lokasi saat ini');
-        $this->dispatch('panggiljs');
+        $this->dispatch('getLokasiSaatini');
     }
 
     public function onRead(){
@@ -99,7 +105,8 @@ class Giss extends Component
 
     public function render()
     {
-            $this->lokasi=$this->onGetGeocoder($this->lt,$this->lg);
+            //$this->lokasi=$this->onGetGeocoder($this->lt,$this->lg);
+            $this->lokasi=google_alamat($this->lt,$this->lg);
             $this->latlang=$this->lt.','.$this->lg;
             return view('livewire.backend.giss')->layout('layouts.app');
     }

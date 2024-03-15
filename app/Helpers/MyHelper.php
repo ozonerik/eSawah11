@@ -5,6 +5,22 @@ use App\Models\Appconfig;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
+if (!function_exists('google_alamat')) {
+    function google_alamat($lt,$lg){
+        //lt= -6.7275824, lg= 108.5434431 apikey=AIzaSyC4n0qKTgofSQtwYANwBrNd5lO-_mFUwt4
+        $lt=(string)$lt;
+        $lg=(string)$lg;
+        $key=get_googleapikey();
+        if(!empty($lt)||!empty($lg)){
+            $response = Http::get('https://maps.googleapis.com/maps/api/geocode/json?latlng='.$lt.','.$lg.'&key='.$key );
+            if($response->successful()){
+                $data=json_decode($response, true);
+                return $alamat=$data['results'][3]['formatted_address'];
+            }
+        }
+    }
+}
+
 if (!function_exists('conv_measure')) {
     function conv_measure($val){
         $nilai = str_replace(".",",",$val);
@@ -41,11 +57,8 @@ if (!function_exists('get_hargaemas')) {
         $response = Http::get( 'https://logam-mulia-api.vercel.app/prices/hargaemas-com' );
         if($response->successful()){
             $data = $response->json();
-            $hargabeli=$data['data'][0]['buy'];
-        }else{
-            $hargabeli=900000;
-        }   
-        return $hargabeli;
+            return $hargabeli=$data['data'][0]['buy'];
+        }
     }
 }
 

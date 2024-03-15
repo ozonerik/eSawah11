@@ -97,6 +97,7 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
             }).bindPopup(position.lat.toFixed(7)+","+position.lng.toFixed(7)).openPopup().update();
             @this.set('{{ $lt }}', position.lat.toFixed(7));
             @this.set('{{ $lg }}', position.lng.toFixed(7));
+            Livewire.dispatch('{{ $eventDrag }}',{ data:{'lt':position.lat.toFixed(7), 'lg':position.lng.toFixed(7)}});
         });
 
         if($ac!==''){
@@ -108,7 +109,7 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
         map_init.on('measurefinish', function(hasil) {
             let ls=hasil.area.toFixed(2);
             let kl=hasil.length.toFixed(2);
-            Livewire.dispatch('{{ $eventname }}',{ data:{'ls':ls, 'kl':kl}});
+            Livewire.dispatch('{{ $eventMeasure }}',{ data:{'ls':ls, 'kl':kl}});
             @this.set('{{ $area }}', ls);
             @this.set('{{ $length }}', kl);
         });
