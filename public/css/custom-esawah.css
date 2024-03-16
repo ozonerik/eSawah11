@@ -1,5 +1,7 @@
 #mymap{
-  height: 500px;
+  object-fit: contain!important;
+  height: 100%;
+  width: 100%;
   margin: 10px 10px 10x 10px;
   border-radius: 5px 5px;
   background-image: url("../img/image.png");

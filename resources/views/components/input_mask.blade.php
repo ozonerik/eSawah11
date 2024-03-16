@@ -45,6 +45,21 @@ document.addEventListener('livewire:initialized', () => {
             let nilai=$('#{{ $ids }}').val();
             @this.set('{{ $name }}', nilai);
         });
+    }else if('{{$typemask}}' === 'derajat'){
+        $('#{{ $ids }}').inputmask({
+            'autoUnmask': true, 
+            'suffix': ' °',
+            'alias': 'decimal', 
+            'radixPoint':',', 
+            'groupSeparator': '.', 
+            'autoGroup': true, 
+            'digits': 2, 
+            'digitsOptional': false, 
+            'rightAlign': false 
+        }).on('keyup', function(e) {
+            let nilai=$('#{{ $ids }}').val();
+            @this.set('{{ $name }}', nilai);
+        });
     }else if('{{$typemask}}' === 'panjang'){
         $('#{{ $ids }}').inputmask({
             'autoUnmask': true, 

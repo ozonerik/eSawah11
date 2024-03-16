@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Backend\Profile;
 use App\Livewire\Backend\Dashboard;
 use App\Livewire\Backend\Giss;
+use App\Livewire\Backend\Sawahs;
 use App\Livewire\Frontend\Home;
 use App\Livewire\Test;
 
@@ -23,7 +24,7 @@ Route::get('/home', Home::class)->name('home');
 Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::get('/result', Profile::class)->name('result');
-    Route::get('/sawahs', Profile::class)->name('sawahs');
+    Route::get('/sawahs', Sawahs::class)->name('sawahs');
     Route::get('/profile', Profile::class)->name('profile');
     Route::get('/pawongans', Profile::class)->name('pawongans');
     Route::get('/lanjas', Profile::class)->name('lanjas');

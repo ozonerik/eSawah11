@@ -4,6 +4,25 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Appconfig;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use Spatie\Geocoder\Geocoder;
+
+if (!function_exists('ascii')) {
+    function ascii($a){ 
+        return String.fromCharCode($a); 
+    }
+}
+
+if (!function_exists('geo_alamat')) {
+    function geo_alamat($lat,$lng){
+        $client = new \GuzzleHttp\Client();
+        $geocoder = new Geocoder($client);
+        $geocoder->setApiKey(config('geocoder.key'));
+        $g=collect($geocoder->getAddressForCoordinates(floatval($lat),floatval($lng)));
+        $location= $g->get('formatted_address');
+        return $location;
+    }
+}
+
 
 if (!function_exists('google_alamat')) {
     function google_alamat($lt,$lg){
@@ -118,13 +137,14 @@ if (!function_exists('get_currentroute')) {
     }
 }
 
+
 if (!function_exists('get_convtobata')) {
     function get_convtobata($value){
         $v=floatval($value)/14.00;
         $a = new \NumberFormatter("id-ID", \NumberFormatter::DECIMAL);
         $s=$a->format(round($v,2));
-        $bata=$s." bata";
-        return $bata;
+        //$bata=$s." bata";
+        return $s;
     }
 }
 
@@ -163,13 +183,14 @@ if (!function_exists('get_convtorp')) {
     }
 }
 
+
 if (!function_exists('get_conluas')) {
     function get_conluas($value){
         $v=floatval($value);
         $a = new \NumberFormatter("id-ID", \NumberFormatter::DECIMAL);
         $s=$a->format(round($v,2));
-        $cluas=$s." m2";
-        return $cluas;
+        //$cluas=$s." m2";
+        return $s;
     }
 }
 

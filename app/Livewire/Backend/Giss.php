@@ -94,15 +94,6 @@ class Giss extends Component
         $this->resetForm();
     }
 
-    public function onGetGeocoder($lat,$lng){
-        $client = new \GuzzleHttp\Client();
-        $geocoder = new Geocoder($client);
-        $geocoder->setApiKey(config('geocoder.key'));
-        $g=collect($geocoder->getAddressForCoordinates(floatval($lat),floatval($lng)));
-        $location= $g->get('formatted_address');
-        return $location;
-    }
-
     public function render()
     {
             //$this->lokasi=$this->onGetGeocoder($this->lt,$this->lg);

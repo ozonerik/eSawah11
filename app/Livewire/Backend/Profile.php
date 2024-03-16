@@ -9,7 +9,6 @@ use Illuminate\Validation\Rules\Password;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Support\Str;
 

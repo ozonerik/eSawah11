@@ -33,7 +33,7 @@ return new class extends Migration
             $table->date('tgljual')->nullable();
             $table->string('nop')->nullable();
             $table->bigInteger('nilaipajak')->unsigned()->nullable()->default(0);
-            $table->string('img')->nullable();
+            $table->longText('img')->nullable();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
