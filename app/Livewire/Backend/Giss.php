@@ -11,7 +11,6 @@ class Giss extends Component
     public $latlang,$luas,$luasbata,$lokasi,$keliling;
     public $mode='read';
     public $hgpadi,$lanja,$lanjakw,$lanjarp;
-    public $map_id;
     public $lt,$lg,$ac;
     public $mluas=0;
     public $mkel=0;
@@ -47,7 +46,6 @@ class Giss extends Component
     private function resetForm(){
         $this->latlang='';
         $this->lokasi='';
-        $this->map_id=0;
         $this->luas=0;
         $this->luasbata=0;
         $this->keliling=0;

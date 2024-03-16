@@ -34,12 +34,14 @@ class Sawahs extends Component
     public $conlanja="5";
     public $modecal="htluas";
     public $autocomplate;
+    public $lt,$lg,$ac;
+    public $mluas=0;
+    public $mkel=0;
     protected $listeners = [
         'delsawahselect',
         'onDelForceProses',
         'getLatlangInput',
     ];
-    public $lt,$lg;
     public function mount(){
         $this->resetKonversi();
         $this->resetForm();
