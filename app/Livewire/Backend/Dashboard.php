@@ -21,6 +21,7 @@ class Dashboard extends Component
     public function gantiMode($mode)
     {
         $this->mode = $mode;
+        $this->dispatch('getLokasiSaatIni');
     }
 
     #[On('KirimData')]

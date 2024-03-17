@@ -126,6 +126,7 @@ document.addEventListener('livewire:init', () => {
 <script>
     document.addEventListener('livewire:navigated', () => {
         console.log(document.getElementById('lokasi'));
+        console.log(document.getElementById('lokasiadd'));
     });
 
     Livewire.on('getLokasiSaatIni', () => {
