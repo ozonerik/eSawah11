@@ -37,9 +37,9 @@ function geo_alert(id,ac){
   let container = document.getElementById(id);
   if(ac > 90){
     $(container).html("<div class='alert alert-warning alert-dismissible fade show' role='alert'><strong>Location not Accurate</strong> Please reload your browser or clik Get My Location Button.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
-  }else if( ac <= 90){
+  }else if( ac > 1 && ac <= 90){
     $(container).html("<div class='alert alert-success alert-dismissible fade show' role='alert'><strong>Location is accurate</strong> The map is ready to use.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
-  }else if( ac === null){
+  }else{
     $(container).html("<div class='alert alert-danger alert-dismissible fade show' role='alert'><strong>Error!!</strong> Geolocation is not supported by this browser.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
   }
   
@@ -48,7 +48,6 @@ function geo_alert(id,ac){
 async function initAutocomplete() {
     
     let input = document.getElementById('{{ $autoalamat }}');
-    console.log(input);
     if(input){
         const options = {
             componentRestrictions: { country: "id" },
@@ -129,11 +128,13 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
         }
 
         map_init.on('measurefinish', function(hasil) {
-            let ls=hasil.area.toFixed(2);
-            let kl=hasil.length.toFixed(2);
-            Livewire.dispatch('{{ $eventMeasure }}',{ data:{'ls':ls, 'kl':kl}});
-            @this.set('{{ $area }}', ls);
-            @this.set('{{ $length }}', kl);
+            if(hasil.length > 0){
+                let ls=hasil.area.toFixed(2);
+                let kl=hasil.length.toFixed(2);
+                Livewire.dispatch('{{ $eventMeasure }}',{ data:{'ls':ls, 'kl':kl}});
+                @this.set('{{ $area }}', ls);
+                @this.set('{{ $length }}', kl);
+            }
         });
     }
 }
