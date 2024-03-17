@@ -16,6 +16,12 @@ class Dashboard extends Component
     public $user_multi=[];
     public $area=0;
     public $keliling=0;
+    public $mode = 'read';
+
+    public function gantiMode($mode)
+    {
+        $this->mode = $mode;
+    }
 
     #[On('KirimData')]
     public function KirimData($data1,$data2)

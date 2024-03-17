@@ -122,6 +122,18 @@ document.addEventListener('livewire:init', () => {
     });
 });
 </script>
+
+<script>
+    document.addEventListener('livewire:navigated', () => {
+        console.log(document.getElementById('lokasi'));
+    });
+
+    Livewire.on('getLokasiSaatIni', () => {
+        console.log(document.getElementById('lokasiadd'));
+        console.log(document.getElementById('lokasi'));
+    });
+</script>
+
 @endpush
 <div>
     <x-content_header name="Dashboard" >
@@ -130,8 +142,16 @@ document.addEventListener('livewire:init', () => {
     <div class="row mx-1">
         <x-card_form name="Daftar Lanja" width="12" order="1" smallorder="1" closeto="onRead">
             <h1>Ini Dashboard</h1>
-            <button onclick="sendData()" class="btn btn-primary mb-3">Send To Component</button><br>
-            <button wire:click="AmbilData"class="btn btn-primary mb-3">Get from Component</button>
+            @if($mode == 'read')
+                Ini Mode READ: <input id="lokasi" type="text">
+            @elseif ($mode == 'add')
+                Ini Mode ADD:<input id="lokasiadd" type="text">
+            @endif
+            <br>
+            <button wire:click="gantiMode('{{ $mode === 'read' ? 'add' : 'read' }}')" wire:navigate class="btn btn-primary mb-3 mt-3">Ganti Mode</button><br>
+            <button wire:click="$dispatch('getLokasiSaatIni')" class="btn btn-primary mb-3 mt-3" wire:navigate >Cek ID</button><br>
+            <button onclick="sendData()" class="btn btn-primary mb-3" wire:navigate >Send To Component</button><br>
+            <button wire:click="AmbilData"class="btn btn-primary mb-3" wire:navigate>Get from Component</button>
             <div wire:ignore id="tempatMap"></div>
             lt= {{ $lt }}, lg= {{ $lg }}, area= {{ $area }} m2, keliling= {{ $keliling }} m
             <x-input_mask typemask="text" disabled="false" ids="address" label="Address" types="text" name="address" placeholder="Type address" />
