@@ -1,5 +1,5 @@
 @push('js')
-<x-script_mapadd dispatchname="getLokasiSaatini" geoalertId="alert" eventDrag="getDragData" eventMeasure="getMeasureData" ac="ac" lt="lt" lg="lg" autoalamat="lokasi" mapid="mapaddsawah" area="mluas" length="mkel" />
+<x-script_mapadd dispatchAddress="getAutocomplete" dispatchname="getLokasiSaatini" geoalertId="alert" eventDrag="getDragData" eventMeasure="getMeasureData" ac="ac" lt="lt" lg="lg" autoalamat="lokasi" mapid="mapaddsawah" area="mluas" length="mkel" />
 @endpush
 <div>
     <x-content_header name="Daftar Sawah" >
@@ -40,6 +40,7 @@
             <h4>Add Sawah Selected</h4>
             <x-slot:footer>
             <form wire:submit.prevent="addsawah">
+                Lokasi: {{ $lokasi }}
                 <x-input_form wajib="true" disabled="" ids="nosawah" label="No Surat" types="text" name="nosawah" placeholder="Enter No Surat" />
                 <x-input_form wajib="true" disabled="" ids="namasawah" label="Nama Sawah" types="text" name="namasawah" placeholder="Type Nama Sawah" />
                 <x-input_form wajib="true" disabled="" ids="luas" label="Luas Sawah (m2)" types="text" name="luas" placeholder="Type Luas Sawah" />

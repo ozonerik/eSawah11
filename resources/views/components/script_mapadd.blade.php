@@ -1,12 +1,11 @@
 <script>
-document.addEventListener('livewire:initialized', () => {
+Livewire.on('{{ $dispatchname }}', () => {
     navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
     initAutocomplete();
-    Livewire.on('{{ $dispatchname }}', () => {
-        navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
-        initAutocomplete();
-    });
-})
+});
+Livewire.on('{{ $dispatchAddress }}', () => {
+    initAutocomplete();
+});
 </script>
 <script>
 function geo_getPosition(position) {
@@ -15,6 +14,7 @@ function geo_getPosition(position) {
     let ac = position.coords.accuracy;
     @this.set('{{ $lt }}', lt);
     @this.set('{{ $lg }}', lg);
+    Livewire.dispatch('{{ $eventDrag }}',{ data:{'lt':lt.toFixed(7), 'lg':lg.toFixed(7)}});
     if(ac >  90){
         toastr.warning("Location is not accurate ");
     }else{
@@ -65,6 +65,7 @@ async function initAutocomplete() {
                 let ac=90;
                 @this.set('{{ $lt }}', lt);
                 @this.set('{{ $lg }}', lg);
+                Livewire.dispatch('{{ $eventDrag }}',{ data:{'lt':lt.toFixed(7), 'lg':lg.toFixed(7)}});
                 showMaps(lt,lg,ac,'{{ $mapid }}','true','Change Location')  
             }
         });

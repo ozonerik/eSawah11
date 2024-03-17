@@ -51,21 +51,27 @@ class Sawahs extends Component
     #[On('getDragData')]
     public function getDragData($data){
         $this->lokasi=google_alamat($data['lt'],$data['lg']);
+        $this->latlang=$this->lt.','.$this->lg;
     }
 
     #[On('getMeasureData')]
     public function getMeasureData($data){
         //dd($data);
         $this->luas=conv_measure($data['ls']);
-        $this->luasbata= get_Nconvtobata($this->luas);
-        $this->keliling=conv_measure($data['kl']);
-        $this->onHitung();
     }
 
     public function onCurrentlokasi()
     {
         $this->dispatch('getLokasiSaatini');
+        $this->lokasi=google_alamat($this->lt,$this->lg);
+        $this->latlang=$this->lt.','.$this->lg;
     }
+
+    public function updatedLokasi()
+    {
+        $this->dispatch('getAutocomplete');
+    }
+
 
      // Batas Awal Fungsi Tabel
     public function getSawahProperty(){
@@ -371,10 +377,8 @@ class Sawahs extends Component
     }
 
     public function onAdd(){
-        //dd($this->kordinat);
-        $this->dispatch('getLokasiSaatini');
         $this->mode='add';
-        //$this->onGetAdress('add');
+        $this->dispatch('getLokasiSaatini');
         $this->resetForm();
     }
 
