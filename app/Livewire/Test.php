@@ -8,15 +8,14 @@ use Livewire\Component;
 class Test extends Component
 {
     //#[Layout('components.layouts.app')] 
-    public $luas,$tanggal,$result;
-    public function updatedLuas($value){
-        $this->result=$value;
-    }
-    public function updatedTanggal($value){
-        $this->result=$value;
+    public $mode='read';
+    public $luas,$bata;
+    public function changeMode($mode){  
+        $this->mode=$mode;
+        //$this->dispatch('cobaEvent');
     }
     public function render()
     {
-        return view('livewire.test')->layout('layouts.app');
+        return view('livewire.test')->layout('components.layouts.app');
     }
 }
