@@ -4,6 +4,7 @@ document.addEventListener('livewire:initialized', () => {
     initAutocomplete();
     Livewire.on('{{ $dispatchname }}', () => {
         navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
+        initAutocomplete();
     });
 })
 </script>
@@ -45,7 +46,9 @@ function geo_alert(id,ac){
 }
 //autocomplete
 async function initAutocomplete() {
+    
     let input = document.getElementById('{{ $autoalamat }}');
+    console.log(input);
     if(input){
         const options = {
             componentRestrictions: { country: "id" },

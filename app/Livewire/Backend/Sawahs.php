@@ -9,6 +9,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Livewire\Attributes\On; 
 
 class Sawahs extends Component
 {
@@ -37,11 +38,8 @@ class Sawahs extends Component
     public $lt,$lg,$ac;
     public $mluas=0;
     public $mkel=0;
-    protected $listeners = [
-        'delsawahselect',
-        'onDelForceProses',
-        'getLatlangInput',
-    ];
+
+
     public function mount(){
         $this->resetKonversi();
         $this->resetForm();
@@ -50,102 +48,24 @@ class Sawahs extends Component
 
     //jangan gunakan variabel dengan nama rules dan messages 
     
-    //awal get lokasi
-    public $map_id = 0;
+    #[On('getDragData')]
+    public function getDragData($data){
+        $this->lokasi=google_alamat($data['lt'],$data['lg']);
+    }
 
-    public function getLatlangInput($data)
+    #[On('getMeasureData')]
+    public function getMeasureData($data){
+        //dd($data);
+        $this->luas=conv_measure($data['ls']);
+        $this->luasbata= get_Nconvtobata($this->luas);
+        $this->keliling=conv_measure($data['kl']);
+        $this->onHitung();
+    }
+
+    public function onCurrentlokasi()
     {
-        if($data['lat']==0 || $data['long']==0){
-            $this->latlang='';
-            $this->lt=0;
-            $this->lg=0;
-        }else{
-            $this->latlang=$data['lat'].','.$data['long'];
-            $this->lt=$data['lat'];
-            $this->lg=$data['long'];
-        }
-   
-        if(empty($data['lokasi'])){
-            $geocoder=$this->geo_alamat($data['lat'],$data['long']);
-            if($geocoder !== 'result_not_found'){
-                $this->lokasi=  $geocoder ;
-            }else{
-                $this->lokasi=  '' ;
-                if($this->mode=='edit'){
-                    $this->dispatch('editgetaddress',[
-                        'map_id' => $this->map_id,
-                        'lt' => 0,
-                        'lg' => 0,
-                        'kordinat' => '',
-                    ]);
-                }else{
-                    $this->dispatch('getaddress',[
-                        'map_id' => $this->map_id,
-                        'lt' => 0,
-                        'lg' => 0,
-                        'kordinat' => '',
-                    ]);
-                }
- 
-            }    
-        }else{
-            $this->lokasi=$data['lokasi'];
-            $this->map_id++;
-            if($this->mode=='edit'){
-                $this->dispatch('editgetaddress',[
-                    'map_id' => $this->map_id,
-                    'lt' => $data['lat'],
-                    'lg' => $data['long'],
-                    'kordinat' => $this->latlang,
-                ]);
-            }else{
-                $this->dispatch('getaddress',[
-                    'map_id' => $this->map_id,
-                    'lt' => $data['lat'],
-                    'lg' => $data['long'],
-                    'kordinat' => $this->latlang,
-                ]);
-            }
-        }
+        $this->dispatch('getLokasiSaatini');
     }
-
-    public function onGetlokasi(){
-        $this->map_id++;
-        $this->dispatch('getLocation',['map_id' => $this->map_id]);
-    }
-
-    public function onGetAdress($q){
-        $this->map_id++;
-        if($q=='add'){
-            $this->dispatch('getaddress',['map_id' => $this->map_id]);
-        }else{
-            $this->dispatch('editgetaddress',['map_id' => $this->map_id]);
-        }
-        
-    }
-
-    public function editGetlokasi(){
-        $this->map_id++;
-        $this->dispatch('editgetLocation',['map_id' => $this->map_id]);
-    }
-
-    private function show_location($kordinat){
-        //location
-        if(!empty($kordinat)){
-            $data=explode("," , $kordinat);
-        }else{
-            $data[0]=0;
-            $data[1]=0;
-        }
-        $this->dispatch('showLocation',[
-            'map_id' => $this->map_id,
-            'nlat' => $data[0],
-            'nlong' => $data[1],
-            'kordinat' => $kordinat,
-        ]);
-    }
-
-    //akhir get lokasi
 
      // Batas Awal Fungsi Tabel
     public function getSawahProperty(){
@@ -323,7 +243,7 @@ class Sawahs extends Component
 
     public function onEdit($id){
         $this->dispatch('run_maskcurrency');
-        $this->onGetAdress('edit');
+        //$this->onGetAdress('edit');
         $this->mode='edit';
         $this->ids=$id;
         $sawah = Sawah::findOrFail($id);
@@ -454,7 +374,7 @@ class Sawahs extends Component
         //dd($this->kordinat);
         $this->dispatch('getLokasiSaatini');
         $this->mode='add';
-        $this->onGetAdress('add');
+        //$this->onGetAdress('add');
         $this->resetForm();
     }
 

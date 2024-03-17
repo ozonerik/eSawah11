@@ -1,7 +1,14 @@
 @push('js')
-    @if($mode=='read')
-    <x-script_mapadd dispatchname="getLokasiSaatini" geoalertId="alert" eventDrag="getDragData" eventMeasure="getMeasureData" ac="ac" lt="lt" lg="lg" autoalamat="lokasi" mapid="mapaddsawah" area="mluas" length="mkel" />
-    @endif
+<script>
+    document.addEventListener('livewire:initialized', () => {
+        let input = document.getElementById('lokasi');
+        console.log(input);
+    });
+    Livewire.on('getLokasiSaatini', () => {
+        let input = document.getElementById('lokasiadd');
+        console.log(input);
+    });
+</script>
 @endpush
 <div>
     <x-content_header name="Daftar Sawah" >
@@ -28,6 +35,7 @@
             </div>
         </x-card-section> 
         @if($mode=='read')
+        <input type="text" id="lokasi" name="lokasi" >
         <x-card_tablesawah type="primary" width="9" order="1" smallorder="1" title="Daftar Sawah" :data="$Sawah" :thead="['No Surat','Nama Sawah','Luas(m2)','Lokasi','Photo Sawah']" :tbody="['nosawah','namasawah','luas','lokasi','img']" :tbtn="['edit','del']" search="Search...">
         <x-slot:menu>
             <button wire:click="onAdd" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Tambah"><i class="fas fa-plus"></i></button>
@@ -42,13 +50,14 @@
             <h4>Add Sawah Selected</h4>
             <x-slot:footer>
             <form wire:submit.prevent="addsawah">
+                <input type="text"  @created="$refresh" id="lokasiadd" name="lokasiadd" >
                 <x-input_form wajib="true" disabled="" ids="nosawah" label="No Surat" types="text" name="nosawah" placeholder="Enter No Surat" />
                 <x-input_form wajib="true" disabled="" ids="namasawah" label="Nama Sawah" types="text" name="namasawah" placeholder="Type Nama Sawah" />
                 <x-input_form wajib="true" disabled="" ids="luas" label="Luas Sawah (m2)" types="text" name="luas" placeholder="Type Luas Sawah" />
                 <x-input_form wajib="true" disabled="" ids="lokasi" label="Lokasi Sawah" types="text" name="lokasi" placeholder="Type Lokasi Sawah" />
                 <div wire:ignore id="alert"></div>
                 <div wire:ignore id="mapaddsawah" style="height: 400px;"></div>
-                <x-inputlokasi_form action="onGetlokasi" labelbtn="Get My Location" wajib="" disabled="" ids="latlang" label="Koordinat Sawah" types="text" name="latlang" placeholder="Get Koordinat Sawah" />
+                <x-inputlokasi_form action="onCurrentlokasi" labelbtn="Get My Location" wajib="" disabled="" ids="latlang" label="Koordinat Sawah" types="text" name="latlang" placeholder="Get Koordinat Sawah" />
                 <x-input_form disabled="" ids="b_barat" label="Batas Barat/Kulon" types="text" name="b_barat" placeholder="Type Batas Barat Sawah" />
                 <x-input_form disabled="" ids="b_utara" label="Batas Utara/Lor" types="text" name="b_utara" placeholder="Type Batas Utara Sawah" />
                 <x-input_form disabled="" ids="b_timur" label="Batas Timur/Wetan" types="text" name="b_timur" placeholder="Type Batas Timur Sawah" />
