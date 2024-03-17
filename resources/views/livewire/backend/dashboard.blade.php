@@ -148,10 +148,10 @@ document.addEventListener('livewire:init', () => {
                 Ini Mode ADD:<input id="lokasiadd" type="text">
             @endif
             <br>
-            <button wire:click="gantiMode('{{ $mode === 'read' ? 'add' : 'read' }}')" wire:navigate class="btn btn-primary mb-3 mt-3">Ganti Mode</button><br>
-            <button wire:click="$dispatch('getLokasiSaatIni')" class="btn btn-primary mb-3 mt-3" wire:navigate >Cek ID</button><br>
-            <button onclick="sendData()" class="btn btn-primary mb-3" wire:navigate >Send To Component</button><br>
-            <button wire:click="AmbilData"class="btn btn-primary mb-3" wire:navigate>Get from Component</button>
+            <button wire:click="gantiMode('{{ $mode === 'read' ? 'add' : 'read' }}')" class="btn btn-primary mb-3 mt-3">Ganti Mode</button><br>
+            <button wire:click="$dispatch('getLokasiSaatIni')" class="btn btn-primary mb-3 mt-3" >Cek ID</button><br>
+            <button onclick="sendData()" class="btn btn-primary mb-3" >Send To Component</button><br>
+            <button wire:click="AmbilData"class="btn btn-primary mb-3">Get from Component</button>
             <div wire:ignore id="tempatMap"></div>
             lt= {{ $lt }}, lg= {{ $lg }}, area= {{ $area }} m2, keliling= {{ $keliling }} m
             <x-input_mask typemask="text" disabled="false" ids="address" label="Address" types="text" name="address" placeholder="Type address" />
