@@ -1,14 +1,5 @@
 @push('js')
-<script>
-    document.addEventListener('livewire:navigated', () => {
-        console.log(document.getElementById('lokasi'));
-    });
-    Livewire.on('getLokasiSaatini', () => {
-        console.log('getLokasiSaatini');
-        console.log(document.getElementById('lokasi'));
-        console.log(document.getElementById('lokasiadd'));
-    });
-</script>
+<x-script_mapadd dispatchname="getLokasiSaatini" geoalertId="alert" eventDrag="getDragData" eventMeasure="getMeasureData" ac="ac" lt="lt" lg="lg" autoalamat="lokasi" mapid="mapaddsawah" area="mluas" length="mkel" />
 @endpush
 <div>
     <x-content_header name="Daftar Sawah" >
@@ -40,7 +31,6 @@
             <button wire:click="onAdd" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Tambah"><i class="fas fa-plus"></i></button>
             <button wire:click="onDelSelect" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Hapus" @if(empty($checked)) disabled @endif><i class="fas fa-trash"></i></button>
             <button wire:click="onTrashed" class="btn btn-sm btn-success" data-toggle="tooltip" title="Trash" @if(empty($Restoresawah->total())) disabled @endif><i class="fa fa-archive mr-2"></i>Trash</button>
-            Lokasi Read: <input type="text" id="lokasi" name="lokasi" >
         </x-slot>    
         </x-card_tablesawah>
         @elseif($mode=='trashed')
@@ -50,7 +40,6 @@
             <h4>Add Sawah Selected</h4>
             <x-slot:footer>
             <form wire:submit.prevent="addsawah">
-                Lokasi Add: <input type="text"  @created="$refresh" id="lokasiadd" name="lokasiadd" >
                 <x-input_form wajib="true" disabled="" ids="nosawah" label="No Surat" types="text" name="nosawah" placeholder="Enter No Surat" />
                 <x-input_form wajib="true" disabled="" ids="namasawah" label="Nama Sawah" types="text" name="namasawah" placeholder="Type Nama Sawah" />
                 <x-input_form wajib="true" disabled="" ids="luas" label="Luas Sawah (m2)" types="text" name="luas" placeholder="Type Luas Sawah" />

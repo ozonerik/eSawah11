@@ -153,7 +153,7 @@ document.addEventListener('livewire:init', () => {
             <button wire:click="$dispatch('getLokasiSaatIni')" class="btn btn-primary mb-3 mt-3" >Cek ID</button><br>
             <button onclick="sendData()" class="btn btn-primary mb-3" >Send To Component</button><br>
             <button wire:click="AmbilData"class="btn btn-primary mb-3">Get from Component</button>
-            <div wire:ignore id="tempatMap"></div>
+            <div wire:ignore id="tempatMap" style="height:300px"></div>
             lt= {{ $lt }}, lg= {{ $lg }}, area= {{ $area }} m2, keliling= {{ $keliling }} m
             <x-input_mask typemask="text" disabled="false" ids="address" label="Address" types="text" name="address" placeholder="Type address" />
             <x-input_mask typemask="luas" disabled="false" ids="luas" label="Luas" types="text" name="luas" placeholder="Type Luas" />
