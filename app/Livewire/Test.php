@@ -12,7 +12,8 @@ class Test extends Component
     public $luas,$bata;
     public function changeMode($mode){  
         $this->mode=$mode;
-        //$this->dispatch('cobaEvent');
+        $this->dispatch('$refresh');
+        $this->dispatch('getID');
     }
     public function render()
     {

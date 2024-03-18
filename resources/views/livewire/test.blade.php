@@ -4,7 +4,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/bindings/inputmask.binding.min.js" integrity="sha512-TGXLFBp6KE2kQHdH2lH1ysWKWKeuV013LpSktndHu9j3fT8tI7kqz4bWiOIIyFdn3Q65RcdrT/OkdL4LJPEGXQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     document.addEventListener('livewire:init', () => {
-
     })
  
     document.addEventListener('livewire:initialized', () => {
@@ -36,7 +35,10 @@
             let nilai=$('#bata}').val();
             @this.set('bata', nilai);
         });
-    })
+    });
+    Livewire.on('getID', () => {
+      console.log(document.getElementById("bata"));
+    });
 </script>
 @endpush
 <div>
@@ -48,4 +50,5 @@
   Bata : <input type="text" wire:model.live="bata" class="form-control m-2" id="bata" placeholder="bata">
   @endif
   <button type="button" wire:click="changeMode( '{{ $mode === 'read' ? 'add' : 'read' }}' )" class="btn btn-primary">Ganti Mode</button>
+  <button type="button" wire:click="$dispatch('getID')" class="btn btn-primary">Dispatch Tombol</button>
 </div>
