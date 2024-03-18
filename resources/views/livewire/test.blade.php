@@ -4,40 +4,33 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/bindings/inputmask.binding.min.js" integrity="sha512-TGXLFBp6KE2kQHdH2lH1ysWKWKeuV013LpSktndHu9j3fT8tI7kqz4bWiOIIyFdn3Q65RcdrT/OkdL4LJPEGXQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     document.addEventListener('livewire:init', () => {
+      Livewire.hook('element.init', ({ component, el }) => {
+        let bata=document.getElementById("bata");
+        if(bata){
+          console.log('ada')
+          $(bata).inputmask({
+              'autoUnmask': true, 
+              'suffix': ' bata',
+              'alias': 'decimal', 
+              'radixPoint':',', 
+              'groupSeparator': '.', 
+              'autoGroup': true, 
+              'digits': 2, 
+              'digitsOptional': false, 
+              'rightAlign': false 
+          }).on('keyup', function(e) {
+              let nilai=$(bata).val();
+              @this.set('bata', nilai);
+          });
+        }
+
+      })
     })
  
-    document.addEventListener('livewire:initialized', () => {
-      $('#luas').inputmask({
-            'autoUnmask': true, 
-            'suffix': ' m2',
-            'alias': 'decimal', 
-            'radixPoint':',', 
-            'groupSeparator': '.', 
-            'autoGroup': true, 
-            'digits': 2, 
-            'digitsOptional': false, 
-            'rightAlign': false 
-        }).on('keyup', function(e) {
-            let nilai=$('#luas}').val();
-            @this.set('luas', nilai);
-        });
-        $('#bata').inputmask({
-            'autoUnmask': true, 
-            'suffix': ' bata',
-            'alias': 'decimal', 
-            'radixPoint':',', 
-            'groupSeparator': '.', 
-            'autoGroup': true, 
-            'digits': 2, 
-            'digitsOptional': false, 
-            'rightAlign': false 
-        }).on('keyup', function(e) {
-            let nilai=$('#bata}').val();
-            @this.set('bata', nilai);
-        });
-    });
+  
     Livewire.on('getID', () => {
-      console.log(document.getElementById("bata"));
+      //console.log(document.getElementById("bata"));
+
     });
 </script>
 @endpush
