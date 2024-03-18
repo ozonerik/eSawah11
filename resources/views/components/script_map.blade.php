@@ -1,3 +1,4 @@
+@push('js')
 <script>
 document.addEventListener('livewire:initialized', () => {
     navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
@@ -134,3 +135,4 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
     }
 }
 </script>
+@endpush
