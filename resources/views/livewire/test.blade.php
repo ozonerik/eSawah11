@@ -7,11 +7,16 @@
       Livewire.hook('element.init', ({ component, el }) => {
         let bata=document.getElementById("bata");
         if(bata){
-          console.log('ada')
+          console.log('bata')
           $(bata).inputmask({
               'autoUnmask': true, 
               'suffix': ' bata',
-              'alias': 'decimal', 
+              'alias': 'decimal',
+              'onBeforeMask': function (value) {
+                value=0;
+                return value;
+              },
+              'clearIncomplete': true,
               'radixPoint':',', 
               'groupSeparator': '.', 
               'autoGroup': true, 
@@ -23,7 +28,6 @@
               @this.set('bata', nilai);
           });
         }
-
       })
     })
  
@@ -38,9 +42,9 @@
   <h1 class="text-center" >Testing Input Mask Mode Add</h1>
   <h2>Mode : {{ $mode }}</h2>
   @if($mode === 'read')
-  Luas : <input type="text" wire:model.live="luas" class="form-control m-2" id="luas" placeholder="luas">
+  Luas : <input type="text" wire:model.live="luas" class="form-control m-2" id="luas" placeholder="luas" value="0">
   @else
-  Bata : <input type="text" wire:model.live="bata" class="form-control m-2" id="bata" placeholder="bata">
+  Bata : <input type="text" wire:model.live="bata" class="form-control m-2" id="bata" placeholder="bata" value="0,00">
   @endif
   <button type="button" wire:click="changeMode( '{{ $mode === 'read' ? 'add' : 'read' }}' )" class="btn btn-primary">Ganti Mode</button>
   <button type="button" wire:click="$dispatch('getID')" class="btn btn-primary">Dispatch Tombol</button>
