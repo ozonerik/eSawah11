@@ -2,9 +2,9 @@
 <script data-navigate-once>
 Livewire.on('{{ $dispatchname }}', () => {
     navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
-    initAutocomplete();
 });
 Livewire.on('{{ $dispatchAddress }}', () => {
+    console.log('dispatch add')
     initAutocomplete();
 });
 </script>

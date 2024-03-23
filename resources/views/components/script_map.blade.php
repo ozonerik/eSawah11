@@ -5,6 +5,7 @@ document.addEventListener('livewire:init', () => {
     initAutocomplete();
 })
 Livewire.on('{{ $dispatchname }}', () => {
+    console.log('dispatch')
         navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
 });
 </script>
