@@ -1,6 +1,6 @@
 @push('js')
 <script data-navigate-once>
-document.addEventListener('livewire:init', () => {
+document.addEventListener('livewire:navigated', () => {
     navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
     initAutocomplete();
 })

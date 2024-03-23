@@ -26,10 +26,7 @@
 <!-- leaflet maps -->
 <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" ></script>
 <script src="https://ljagis.github.io/leaflet-measure/leaflet-measure.js"></script>
-<script data-navigate-once>
-    console.log('Runs only on page one')
-</script>
-<script data-navigate-once>
+<script>
 Inputmask.extendAliases({
       'harga': {
         'autoUnmask': true, 
@@ -193,7 +190,7 @@ Inputmask.extendAliases({
       }
 }); 
 </script>
-<script data-navigate-once>
+<script>
     // Make the dashboard widgets sortable Using jquery UI
     $('.connectedSortable').sortable({
         placeholder: 'sort-highlight',
@@ -204,7 +201,7 @@ Inputmask.extendAliases({
     })
     $('.connectedSortable .card-header').css('cursor', 'move');
 </script>
-<script data-navigate-once>
+<script>
     toastr.options = {
         "closeButton": false,
         "debug": false,
@@ -223,7 +220,7 @@ Inputmask.extendAliases({
         "hideMethod": "fadeOut"
     }
 </script>
-<script data-navigate-once>
+<script>
     @if(Session::has('success'))
         toastr.success("{{ session('success') }}")
     @endif
@@ -237,7 +234,7 @@ Inputmask.extendAliases({
         toastr.warning("{{ session('warning') }}")
     @endif
 </script>
-<script data-navigate-once>
+<script>
     var toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
     var currentTheme = localStorage.getItem('theme');
     var mainHeader = document.querySelector('.main-header');
