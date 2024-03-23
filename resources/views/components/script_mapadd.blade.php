@@ -1,5 +1,5 @@
 @push('js')
-<script>
+<script data-navigate-once>
 Livewire.on('{{ $dispatchname }}', () => {
     navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
     initAutocomplete();
@@ -8,7 +8,7 @@ Livewire.on('{{ $dispatchAddress }}', () => {
     initAutocomplete();
 });
 </script>
-<script>
+<script data-navigate-once>
 function geo_getPosition(position) {
     let lt=position.coords.latitude;
     let lg=position.coords.longitude;
@@ -18,15 +18,16 @@ function geo_getPosition(position) {
     Livewire.dispatch('{{ $eventDrag }}',{ data:{'lt':lt.toFixed(7), 'lg':lg.toFixed(7)}});
     if(ac >  90){
         toastr.warning("Location is not accurate ");
-    }else{
+        $('#{{ $geoalertId }}').html("<div class='alert alert-warning alert-dismissible fade show' role='alert'><strong>Location not Accurate</strong> Please reload your browser or clik Get My Location Button.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+    }else if(ac >= 1 && ac <=  90){
         toastr.success("Location is accurate ");
+        $('#{{ $geoalertId }}').html("<div class='alert alert-success alert-dismissible fade show' role='alert'><strong>Location is accurate</strong> The map is ready to use.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
     }
-    geo_alert('{{ $geoalertId }}',ac)
     showMaps(lt,lg,ac,'mymap','true','Your Location') 
 }   
 function geo_errorCallback(error){
     toastr.error("Geolocation is not supported by this browser. ");
-    geo_alert('{{ $geoalertId }}',null)
+    $('#{{ $geoalertId }}').html("<div class='alert alert-danger alert-dismissible fade show' role='alert'><strong>Error!!</strong> Geolocation is not supported by this browser.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
     @this.set('{{ $ac }}', null);
 };
 function geo_options() {
@@ -34,17 +35,7 @@ function geo_options() {
     timeout: 10000;
 };
 
-function geo_alert(id,ac){
-  let container = document.getElementById(id);
-  if(ac > 90){
-    $(container).html("<div class='alert alert-warning alert-dismissible fade show' role='alert'><strong>Location not Accurate</strong> Please reload your browser or clik Get My Location Button.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
-  }else if( ac > 1 && ac <= 90){
-    $(container).html("<div class='alert alert-success alert-dismissible fade show' role='alert'><strong>Location is accurate</strong> The map is ready to use.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
-  }else{
-    $(container).html("<div class='alert alert-danger alert-dismissible fade show' role='alert'><strong>Error!!</strong> Geolocation is not supported by this browser.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
-  }
-  
-}
+
 //autocomplete
 async function initAutocomplete() {
     

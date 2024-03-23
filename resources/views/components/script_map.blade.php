@@ -1,14 +1,14 @@
 @push('js')
-<script>
-document.addEventListener('livewire:initialized', () => {
+<script data-navigate-once>
+document.addEventListener('livewire:navigated', () => {
     navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
     initAutocomplete();
-    Livewire.on('{{ $dispatchname }}', () => {
-        navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
-    });
 })
+Livewire.on('{{ $dispatchname }}', () => {
+        navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
+});
 </script>
-<script>
+<script data-navigate-once>
 function geo_getPosition(position) {
     let lt=position.coords.latitude;
     let lg=position.coords.longitude;

@@ -12,31 +12,15 @@ class Dashboard extends Component
 {
     
     #[Layout('layouts.app')] 
-    public $user,$luas,$tanggal,$result,$address,$lt,$lg;
+    public $user,$luas,$tanggal,$result;
     public $user_multi=[];
     public $area=0;
     public $keliling=0;
-    public $mode = 'read';
 
     public function gantiMode($mode)
     {
         $this->mode = $mode;
         $this->dispatch('getLokasiSaatIni');
-    }
-
-    #[On('KirimData')]
-    public function KirimData($data1,$data2)
-    {
-        $data=[$data1,$data2];
-        dd($data);
-    }
-
-    #[On('AmbilData')]
-    public function AmbilData()
-    {
-        //dd('ambil data');
-        $this->dispatch('getDataFromComponent',data1:'data1 dari component',data2:'data2 dari component');
-        $this->dispatch('panggiljs');
     }
 
     public function mount(){
