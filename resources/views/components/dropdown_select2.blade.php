@@ -12,8 +12,8 @@
 </div>
 
 @push('js')
-<script>
-document.addEventListener('livewire:load', function () {
+<script data-navigate-once>
+document.addEventListener('livewire:navigated', function () {
     $('#{{$ids}}').select2({
         theme: 'bootstrap4',
         placeholder: "Please Choose...",

@@ -11,8 +11,8 @@
     @if($errors->has( $name ))<div class="invalid-feedback">{{ $errors->first($name) }}</div>@endif
 </div>
 @push('js')
-<script>
-document.addEventListener('livewire:load', function () {
+<script data-navigate-once>
+document.addEventListener('livewire:navigated', function () {
     $('#{{$ids}}').select2({
         theme: 'bootstrap4',
         placeholder: "Please Choose...",
