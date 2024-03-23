@@ -15,7 +15,7 @@
             <div class="row mx-3 pl-1 mb-2">
                 <div class="col-md-1 p-0 order-2 order-md-1 pr-md-3">
                     <div class="input-group input-group-sm mx-auto float-md-left mb-2 mb-md-0">
-                        <select class="form-control" wire:model="perPage">
+                        <select class="form-control"  wire:model.live="perPage">
                             <option value="5">5</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-md-3 p-0 order-1 order-md-3 pl-md-3">
                     <div class="input-group input-group-sm mx-auto float-md-right mb-2 mb-md-0">
-                        <input type="text" name="table_search" class="form-control" wire:model="search" placeholder="{{ $search }}">
+                        <input type="text" name="table_search" class="form-control"  wire:model.live="search" placeholder="{{ $search }}">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-default">
                             <i class="fas fa-search"></i>
@@ -44,7 +44,7 @@
                 <table class="table table-striped m-0">
                     <thead>
                         <tr>
-                            <th class="text-center"><input type="checkbox" wire:model="selectPage"></th>
+                            <th class="text-center"><input type="checkbox"  wire:model.live="selectPage"></th>
                             <th>No</th>
                             @foreach($thead as $val)
                             <th>{{ $val }}</th>
@@ -55,7 +55,7 @@
                     <tbody>
                         @foreach($data as $key=>$row)
                         <tr class="@if($this->is_checked($row->id)) table-primary @endif">
-                            <td class="text-center"><input type="checkbox" value="{{ $row->id }}" wire:model="checked"></td>
+                            <td class="text-center"><input type="checkbox" value="{{ $row->id }}"  wire:model.live="checked"></td>
                             <td>{{$data->firstItem() + $key}}
                                 
                             </td>
@@ -81,12 +81,12 @@
                             @endforeach
                             <td>
                                 @if( in_array('edit',$tbtn) &&  in_array('del',$tbtn) )
-                                <button wire:click.prevent="onEdit({{ $row->id }})" class="btn btn-sm btn-success w-100" data-toggle="tooltip" title="Edit" ><i class="fas fa-edit"></i></button>         
-                                <button wire:click.prevent="onDelete({{ $row->id }})" class="btn btn-sm btn-danger mt-1 w-100" data-toggle="tooltip" title="Hapus"><i class="fas fa-trash-alt"></i></button>
+                                <button wire:click="onEdit({{ $row->id }})" class="btn btn-sm btn-success w-100" data-toggle="tooltip" title="Edit" ><i class="fas fa-edit"></i></button>         
+                                <button wire:click="onDelete({{ $row->id }})" class="btn btn-sm btn-danger mt-1 w-100" data-toggle="tooltip" title="Hapus"><i class="fas fa-trash-alt"></i></button>
                                 @elseif(in_array('edit',$tbtn))
-                                <button wire:click.prevent="onEdit({{ $row->id }})" class="btn btn-sm btn-success w-100" data-toggle="tooltip" title="Edit" ><i class="fas fa-edit"></i></button>
+                                <button wire:click="onEdit({{ $row->id }})" class="btn btn-sm btn-success w-100" data-toggle="tooltip" title="Edit" ><i class="fas fa-edit"></i></button>
                                 @elseif(in_array('del',$tbtn))
-                                <button wire:click.prevent="onDelete({{ $row->id }})" class="btn btn-sm btn-danger w-100" data-toggle="tooltip" title="Hapus"><i class="fas fa-trash-alt"></i></button>
+                                <button wire:click="onDelete({{ $row->id }})" class="btn btn-sm btn-danger w-100" data-toggle="tooltip" title="Hapus"><i class="fas fa-trash-alt"></i></button>
                                 @endif
                             </td>
                         </tr>
