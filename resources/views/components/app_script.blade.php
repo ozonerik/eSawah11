@@ -29,7 +29,7 @@
 <script data-navigate-once>
     console.log('Runs only on page one')
 </script>
-<script>
+<script data-navigate-once>
 Inputmask.extendAliases({
       'harga': {
         'autoUnmask': true, 
@@ -193,7 +193,7 @@ Inputmask.extendAliases({
       }
 }); 
 </script>
-<script>
+<script data-navigate-once>
     // Make the dashboard widgets sortable Using jquery UI
     $('.connectedSortable').sortable({
         placeholder: 'sort-highlight',
@@ -204,7 +204,7 @@ Inputmask.extendAliases({
     })
     $('.connectedSortable .card-header').css('cursor', 'move');
 </script>
-<script>
+<script data-navigate-once>
     toastr.options = {
         "closeButton": false,
         "debug": false,
@@ -223,7 +223,7 @@ Inputmask.extendAliases({
         "hideMethod": "fadeOut"
     }
 </script>
-<script>
+<script data-navigate-once>
     @if(Session::has('success'))
         toastr.success("{{ session('success') }}")
     @endif
@@ -237,7 +237,7 @@ Inputmask.extendAliases({
         toastr.warning("{{ session('warning') }}")
     @endif
 </script>
-<script>
+<script data-navigate-once>
     var toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
     var currentTheme = localStorage.getItem('theme');
     var mainHeader = document.querySelector('.main-header');
