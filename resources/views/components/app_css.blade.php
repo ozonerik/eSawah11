@@ -15,8 +15,8 @@
 <!-- Select2 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4-modif.css') }}">
-<!-- custom css -->
-<link rel="stylesheet" href="{{ asset('css/custom-esawah.css') }}">
 <!-- leaflet maps -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">
-<link rel="stylesheet" href="{{ asset('plugins/leaflet-maps/leaflet-measure.css') }}">
+<link rel="stylesheet" href="https://ljagis.github.io/leaflet-measure/leaflet-measure.css">
+<!-- custom css -->
+<link rel="stylesheet" href="{{ asset('css/custom-esawah.css') }}">

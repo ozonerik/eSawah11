@@ -12,7 +12,7 @@
             <form wire:submit.prevent="onHitung">
                 <div wire:ignore id="alert"></div>
                 <div wire:ignore id="gismap" style="height:500px"></div>
-                <x-input_mask typemask="notlive" wajib="" disabled="" ids="lokasi" label="Lokasi" types="text" name="lokasi" placeholder="Get Lokasi" />
+                <x-input_mask typemask="lokasi" wajib="" disabled="" ids="lokasi" label="Lokasi" types="text" name="lokasi" placeholder="Get Lokasi" />
                 <x-inputlokasi_form action="onCurrentlokasi" labelbtn="Get My Location" wajib="" disabled="" ids="latlang" label="Koordinat" types="text" name="latlang" placeholder="Get Koordinat" />
                 <x-input_mask typemask="luas" wajib="" disabled="" ids="luas" label="Luas (m2)" types="text" name="luas" placeholder="Get Luas (m2)" />
                 <x-input_mask typemask="bata" wajib="" disabled="" ids="luasbata" label="Luas (bata)" types="text" name="luasbata" placeholder="Get Luas (bata)" />

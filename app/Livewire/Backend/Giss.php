@@ -73,13 +73,6 @@ class Giss extends Component
     }
 
     public function onHitung(){
-         $this->validate(
-             [ 
-                 'luas' => 'nullable',
-                 'luasbata' => 'nullable',
-                 'hgpadi' => 'required',
-                 'lanja' => 'required',
-             ]);
             $luas=$this->luas;
             $luasbata=$this->luasbata;
             $hgpadi=$this->hgpadi;

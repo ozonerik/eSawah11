@@ -1,195 +1,57 @@
-@push('js')
-<script>
-document.addEventListener('livewire:init', () => {
-    Livewire.hook('element.init', ({ component, el }) => {
-        let container=document.getElementById('{{ $ids }}');
-        console.log('{{ $ids }}');
-        if(container){
-            if('{{$typemask}}' === 'luas'){
-            $(container).inputmask({
-                'autoUnmask': true, 
-                'suffix': ' m2',
-                'alias': 'decimal',
-                'onBeforeMask': function (value) {
-                    value=0;
-                    return value;
-                }, 
-                'radixPoint':',', 
-                'groupSeparator': '.', 
-                'autoGroup': true, 
-                'digits': 2, 
-                'digitsOptional': false, 
-                'rightAlign': false 
-            }).on('keyup', function(e) {
-                let nilai=$(container).val();
-                @this.set('{{ $name }}', nilai);
-            });
-            }else if('{{$typemask}}' === 'bata'){
-                $(container).inputmask({
-                    'autoUnmask': true, 
-                    'suffix': ' bata',
-                    'alias': 'decimal',
-                    'onBeforeMask': function (value) {
-                        value=0;
-                        return value;
-                    }, 
-                    'radixPoint':',', 
-                    'groupSeparator': '.', 
-                    'autoGroup': true, 
-                    'digits': 2, 
-                    'digitsOptional': false, 
-                    'rightAlign': false 
-                }).on('keyup', function(e) {
-                    let nilai=$(container).val();
-                    @this.set('{{ $name }}', nilai);
-                });
-            }else if('{{$typemask}}' === 'kwintal'){
-                $(container).inputmask({
-                    'autoUnmask': true, 
-                    'suffix': ' kw',
-                    'alias': 'decimal', 
-                    'onBeforeMask': function (value) {
-                        value=0;
-                        return value;
-                    },
-                    'radixPoint':',', 
-                    'groupSeparator': '.', 
-                    'autoGroup': true, 
-                    'digits': 2, 
-                    'digitsOptional': false, 
-                    'rightAlign': false 
-                }).on('keyup', function(e) {
-                    let nilai=$(container).val();
-                    @this.set('{{ $name }}', nilai);
-                });
-            }else if('{{$typemask}}' === 'derajat'){
-                $(container).inputmask({
-                    'autoUnmask': true, 
-                    'suffix': ' °',
-                    'alias': 'decimal', 
-                    'onBeforeMask': function (value) {
-                        value=0;
-                        return value;
-                    },
-                    'radixPoint':',', 
-                    'groupSeparator': '.', 
-                    'autoGroup': true, 
-                    'digits': 2, 
-                    'digitsOptional': false, 
-                    'rightAlign': false 
-                }).on('keyup', function(e) {
-                    let nilai=$(container).val();
-                    @this.set('{{ $name }}', nilai);
-                });
-            }else if('{{$typemask}}' === 'panjang'){
-                $(container).inputmask({
-                    'autoUnmask': true, 
-                    'suffix': ' m',
-                    'alias': 'decimal', 
-                    'onBeforeMask': function (value) {
-                        value=0;
-                        return value;
-                    },
-                    'radixPoint':',', 
-                    'groupSeparator': '.', 
-                    'autoGroup': true, 
-                    'digits': 2, 
-                    'digitsOptional': false, 
-                    'rightAlign': false 
-                }).on('keyup', function(e) {
-                    let nilai=$(container).val();
-                    @this.set('{{ $name }}', nilai);
-                });
-            }else if('{{$typemask}}' === 'harga'){
-                $(container).inputmask({
-                    'autoUnmask': true, 
-                    'prefix': 'Rp ',
-                    'alias': 'decimal', 
-                    'onBeforeMask': function (value) {
-                        value=0;
-                        return value;
-                    },
-                    'shortcuts':{'r': '1000', 'j': '1000000','m':'1000000000','t':'1000000000000'},
-                    'radixPoint':',', 
-                    'groupSeparator': '.', 
-                    'autoGroup': true, 
-                    'digits': 0, 
-                    'digitsOptional': false, 
-                    'rightAlign': false 
-                }).on('keyup', function(e) {
-                    let nilai=$(container).val();
-                    @this.set('{{ $name }}', nilai);
-                });
-            }else if('{{$typemask}}' === 'desimal'){
-                $(container).inputmask({
-                    'autoUnmask': true, 
-                    'alias': 'decimal', 
-                    'onBeforeMask': function (value) {
-                        value=0;
-                        return value;
-                    },
-                    'radixPoint':',', 
-                    'groupSeparator': '.', 
-                    'autoGroup': true, 
-                    'digits': 2, 
-                    'digitsOptional': false, 
-                    'rightAlign': false 
-                }).on('keyup', function(e) {
-                    let nilai=$(container).val();
-                    @this.set('{{ $name }}', nilai);
-                });
-            }else if('{{$typemask}}' === 'telp'){
-                $(container).inputmask({
-                    'autoUnmask': true, 
-                    'mask': ['9999-9999-999[9][9][9]'],
-                    'onBeforeMask': function (value) {
-                        value=0;
-                        return value;
-                    },
-                    'rightAlign': false 
-                }).on('keyup', function(e) {
-                    let nilai=$(container).val();
-                    @this.set('{{ $name }}', nilai);
-                });
-            }else if('{{$typemask}}' === 'tanggal'){
-                $(container).datepicker({
-                    autoclose:true,
-                    format:'dd/mm/yyyy',
-                    orientation:'bottom',
-                    highlight:true,
-                    language:'id',
-                    todayHighlight:true,
-                    todayBtn:true,
-                }).on('changeDate', function(e) {
-                    let nilai=$(container).val();
-                    @this.set('{{ $name }}', nilai);
-                });
-                $(container).inputmask({
-                    'alias': 'datetime', 
-                    'inputFormat': 'dd/mm/yyyy',
-                    'rightAlign': false ,
-                    'onBeforeMask': function (value) {
-                        let date = new Date().toLocaleDateString("id-ID");
-                        value=date;
-                        return value;
-                    },
-                }).on('keyup', function(e) {
-                    let nilai=$(container).val();
-                    @this.set('{{ $name }}', nilai);
-                });
-            }
-        }  
-    })
-})
-</script>
-@endpush
-<div class="form-group">
-    <label for="{{ $ids }}" class="form-label @if(!empty($wajib)) text-danger  @endif">{{ $label }}</label>
-    @if($typemask == 'notlive')
-    <input wire:ignore wire:model="{{ $name }}" name="{{ $name }}" id="{{ $ids }}" @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif type="{{ $types }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
-    @else
-    <input wire:model.live="{{ $name }}" name="{{ $name }}" id="{{ $ids }}" @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif type="{{ $types }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+<div class="form-group" wire:ignore>
+    <label for="{{ $ids }}" class="@if(!empty($wajib)) text-danger  @endif">{{ $label }}</label>
+    @if($typemask == 'harga')
+    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" type-currency="IDR" data-inputmask="'alias':'harga'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
     @endif
+    @if($typemask == 'luas')
+    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" type-inputmask="luas" data-inputmask="'alias':'luas'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    @endif
+    @if($typemask == 'kwintal')
+    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'kwintal'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    @endif
+    @if($typemask == 'bata')
+    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'bata'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    @endif
+    @if($typemask == 'tanggal')
+    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'tanggal'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+        @push('js')
+        <script>
+            $('#{{ $ids }}').datepicker({
+                autoclose:true,
+                format:'dd/mm/yyyy',
+                orientation:'bottom',
+                highlight:true,
+                language:'id',
+                todayHighlight:true,
+                todayBtn:true,
+            }).on('changeDate', function(e) {
+                @this.set('{{ $name }}', $('#{{ $ids }}').val());
+            });
+        </script>
+        @endpush
+    @endif
+    @if($typemask == 'derajat')
+    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'derajat'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    @endif
+    @if($typemask == 'panjang')
+    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'panjang'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    @endif
+    @if($typemask == 'desimal')
+    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'desimal'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    @endif
+    @if($typemask == 'nomor')
+    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'nomor'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    @endif
+    @if($typemask == 'telp')
+    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'telp'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    @endif
+    @if($typemask == 'text')
+    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    @endif
+    @if($typemask == 'lokasi')
+    <input wire:ignore onchange="@this.set('{{ $name }}', this.value)" @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    @endif
+
     @if($errors->has( $name ))
         <span class="invalid-feedback" role="alert">
             {{ $errors->first($name) }}

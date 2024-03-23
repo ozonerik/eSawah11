@@ -46,6 +46,21 @@ class Sawahs extends Component
         $this->resetKalkulator();
     }
 
+    private function show_location($kordinat){
+        //location
+        if(!empty($kordinat)){
+            $data=explode("," , $kordinat);
+        }else{
+            $data[0]=0;
+            $data[1]=0;
+        }
+        $this->dispatch('showLocation',[
+            'map_id' => 0,
+            'nlat' => $data[0],
+            'nlong' => $data[1],
+            'kordinat' => $kordinat,
+        ]);
+    }
     //jangan gunakan variabel dengan nama rules dan messages 
     
     #[On('getDragData')]
@@ -142,21 +157,10 @@ class Sawahs extends Component
         $this->ls2=0;
         $this->ls3=0;
         $this->ls4=0;
-        $this->lanjakw= get_lanja(0,$this->lanja);
-        $this->lanjarp= get_nlanja(0,$this->lanja,$this->hgpadi);
+        $this->lanjakw= 0;
+        $this->lanjarp= 0;
     }
     public function kalkulatorsawah(){
-        $this->validate(
-        [ 
-            'p1' => 'nullable',
-            'l1' => 'nullable',
-            'p2' => 'nullable',
-            'l2' => 'nullable',
-            'la' => 'nullable',
-            'm' => 'nullable',
-            'hgpadi' => 'required',
-            'lanja' => 'required',
-        ]);
         $p1=$this->p1;
         $l1=$this->l1;
         $p2=$this->p2;
@@ -222,18 +226,10 @@ class Sawahs extends Component
         $this->cbata=0;
         $this->conhgpadi=get_hargapadi();
         $this->conlanja=get_nilailanja();
-        $this->clanjakw=get_lanja($this->cluas,$this->conlanja);
-        $this->clanjarp=get_nlanja($this->cluas,$this->conlanja,$this->conhgpadi);
+        $this->clanjakw=0;
+        $this->clanjarp=0;
     } 
     public function konversisawah(){
-        $this->validate(
-            [ 
-                'cluas' => 'nullable',
-                'cbata' => 'nullable',
-                'conhgpadi' => 'required',
-                'conlanja' => 'required',
-            ]);
-        
         $cluas=$this->cluas;
         $cbata=$this->cbata;
         $conhgpadi=$this->conhgpadi;

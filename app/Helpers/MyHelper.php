@@ -6,9 +6,11 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Spatie\Geocoder\Geocoder;
 
-if (!function_exists('ascii')) {
-    function ascii($a){ 
-        return String.fromCharCode($a); 
+
+if (!function_exists('conv_measure')) {
+    function conv_measure($val){
+        $nilai = str_replace(".",",",$val);
+        return $nilai;
     }
 }
 
@@ -40,13 +42,6 @@ if (!function_exists('google_alamat')) {
     }
 }
 
-if (!function_exists('conv_measure')) {
-    function conv_measure($val){
-        $nilai = str_replace(".",",",$val);
-        return $nilai;
-    }
-}
-
 if (!function_exists('conv_inputmask')) {
     function conv_inputmask($string){
         $nilai = '';
@@ -59,7 +54,7 @@ if (!function_exists('conv_inputmask')) {
         }else{
             $nilai =$s;
         }
-        return $nilai;
+        return floatval($nilai);
     }
 }
 
@@ -76,8 +71,11 @@ if (!function_exists('get_hargaemas')) {
         $response = Http::get( 'https://logam-mulia-api.vercel.app/prices/hargaemas-com' );
         if($response->successful()){
             $data = $response->json();
-            return $hargabeli=$data['data'][0]['buy'];
-        }
+            $hargabeli=$data['data'][0]['buy'];
+        }else{
+            $hargabeli=900000;
+        }   
+        return $hargabeli;
     }
 }
 
@@ -137,7 +135,6 @@ if (!function_exists('get_currentroute')) {
     }
 }
 
-
 if (!function_exists('get_convtobata')) {
     function get_convtobata($value){
         $v=floatval($value)/14.00;
@@ -150,7 +147,7 @@ if (!function_exists('get_convtobata')) {
 
 if (!function_exists('get_Nconvtobata')) {
     function get_Nconvtobata($value){
-        $v=floatval($value)/14.00;
+        $v=floatval(conv_inputmask($value))/14.00;
         $s=round($v,2);
         $bata=$s;
         return $bata;
@@ -159,10 +156,10 @@ if (!function_exists('get_Nconvtobata')) {
 
 if (!function_exists('get_NBatatoluas')) {
     function get_NBatatoluas($value){
-        $v=floatval($value)*14.00;
+        $v=floatval(conv_inputmask($value))*14.00;
         $s=round($v,2);
-        $bata=$s;
-        return $bata;
+        $luas=$s;
+        return $luas;
     }
 }
 
@@ -182,7 +179,6 @@ if (!function_exists('get_convtorp')) {
         return $rp;
     }
 }
-
 
 if (!function_exists('get_conluas')) {
     function get_conluas($value){
@@ -256,8 +252,9 @@ if (!function_exists('get_luassegi4')) {
 if (!function_exists('get_lanja')) {
     function get_lanja($meter,$kw){
         $a = new \NumberFormatter("id-ID", \NumberFormatter::DECIMAL);
-        $kw=intval($kw);
-        $bata=floatval($meter)/14.00;
+        $kw=floatval($kw);
+        $meter=floatval($meter);
+        $bata=round(floatval($meter/14.00),2);
         $lanja=$bata/100;
         $val=round($lanja*$kw,2);
         //$nlanjakw=$a->format($val);
@@ -268,11 +265,14 @@ if (!function_exists('get_lanja')) {
 
 if (!function_exists('get_nlanja')) {
     function get_nlanja($meter,$kw,$harga){
-        $kw=intval($kw);
-        $harga=intval($harga);
-        $bata=floatval($meter)/14.00;
+        $a = new \NumberFormatter("id-ID", \NumberFormatter::DECIMAL);
+        $kw=floatval($kw);
+        $harga=floatval($harga);
+        $meter=floatval($meter);
+        $bata=round(floatval($meter/14.00),2);
         $lanja=$bata/100;
-        $nlanjarp=round($lanja*$kw,2)*$harga;
+        $nlanjarp=round($lanja*$kw*$harga,2);
+        //$lanjarp=$a->format($nlanjarp);
         //$nlanjatext=get_floatttorp($nlanjarp);
         return $nlanjarp;
     }
@@ -280,7 +280,7 @@ if (!function_exists('get_nlanja')) {
 
 if (!function_exists('get_floatttorp')) {
     function get_floatttorp($val){
-        $val = floatval($val);
+        $val = floatval(conv_inputmask($val));
         $a = new NumberFormatter("id-ID", NumberFormatter::CURRENCY);
         $a->setAttribute( $a::FRACTION_DIGITS, 0 );
         $result=$a->formatCurrency($val,"IDR");
