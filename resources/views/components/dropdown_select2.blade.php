@@ -13,7 +13,7 @@
 
 @push('js')
 <script data-navigate-once>
-document.addEventListener('livewire:navigated', function () {
+document.addEventListener('livewire:initialized', function () {
     $('#{{$ids}}').select2({
         theme: 'bootstrap4',
         placeholder: "Please Choose...",
