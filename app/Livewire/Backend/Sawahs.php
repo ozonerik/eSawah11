@@ -27,12 +27,9 @@ class Sawahs extends Component
     public $ids,$nosawah,$namasawah,$luas,$lokasi,$latlang,$b_barat,$b_utara,$b_timur,$b_selatan,$namapenjual,$hargabeli,$tglbeli,$namapembeli,$hargajual,$tgljual,$nop,$nilaipajak,$img,$user_id;
     public $oldpath,$newpath,$tmpimg;
     public $filename="Choose File";
-    public $p1,$l1,$p2,$l2,$la,$m,$ls1,$ls2,$ls3,$ls4,$lanjakw,$lanjarp;
+    public $p1,$l1,$p2,$l2,$la,$m,$ls1,$ls2,$ls3,$ls4,$lanjakw,$lanjarp,$hargabata,$hargatanah;
     public $cluas,$cbata,$clanjakw,$clanjarp;
-    public $hgpadi="750000";
-    public $lanja="5";
-    public $conhgpadi="750000";
-    public $conlanja="5";
+    public $hgpadi,$lanja,$conhgpadi,$conlanja,$chargabata,$chargatanah;
     public $modecal="htluas";
     public $autocomplate;
     public $lt,$lg,$ac;
@@ -144,6 +141,9 @@ class Sawahs extends Component
     public function updatedLanja($value){
         $this->kalkulatorsawah();
     }
+    public function updatedHargabata($value){
+        $this->kalkulatorsawah();
+    }
     public function resetKalkulator(){
         $this->p1=0;
         $this->l1=0;
@@ -153,25 +153,25 @@ class Sawahs extends Component
         $this->m=0;
         $this->hgpadi=get_hargapadi();
         $this->lanja=get_nilailanja();
+        $this->hargabata=get_hargabata();
         $this->ls1=0;
         $this->ls2=0;
         $this->ls3=0;
         $this->ls4=0;
         $this->lanjakw= 0;
         $this->lanjarp= 0;
+        $this->hargatanah= 0;
     }
     public function kalkulatorsawah(){
-        $p1=$this->p1;
-        $l1=$this->l1;
-        $p2=$this->p2;
-        $l2=$this->l2;
-        $la=$this->la;
-        $m=$this->m;
-        $hgpadi=$this->hgpadi;
-        $lanja=$this->lanja;
+        $p1=conv_inputmask($this->p1);
+        $l1=conv_inputmask($this->l1);
+        $p2=conv_inputmask($this->p2);
+        $l2=conv_inputmask($this->l2);
+        $la=conv_inputmask($this->la);
+        $m=conv_inputmask($this->m);
+        $hgpadi=conv_inputmask($this->hgpadi);
+        $lanja=conv_inputmask($this->lanja);
         if(empty($p2)||empty($l2)){
-            $p1=floatval($p1);
-            $l1=floatval($l1);
             $ls1=get_Nconluas($p1*$l1);
             $this->ls1=get_conluas($p1*$l1);
             $this->ls2=get_conluas($p1*$l1);
@@ -191,12 +191,13 @@ class Sawahs extends Component
         }else{
             $ls1=get_luaspersegi($p1,$l1,$p2,$l2);
             $this->ls1=get_conluas($ls1);
-            $this->ls2="";
+            $this->ls2=0;
             $this->ls3= get_convtobata($ls1);
-            $this->ls4="";
+            $this->ls4=0;
             $this->lanjakw= get_lanja($ls1,$lanja);
             $this->lanjarp= get_nlanja($ls1,$lanja,$hgpadi);
         }
+        $this->hargatanah= floatval($this->ls3)*$this->hargabata ;
 
     }
     // Batas Akhir Fungsi Kalkulator Sawah
@@ -219,21 +220,28 @@ class Sawahs extends Component
     public function updatedConlanja($value){
         $this->konversisawah();
     }
+    public function updatedChargabata($value){
+        $this->konversisawah();
+    }
     public function resetKonversi(){
         $this->cluas=0;
         $this->cbata=0;
         $this->conhgpadi=get_hargapadi();
         $this->conlanja=get_nilailanja();
+        $this->chargabata=get_hargabata();
         $this->clanjakw=0;
         $this->clanjarp=0;
+        $this->chargatanah=0;
     } 
     public function konversisawah(){
-        $cluas=$this->cluas;
-        $cbata=$this->cbata;
-        $conhgpadi=$this->conhgpadi;
-        $conlanja=$this->conlanja;
+        $cluas=conv_inputmask($this->cluas);
+        $cbata=conv_inputmask($this->cbata);
+        $conhgpadi=conv_inputmask($this->conhgpadi);
+        $conlanja=conv_inputmask($this->conlanja);
+        $chargabata=conv_inputmask($this->chargabata);
         $this->clanjakw= get_lanja($cluas,$conlanja);
         $this->clanjarp= get_nlanja($cluas,$conlanja,$conhgpadi);
+        $this->chargatanah= ($cbata*$chargabata);
     }
 
     public function onRead(){

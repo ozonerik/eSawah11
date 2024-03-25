@@ -1,6 +1,6 @@
-@push('js')
+<!-- @push('js')
 <x-script_mapadd dispatchAddress="getAutocomplete" dispatchname="getLokasiSaatini" geoalertId="alert" eventDrag="getDragData" eventMeasure="getMeasureData" ac="ac" lt="lt" lg="lg" autoalamat="lokasi" mapid="mapaddsawah" area="mluas" length="mkel" />
-@endpush
+@endpush -->
 <div>
     <x-content_header name="Daftar Sawah" >
         <li class="breadcrumb-item active">Sawah</li>
@@ -35,7 +35,7 @@
         </x-card_tablesawah>
         @elseif($mode=='trashed')
         <x-card_tabletrash type="danger" width="9" order="1" smallorder="1" title="Restore Sawah" :data="$Restoresawah" :thead="['No Surat','Nama Sawah','Luas(m2)','Lokasi']" :tbody="['nosawah','namasawah','luas','lokasi']" :tbtn="['restore','del']" search="Search..."/>
-        @elseif($mode=='add')
+        <!-- @elseif($mode=='add')
         <x-card_form name="Add Sawah" width="9" order="1" smallorder="1" closeto="onRead">
             <h4>Add Sawah Selected</h4>
             <x-slot:footer>
@@ -64,7 +64,7 @@
                 <button type="submit" class="btn btn-primary float-right" wire:target="img" wire:loading.attr="disabled">Save</button>
             </form>
             </x-slot>
-        </x-card_form>
+        </x-card_form> -->
         @elseif($mode=='edit')
         <x-card_form name="Edit Sawah" width="9" order="1" smallorder="1" closeto="onRead">
             <h4>Edit Sawah</h4>

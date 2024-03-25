@@ -44,6 +44,10 @@ class SawahAdd extends Component
         $this->resetForm();
     }
 
+    public function onRead(){
+        return redirect()->route('sawahs');
+    }
+
     #[On('getDragData')]
     public function getDragData($data){
         $this->lokasi=google_alamat($data['lt'],$data['lg']);

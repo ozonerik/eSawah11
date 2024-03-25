@@ -154,6 +154,25 @@ if (!function_exists('get_Nconvtobata')) {
     }
 }
 
+if (!function_exists('get_conluas')) {
+    function get_conluas($value){
+        $v=floatval($value);
+        //$a = new \NumberFormatter("id-ID", \NumberFormatter::DECIMAL);
+        //$s=$a->format(round($v,2));
+        //$cluas=$s." m2";
+        return $v;
+    }
+}
+
+if (!function_exists('get_Nconluas')) {
+    function get_Nconluas($value){
+        $v=floatval($value);
+        $s=round($v,2);
+        $cluas=$s;
+        return $cluas;
+    }
+}
+
 if (!function_exists('get_NBatatoluas')) {
     function get_NBatatoluas($value){
         $v=floatval(conv_inputmask($value))*14.00;
@@ -162,6 +181,7 @@ if (!function_exists('get_NBatatoluas')) {
         return $luas;
     }
 }
+
 
 if (!function_exists('get_formatindo')) {
     function get_formatindo($value){
@@ -177,25 +197,6 @@ if (!function_exists('get_convtorp')) {
         $s=round($v,0);
         $rp=get_floatttorp($s);
         return $rp;
-    }
-}
-
-if (!function_exists('get_conluas')) {
-    function get_conluas($value){
-        $v=floatval($value);
-        $a = new \NumberFormatter("id-ID", \NumberFormatter::DECIMAL);
-        $s=$a->format(round($v,2));
-        //$cluas=$s." m2";
-        return $s;
-    }
-}
-
-if (!function_exists('get_Nconluas')) {
-    function get_Nconluas($value){
-        $v=floatval($value);
-        $s=round($v,2);
-        $cluas=$s;
-        return $cluas;
     }
 }
 
