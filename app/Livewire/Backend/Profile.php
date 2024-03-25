@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Support\Str;
+use Livewire\Attributes\On;
 
 
 class Profile extends Component
@@ -46,14 +47,11 @@ class Profile extends Component
         ]);
     }
 
+    #[On('deleteprofile')]
     public function deleteprofile(){
-        dd('hapus');
         User::findOrFail(Auth::user()->id)->delete();
         $this->alert('success', 'User berhasil dihapus');
         Auth::guard('web')->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        
         return redirect('/');
     }
 
