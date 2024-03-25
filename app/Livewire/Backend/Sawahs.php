@@ -364,9 +364,10 @@ class Sawahs extends Component
     }
 
     public function onAdd(){
-        $this->mode='add';
+        return redirect()->route('sawahs.add');
+/*         $this->mode='add';
         $this->dispatch('getLokasiSaatini');
-        $this->resetForm();
+        $this->resetForm(); */
     }
 
     public function addsawah(){

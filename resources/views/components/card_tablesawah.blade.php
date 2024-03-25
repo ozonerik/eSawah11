@@ -70,7 +70,7 @@
                                         @endif
                                     <!--luas-->
                                     @elseif($val=="luas")
-                                        {{ get_formatindo($row->$val) }} ( {{ get_convtobata($row->$val) }} )
+                                        {{ get_formatindo($row->$val) }} m2 ( {{ get_convtobata($row->$val) }} bata )
                                     <!--harga-->
                                     @elseif(substr($val,0,5) == "harga")
                                         {{ get_convtorp($row->$val) }}
