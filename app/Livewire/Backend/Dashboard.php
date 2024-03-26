@@ -12,15 +12,23 @@ class Dashboard extends Component
 {
     
     #[Layout('layouts.app')] 
-    public $user,$luas,$tanggal,$result;
+    public $user,$luas,$tanggal,$result,$lokasi;
     public $user_multi=[];
     public $area=0;
     public $keliling=0;
+    public $mode='read';
 
     public function gantiMode($mode)
     {
         $this->mode = $mode;
-        $this->dispatch('getLokasiSaatIni');
+        if($mode=='read'){
+            dd('read');
+        }
+        if($mode=='edit'){
+            //dd('edit');
+            $this->dispatch('run_select2');
+        }
+        
     }
 
     public function mount(){
