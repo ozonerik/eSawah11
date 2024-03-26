@@ -147,7 +147,7 @@ if (!function_exists('get_convtobata')) {
 
 if (!function_exists('get_Nconvtobata')) {
     function get_Nconvtobata($value){
-        $v=floatval(conv_inputmask($value))/14.00;
+        $v=floatval($value)/14.00;
         $s=round($v,2);
         $bata=$s;
         return $bata;
@@ -175,7 +175,7 @@ if (!function_exists('get_Nconluas')) {
 
 if (!function_exists('get_NBatatoluas')) {
     function get_NBatatoluas($value){
-        $v=floatval(conv_inputmask($value))*14.00;
+        $v=floatval($value)*14.00;
         $s=round($v,2);
         $luas=$s;
         return $luas;
@@ -279,9 +279,20 @@ if (!function_exists('get_nlanja')) {
     }
 }
 
+if (!function_exists('hitung_hargatanah')) {
+    function hitung_hargatanah($meter,$harga){
+        $a = new \NumberFormatter("id-ID", \NumberFormatter::DECIMAL);
+        $harga=floatval($harga);
+        $meter=floatval($meter);
+        $bata=round(floatval($meter/14.00),2);
+        $nlanjarp=round($bata*$harga);
+        return $nlanjarp;
+    }
+}
+
 if (!function_exists('get_floatttorp')) {
     function get_floatttorp($val){
-        $val = floatval(conv_inputmask($val));
+        $val = floatval($val);
         $a = new NumberFormatter("id-ID", NumberFormatter::CURRENCY);
         $a->setAttribute( $a::FRACTION_DIGITS, 0 );
         $result=$a->formatCurrency($val,"IDR");

@@ -171,33 +171,34 @@ class Sawahs extends Component
         $m=conv_inputmask($this->m);
         $hgpadi=conv_inputmask($this->hgpadi);
         $lanja=conv_inputmask($this->lanja);
+        $hargabata=conv_inputmask($this->hargabata);
         if(empty($p2)||empty($l2)){
-            $ls1=get_Nconluas($p1*$l1);
-            $this->ls1=get_conluas($p1*$l1);
-            $this->ls2=get_conluas($p1*$l1);
-            $this->ls3=get_convtobata($p1*$l1);
-            $this->ls4=get_convtobata($p1*$l1);
-            $this->lanjakw= get_lanja($ls1,$lanja);
-            $this->lanjarp= get_nlanja($ls1,$lanja,$hgpadi);
+            //$ls1=get_Nconluas($p1*$l1);
+            $this->ls1=get_Nconluas($p1*$l1);
+            $this->ls2=get_Nconluas($p1*$l1);
+            $this->ls3=get_Nconvtobata($p1*$l1);
+            $this->ls4=get_Nconvtobata($p1*$l1);
+            $this->lanjakw= get_lanja($this->ls1,$lanja);
+            $this->lanjarp= get_nlanja($this->ls1,$lanja,$hgpadi);
         }elseif(!empty($m)){
             $ls1=get_luassegi4($p1,$l1,$p2,$l2,$m);
             $ls2=get_luassegi4($p1,$l1,$p2,$l2,$m);
-            $this->ls1=get_conluas($ls1);
-            $this->ls2=get_conluas($ls2);
-            $this->ls3= get_convtobata($ls1);
-            $this->ls4= get_convtobata($ls2);
-            $this->lanjakw= get_lanja($ls1,$lanja);
-            $this->lanjarp= get_nlanja($ls1,$lanja,$hgpadi);
+            $this->ls1=get_Nconluas($ls1);
+            $this->ls2=get_Nconluas($ls2);
+            $this->ls3= get_Nconvtobata($ls1);
+            $this->ls4= get_Nconvtobata($ls2);
+            $this->lanjakw= get_lanja($this->ls1,$lanja);
+            $this->lanjarp= get_nlanja($this->ls1,$lanja,$hgpadi);
         }else{
             $ls1=get_luaspersegi($p1,$l1,$p2,$l2);
-            $this->ls1=get_conluas($ls1);
+            $this->ls1=get_Nconluas($ls1);
             $this->ls2=0;
-            $this->ls3= get_convtobata($ls1);
+            $this->ls3= get_Nconvtobata($ls1);
             $this->ls4=0;
-            $this->lanjakw= get_lanja($ls1,$lanja);
-            $this->lanjarp= get_nlanja($ls1,$lanja,$hgpadi);
+            $this->lanjakw= get_lanja($this->ls1,$lanja);
+            $this->lanjarp= get_nlanja($this->ls1,$lanja,$hgpadi);
         }
-        $this->hargatanah= floatval($this->ls3)*$this->hargabata ;
+        $this->hargatanah= hitung_hargatanah($this->ls1,$hargabata) ;
 
     }
     // Batas Akhir Fungsi Kalkulator Sawah
@@ -207,11 +208,11 @@ class Sawahs extends Component
         $this->modecal="htconv";
     }
     public function updatedCluas($value){
-        $this->cbata= get_Nconvtobata($this->cluas);
+        $this->cbata= get_Nconvtobata(conv_inputmask($this->cluas));
         $this->konversisawah();
     }
     public function updatedCbata($value){
-        $this->cluas= get_NBatatoluas($this->cbata);
+        $this->cluas= get_NBatatoluas(conv_inputmask($this->cbata));
         $this->konversisawah();
     }
     public function updatedConhgpadi($value){
@@ -234,14 +235,14 @@ class Sawahs extends Component
         $this->chargatanah=0;
     } 
     public function konversisawah(){
-        $cluas=conv_inputmask($this->cluas);
-        $cbata=conv_inputmask($this->cbata);
+        $cluas=($this->cluas);
+        $cbata=($this->cbata);
         $conhgpadi=conv_inputmask($this->conhgpadi);
         $conlanja=conv_inputmask($this->conlanja);
         $chargabata=conv_inputmask($this->chargabata);
         $this->clanjakw= get_lanja($cluas,$conlanja);
         $this->clanjarp= get_nlanja($cluas,$conlanja,$conhgpadi);
-        $this->chargatanah= ($cbata*$chargabata);
+        $this->chargatanah= hitung_hargatanah($cluas,$chargabata);
     }
 
     public function onRead(){
