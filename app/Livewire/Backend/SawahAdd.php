@@ -57,9 +57,9 @@ class SawahAdd extends Component
     public function getMeasureData($data){
         //dd($data);
         $this->luas=conv_measure($data['ls']);
-/*         $this->luasbata= get_Nconvtobata($this->luas);
-        $this->keliling=conv_measure($data['kl']);
-        $this->onHitung(); */
+        $this->bata= get_Nconvtobata($this->luas);
+        $this->hargabeli= ($this->bata * conv_inputmask($this->hargabata));
+
     }
 
     public function onCurrentlokasi()
