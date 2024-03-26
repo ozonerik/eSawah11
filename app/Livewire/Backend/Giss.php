@@ -51,16 +51,16 @@ class Giss extends Component
         $this->keliling=0;
         $this->hgpadi=get_hargapadi();
         $this->lanja=get_nilailanja();
-        $this->lanjakw=get_lanja($this->luas,$this->lanja);
-        $this->lanjarp=get_nlanja($this->luas,$this->lanja,$this->hgpadi);
+        $this->lanjakw=0;
+        $this->lanjarp=0;
     }
 
     public function updatedLuas($value){
-        $this->luasbata= get_Nconvtobata($this->luas);
+        $this->luasbata= get_Nconvtobata(conv_inputmask($this->luas));
         $this->onHitung();
     }
     public function updatedLuasbata($value){
-        $this->luas= get_NBatatoluas($this->luasbata);
+        $this->luas= get_NBatatoluas(conv_inputmask($this->luasbata));
         $this->onHitung();
     }
     public function updatedHgpadi($value){
@@ -75,8 +75,8 @@ class Giss extends Component
     public function onHitung(){
             $luas=$this->luas;
             $luasbata=$this->luasbata;
-            $hgpadi=$this->hgpadi;
-            $lanja=$this->lanja;
+            $hgpadi=conv_inputmask($this->hgpadi);
+            $lanja=conv_inputmask($this->lanja);
             $this->lanjakw= get_lanja($luas,$lanja);
             $this->lanjarp= get_nlanja($luas,$lanja,$hgpadi);
     }
