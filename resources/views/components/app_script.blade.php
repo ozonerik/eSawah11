@@ -28,6 +28,17 @@
 <script src="https://ljagis.github.io/leaflet-measure/leaflet-measure.js"></script>
 <script>
 Inputmask.extendAliases({
+    'noppbb': {
+        'autoUnmask': true, 
+        'onBeforeMask': function (value) {
+            value=0;
+            return value;
+        },
+        'mask': ['99.99.999.999.999.9999.9'],
+        'decimalProtect':true,
+        'rightAlign': false,
+        'removeMaskOnSubmit':true
+      },
       'harga': {
         'autoUnmask': true, 
         'shortcuts':{'r': '1000', 'j': '1000000','m':'1000000000','t':'1000000000000'},
