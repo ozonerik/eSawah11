@@ -198,7 +198,7 @@ class Sawahs extends Component
             $this->lanjakw= get_lanja($this->ls1,$lanja);
             $this->lanjarp= get_nlanja($this->ls1,$lanja,$hgpadi);
         }
-        $this->hargatanah= hitung_hargatanah($this->ls1,$hargabata) ;
+        $this->hargatanah= ($this->ls3 * $hargabata) ;
 
     }
     // Batas Akhir Fungsi Kalkulator Sawah
@@ -242,7 +242,7 @@ class Sawahs extends Component
         $chargabata=conv_inputmask($this->chargabata);
         $this->clanjakw= get_lanja($cluas,$conlanja);
         $this->clanjarp= get_nlanja($cluas,$conlanja,$conhgpadi);
-        $this->chargatanah= hitung_hargatanah($cluas,$chargabata);
+        $this->chargatanah= ($cbata * $chargabata);
     }
 
     public function onRead(){
