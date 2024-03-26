@@ -65,7 +65,7 @@
             </form>
             </x-slot>
         </x-card_form> -->
-        @elseif($mode=='edit')
+<!--         @elseif($mode=='edit')
         <x-card_form name="Edit Sawah" width="9" order="1" smallorder="1" closeto="onRead">
             <h4>Edit Sawah</h4>
             <x-slot:footer>
@@ -101,7 +101,7 @@
                 <button type="submit" class="btn btn-primary float-right" wire:target="img" wire:loading.attr="disabled">Save</button>
             </form>
             </x-slot>
-        </x-card_form>
+        </x-card_form> -->
         @endif
     
     </div>

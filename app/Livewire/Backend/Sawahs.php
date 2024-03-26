@@ -10,6 +10,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Livewire\Attributes\On; 
+use Illuminate\Support\Facades\Crypt;
 
 class Sawahs extends Component
 {
@@ -251,7 +252,9 @@ class Sawahs extends Component
     }
 
     public function onEdit($id){
-        $this->dispatch('run_maskcurrency');
+        $id=Crypt::encryptString($id);
+        return redirect()->route('sawahs.edit','s='.$id);
+        /* $this->dispatch('run_maskcurrency');
         $this->mode='edit';
         $this->ids=$id;
         $sawah = Sawah::findOrFail($id);
@@ -274,7 +277,7 @@ class Sawahs extends Component
         $this->nilaipajak=get_floatttorp($sawah->nilaipajak);
         $this->img=$sawah->img;
         $this->tmpimg=$sawah->img;
-        $this->show_location($this->latlang);
+        $this->show_location($this->latlang); */
         
     }
 
@@ -313,8 +316,8 @@ class Sawahs extends Component
         }
     }
 
-    public function editsawah(){
-        $this->validate(
+    /* public function editsawah(){
+         $this->validate(
             [ 
                 'nosawah' => 'required|string',
                 'namasawah' => 'required|string',
@@ -335,7 +338,7 @@ class Sawahs extends Component
                 'nilaipajak' => 'nullable',
                 'img' => 'nullable|image|max:1024',
             ]);
-        if(empty($this->hargabeli)){
+         if(empty($this->hargabeli)){
             $this->hargabeli='0';
         }
         if(empty($this->hargajual)){
@@ -370,7 +373,7 @@ class Sawahs extends Component
         ]);
         $this->alert('success', 'Sawah berhasil diupdate');
         return redirect()->route('sawahs');
-    }
+    } */
 
     public function onAdd(){
         return redirect()->route('sawahs.add');

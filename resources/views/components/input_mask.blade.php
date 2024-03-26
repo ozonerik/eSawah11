@@ -27,7 +27,7 @@
                 language:'id',
                 todayHighlight:true,
                 todayBtn:true,
-            }).on('changeDate', function(e) {
+            }).datepicker('update', '{{ $this->$name }}').on('changeDate', function(e) {
                 @this.set('{{ $name }}', $('#{{ $ids }}').val());
             });
         </script>

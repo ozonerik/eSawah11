@@ -10,8 +10,10 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Livewire\Attributes\On; 
+use Livewire\Attributes\Url;
+use Illuminate\Support\Facades\Crypt;
 
-class SawahAdd extends Component
+class SawahEdit extends Component
 {
     use WithPagination;
     use LivewireAlert;
@@ -35,34 +37,10 @@ class SawahAdd extends Component
     public $mluas=0;
     public $mkel=0;
     public $bata,$hargabata;
-
-    public function mount(){
-        $this->resetForm();
-    }
-
-    public function onRead(){
-        return redirect()->route('sawahs');
-    }
-
-    #[On('getDragData')]
-    public function getDragData($data){
-        $this->lokasi=google_alamat($data['lt'],$data['lg']);
-    }
-
-    #[On('getMeasureData')]
-    public function getMeasureData($data){
-        //dd($data);
-        $this->luas=conv_measure($data['ls']);
-        $this->bata= get_Nconvtobata($this->luas);
-        $this->hargabeli= ($this->bata * conv_inputmask($this->hargabata));
-
-    }
-
-    public function onCurrentlokasi()
-    {
-        $this->dispatch('getLokasiSaatini');
-    }
     
+    #[Url(as: 's',except: '')]
+    public $id = '';
+
     public function updatedImg($value){
         if($value){
             $this->filename=$value->getClientOriginalName();
@@ -84,11 +62,13 @@ class SawahAdd extends Component
         $this->hargabeli= ($this->bata * conv_inputmask($this->hargabata));
     }
 
-    public function addsawah(){
+    public function editsawah(){
+        $id=Crypt::decryptString($this->id);
         $this->validate(
             [ 
                 'nosawah' => 'required|string',
                 'namasawah' => 'required|string',
+                'luas' => 'required',
                 'lokasi' => 'required|string',
                 'latlang' => 'nullable|string',
                 'b_barat' => 'nullable|string',
@@ -96,8 +76,13 @@ class SawahAdd extends Component
                 'b_timur' => 'nullable|string',
                 'b_selatan' => 'nullable|string',
                 'namapenjual' => 'nullable|string',
+                'hargabeli' => 'nullable',
+                'tglbeli' => 'nullable',
                 'namapembeli' => 'nullable|string',
-                'nop' => 'nullable|string',
+                'hargajual' => 'nullable',
+                'tgljual' => 'nullable',
+                'nop' => 'nullable',
+                'nilaipajak' => 'nullable',
                 'img' => 'nullable|image|max:1024',
             ]);
         if(empty($this->hargabeli)){
@@ -106,13 +91,12 @@ class SawahAdd extends Component
         if(empty($this->hargajual)){
             $this->hargajual='0';
         }
-
         if(!empty($this->img)){
-           $this->newpath="data:image/png;base64,".base64_encode(file_get_contents($this->img->path()));
+            $this->newpath="data:image/png;base64,".base64_encode(file_get_contents($this->img->path()));
         }else{
-            $this->newpath='';
+            $this->newpath=Sawah::findOrFail($id)->img;
         }  
-        $info=Sawah::updateOrCreate(['id' => $this->ids], [
+        $info=Sawah::updateOrCreate(['id' => $id], [
             'nosawah' => $this->nosawah,
             'namasawah' => $this->namasawah,
             'luas' => conv_inputmask($this->luas),
@@ -124,49 +108,49 @@ class SawahAdd extends Component
             'b_selatan' => $this->b_selatan,
             'namapenjual' => $this->namapenjual,
             'hargabeli' => conv_inputmask($this->hargabeli),
-            'tglbeli' => Carbon::parse($this->tglbeli)->format("Y-m-d"),
+            'tglbeli' => Carbon::createFromFormat('d/m/Y', $this->tglbeli)->format("Y-m-d"),
             'namapembeli' => $this->namapembeli,
             'hargajual' => conv_inputmask($this->hargajual),
-            'tgljual' => Carbon::parse($this->tgljual)->format("Y-m-d"),
+            'tgljual' => Carbon::createFromFormat('d/m/Y', $this->tgljual)->format("Y-m-d"),
             'nop' => $this->nop,
             'nilaipajak' => conv_inputmask($this->nilaipajak),
             'img' => $this->newpath,
             'user_id' => Auth::user()->id
         ]);
-        $this->alert('success', 'Sawah berhasil ditambahkan');
+        $this->alert('success', 'Sawah berhasil diupdate');
         return redirect()->route('sawahs');
     }
 
-    private function resetForm(){
-        $this->kordinat='';
-        $this->ids='';
-        $this->nosawah='';
-        $this->namasawah='';
-        $this->luas='0';
+    public function mount(){
+        $id=Crypt::decryptString($this->id);
+        $sawah = Sawah::findOrFail($id);
+        $this->nosawah=$sawah->nosawah;
+        $this->namasawah=$sawah->namasawah;
+        $this->luas=$sawah->luas;
         $this->hargabata=get_hargabata();
-        $this->lokasi='';
-        $this->latlang='';
-        $this->b_barat='';
-        $this->b_utara='';
-        $this->b_timur='';
-        $this->b_selatan='';
-        $this->namapenjual='';
-        $this->hargabeli=0;
-        $this->tglbeli='';
-        $this->namapembeli='';
-        $this->hargajual=0;
-        $this->tgljual='';
-        $this->nop='';
-        $this->nilaipajak=0;
+        $this->bata= get_Nconvtobata($this->luas);
+        $this->lokasi=$sawah->lokasi;
+        $this->latlang=$sawah->latlang;
+        $this->b_barat=$sawah->b_barat;
+        $this->b_utara=$sawah->b_utara;
+        $this->b_timur=$sawah->b_timur;
+        $this->b_selatan=$sawah->b_selatan;
+        $this->namapenjual=$sawah->namapenjual;
+        $this->hargabeli=get_floatttorp($sawah->hargabeli);
+        $this->tglbeli=Carbon::parse($sawah->tglbeli)->format("d/m/Y");
+        $this->namapembeli=$sawah->namapembeli;
+        $this->hargajual=get_floatttorp($sawah->hargajual);
+        $this->tgljual=Carbon::parse($sawah->tgljual)->format("d/m/Y");
+        $this->nop=$sawah->nop;
+        $this->nilaipajak=get_floatttorp($sawah->nilaipajak);
         $this->img=null;
-        $this->resetErrorBag();
-        $this->resetValidation();
+        $this->tmpimg=$sawah->img;
     }
-
+    
     public function render()
     {
         $this->lokasi=google_alamat($this->lt,$this->lg);
         $this->latlang=$this->lt.','.$this->lg;
-        return view('livewire.backend.sawah-add')->layout('layouts.app');
+        return view('livewire.backend.sawah-edit')->layout('layouts.app');
     }
 }
