@@ -11,7 +11,7 @@
     <div class="wrapper">
         <x-navbar />
         <x-sidebar>
-            <x-navitem_menu name="Dashboard" routename="dashboard" :active="cek_currentroute(['giss'])" icon="fas fa-tachometer-alt" />
+            <x-navitem_menu name="Dashboard" routename="dashboard" :active="cek_currentroute(['dashboard'])" icon="fas fa-tachometer-alt" />
             <x-navitem_tree icon="fas fa-mountain" name="Sawah" :open="cek_currentroute(['giss','sawahs','sawahs.add'])">
                 @hasanyrole('admin|pro')
                 <x-navitem_menu name="GIS" routename="giss" :active="cek_currentroute(['giss'])" icon="fas fa-map-marked-alt" />

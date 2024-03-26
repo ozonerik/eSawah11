@@ -41,6 +41,29 @@ class SawahEdit extends Component
     #[Url(as: 's',except: '')]
     public $id = '';
 
+    public function onRead(){
+        return redirect()->route('sawahs');
+    }
+
+    #[On('getDragData')]
+    public function getDragData($data){
+        $this->lokasi=google_alamat($data['lt'],$data['lg']);
+    }
+
+    #[On('getMeasureData')]
+    public function getMeasureData($data){
+        //dd($data);
+        $this->luas=conv_measure($data['ls']);
+        $this->bata= get_Nconvtobata($this->luas);
+        $this->hargabeli= ($this->bata * conv_inputmask($this->hargabata));
+
+    }
+
+    public function onCurrentlokasi()
+    {
+        $this->dispatch('getLokasiSaatini');
+    }
+
     public function updatedImg($value){
         if($value){
             $this->filename=$value->getClientOriginalName();
@@ -145,12 +168,12 @@ class SawahEdit extends Component
         $this->nilaipajak=get_floatttorp($sawah->nilaipajak);
         $this->img=null;
         $this->tmpimg=$sawah->img;
+        $data=explode(",", $this->latlang);
+        $this->dispatch('getMAPltlg',lt:$data[0],lg:$data[1]);
     }
     
     public function render()
     {
-        $this->lokasi=google_alamat($this->lt,$this->lg);
-        $this->latlang=$this->lt.','.$this->lg;
         return view('livewire.backend.sawah-edit')->layout('layouts.app');
     }
 }

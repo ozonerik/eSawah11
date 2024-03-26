@@ -1,12 +1,14 @@
 @push('js')
 <script data-navigate-once>
 document.addEventListener('livewire:initialized', () => {
-    navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
     initAutocomplete();
 })
 Livewire.on('{{ $dispatchname }}', () => {
-    console.log('dispatch')
-        navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
+    navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
+});
+Livewire.on('getMAPltlg', (e) => {
+    console.log('getMAPltlg '+ e.lt+'-'+e.lg)
+    showMaps(e.lt,e.lg,90,'{{ $mapid }}',true,'Location') 
 });
 </script>
 <script data-navigate-once>
@@ -23,7 +25,7 @@ function geo_getPosition(position) {
         toastr.success("Location is accurate ");
         $('#{{ $geoalertId }}').html("<div class='alert alert-success alert-dismissible fade show' role='alert'><strong>Location is accurate</strong> The map is ready to use.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
     }
-    showMaps(lt,lg,ac,'mymap','true','Your Location') 
+    showMaps(lt,lg,ac,'{{ $mapid }}',true,'Your Location') 
 }   
 function geo_errorCallback(error){
     toastr.error("Geolocation is not supported by this browser. ");
@@ -54,15 +56,15 @@ async function initAutocomplete() {
                 let ac=90;
                 @this.set('{{ $lt }}', lt);
                 @this.set('{{ $lg }}', lg);
-                showMaps(lt,lg,ac,'{{ $mapid }}','true','Change Location')  
+                showMaps(lt,lg,ac,'{{ $mapid }}',true,'Change Location')  
             }
         });
     } 
 }
 function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
-    const container = document.getElementById('{{ $mapid }}')
+    const container = document.getElementById($iddiv)
     if(container) {
-        $("#{{ $mapid }}").html("<div id='mymap'></div>");
+        $(container).html("<div id='mymap'></div>");
 
         let map_init=null;
         let measureControl = null;
