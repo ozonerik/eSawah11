@@ -22,8 +22,23 @@ class Giss extends Component
     #[On('getDragData')]
     public function getDragData($data){
         $this->lokasi=google_alamat($data['lt'],$data['lg']);
+        $this->latlang=$this->lt.','.$this->lg;
     }
 
+    #[On('changePlace')]
+    public function changePlace($data){
+        //dd($data);
+        $this->lokasi=google_alamat($data['lt'],$data['lg']);
+        $this->latlang=$this->lt.','.$this->lg;
+    }
+
+    #[On('getCurrentLoc')]
+    public function getCurrentLoc($data){
+        //dd($data);
+        $this->lokasi=google_alamat($data['lt'],$data['lg']);
+        $this->latlang=$this->lt.','.$this->lg;
+    }
+    
     #[On('getMeasureData')]
     public function getMeasureData($data){
         //dd($data);
@@ -87,9 +102,6 @@ class Giss extends Component
 
     public function render()
     {
-            //$this->lokasi=$this->onGetGeocoder($this->lt,$this->lg);
-            $this->lokasi=google_alamat($this->lt,$this->lg);
-            $this->latlang=$this->lt.','.$this->lg;
             return view('livewire.backend.giss')->layout('layouts.app');
     }
 }

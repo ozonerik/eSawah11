@@ -25,7 +25,8 @@ function geo_getPosition(position) {
         toastr.success("Location is accurate ");
         $('#{{ $geoalertId }}').html("<div class='alert alert-success alert-dismissible fade show' role='alert'><strong>Location is accurate</strong> The map is ready to use.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
     }
-    showMaps(lt,lg,ac,'{{ $mapid }}',true,'Your Location') 
+    showMaps(lt,lg,ac,'{{ $mapid }}',true,'Your Location')
+    Livewire.dispatch('{{ $eventCurrent }}',{ data:{'lt':lt.toFixed(7), 'lg':lg.toFixed(7)}});   
 }   
 function geo_errorCallback(error){
     toastr.error("Geolocation is not supported by this browser. ");
@@ -56,7 +57,8 @@ async function initAutocomplete() {
                 let ac=90;
                 @this.set('{{ $lt }}', lt);
                 @this.set('{{ $lg }}', lg);
-                showMaps(lt,lg,ac,'{{ $mapid }}',true,'Change Location')  
+                showMaps(lt,lg,ac,'{{ $mapid }}',true,'Change Location')
+                Livewire.dispatch('{{ $eventPlace }}',{ data:{'lt':lt.toFixed(7), 'lg':lg.toFixed(7)}});  
             }
         });
     } 

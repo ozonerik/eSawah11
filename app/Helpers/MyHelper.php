@@ -45,7 +45,7 @@ if (!function_exists('google_alamat')) {
 if (!function_exists('conv_inputmask')) {
     function conv_inputmask($string){
         $nilai = '';
-        $s=str_replace(',','.',preg_replace('/[^0-9,|m]/i','', $string));
+        $s=str_replace(',','.',preg_replace('/[^0-9,|m]/i','', conv_measure($string)));
         if(Str::is('*m*', $s)){
             $nilai = Str::swap([
                 'm2' => '',

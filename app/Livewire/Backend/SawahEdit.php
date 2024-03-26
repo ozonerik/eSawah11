@@ -48,6 +48,14 @@ class SawahEdit extends Component
     #[On('getDragData')]
     public function getDragData($data){
         $this->lokasi=google_alamat($data['lt'],$data['lg']);
+        $this->latlang=$this->lt.','.$this->lg;
+    }
+
+    #[On('changePlace')]
+    public function changePlace($data){
+        //dd($data);
+        $this->lokasi=google_alamat($data['lt'],$data['lg']);
+        $this->latlang=$this->lt.','.$this->lg;
     }
 
     #[On('getMeasureData')]
@@ -56,7 +64,13 @@ class SawahEdit extends Component
         $this->luas=conv_measure($data['ls']);
         $this->bata= get_Nconvtobata($this->luas);
         $this->hargabeli= ($this->bata * conv_inputmask($this->hargabata));
+    }
 
+    #[On('getCurrentLoc')]
+    public function getCurrentLoc($data){
+        //dd($data);
+        $this->lokasi=google_alamat($data['lt'],$data['lg']);
+        $this->latlang=$this->lt.','.$this->lg;
     }
 
     public function onCurrentlokasi()
@@ -118,7 +132,8 @@ class SawahEdit extends Component
             $this->newpath="data:image/png;base64,".base64_encode(file_get_contents($this->img->path()));
         }else{
             $this->newpath=Sawah::findOrFail($id)->img;
-        }  
+        }
+        //dd($this->luas);
         $info=Sawah::updateOrCreate(['id' => $id], [
             'nosawah' => $this->nosawah,
             'namasawah' => $this->namasawah,
@@ -159,17 +174,19 @@ class SawahEdit extends Component
         $this->b_timur=$sawah->b_timur;
         $this->b_selatan=$sawah->b_selatan;
         $this->namapenjual=$sawah->namapenjual;
-        $this->hargabeli=get_floatttorp($sawah->hargabeli);
+        $this->hargabeli=($sawah->hargabeli);
         $this->tglbeli=Carbon::parse($sawah->tglbeli)->format("d/m/Y");
         $this->namapembeli=$sawah->namapembeli;
-        $this->hargajual=get_floatttorp($sawah->hargajual);
+        $this->hargajual=($sawah->hargajual);
         $this->tgljual=Carbon::parse($sawah->tgljual)->format("d/m/Y");
         $this->nop=$sawah->nop;
-        $this->nilaipajak=get_floatttorp($sawah->nilaipajak);
+        $this->nilaipajak=($sawah->nilaipajak);
         $this->img=null;
         $this->tmpimg=$sawah->img;
         $data=explode(",", $this->latlang);
-        $this->dispatch('getMAPltlg',lt:$data[0],lg:$data[1]);
+        $this->lt=$data[0];
+        $this->lg=$data[1];
+        $this->dispatch('getMAPltlg',lt:$this->lt,lg:$this->lg);
     }
     
     public function render()

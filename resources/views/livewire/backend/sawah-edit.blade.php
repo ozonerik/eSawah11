@@ -1,5 +1,5 @@
 @push('js')
-<x-script_map dispatchname="getLokasiSaatini" geoalertId="alert" eventDrag="getDragData" eventMeasure="getMeasureData" ac="ac" lt="lt" lg="lg" autoalamat="lokasi" mapid="mapeditsawah" area="mluas" length="mkel" />
+<x-script_map eventCurrent="getCurrentLoc" eventPlace="changePlace" dispatchname="getLokasiSaatini" geoalertId="alert" eventDrag="getDragData" eventMeasure="getMeasureData" ac="ac" lt="lt" lg="lg" autoalamat="lokasi" mapid="mapeditsawah" area="mluas" length="mkel" />
 @endpush
 <div>
     <x-content_header name="Daftar Sawah" >
