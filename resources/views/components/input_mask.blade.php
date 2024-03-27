@@ -79,9 +79,7 @@ Livewire.on('run_inputmask2', () => {
                     language:'id',
                     todayHighlight:true,
                     todayBtn:true,
-                })/* .datepicker('update', '{{ $this->$name }}').on('changeDate', function(e) {
-                    @this.set('{{ $name }}', this.value);
-                }); */
+                });
             });
         </script>
         @endpush

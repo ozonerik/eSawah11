@@ -4,10 +4,14 @@ document.addEventListener('livewire:initialized', () => {
     initAutocomplete();
 })
 Livewire.on('{{ $dispatchname }}', () => {
-    navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
+    $(document).ready(function(){
+        navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
+    });
 });
 Livewire.on('getMAPltlg', (e) => {
-    showMaps(e.lt,e.lg,90,'{{ $mapid }}',true,'Location') 
+    $(document).ready(function(){
+        showMaps(e.lt,e.lg,90,'{{ $mapid }}',true,'Location');
+    });
 });
 Livewire.on('run_autolocation', () => {
     $(document).ready(function(){

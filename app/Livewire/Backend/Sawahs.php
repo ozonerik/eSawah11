@@ -72,8 +72,7 @@ class Sawahs extends Component
     }
 
     public function mount(){
-        //$this->resetKonversi();
-        //$this->resetKalkulator();
+        $this->resetForm();
     }
 
      // Batas Awal Fungsi Tabel
@@ -107,14 +106,132 @@ class Sawahs extends Component
         $this->mode='read';
     }
 
+    private function resetForm(){
+        $this->kordinat='';
+        $this->ids='';
+        $this->nosawah='';
+        $this->namasawah='';
+        $this->luas=0;
+        $this->bata=0;
+        $this->hargabata=get_hargabata();
+        $this->lokasi='';
+        $this->latlang='';
+        $this->b_barat='';
+        $this->b_utara='';
+        $this->b_timur='';
+        $this->b_selatan='';
+        $this->namapenjual='';
+        $this->hargabeli=0;
+        $this->tglbeli='';
+        $this->namapembeli='';
+        $this->hargajual=0;
+        $this->tgljual='';
+        $this->nop='';
+        $this->nilaipajak=0;
+        $this->img=null;
+        $this->resetErrorBag();
+        $this->resetValidation();
+    }
+
     public function onEdit($id){
-        $id=Crypt::encryptString($id);
-        return redirect()->route('sawahs.edit','s='.$id);
+        //$id=Crypt::encryptString($id);
+        //return redirect()->route('sawahs.edit','s='.$id);
+        $this->mode='edit';
+        $this->dispatch('run_autolocation');
+        $this->dispatch('run_inputmask2');
+        $this->ids=$id;
+        $sawah = Sawah::findOrFail($id);
+        $this->nosawah=$sawah->nosawah;
+        $this->namasawah=$sawah->namasawah;
+        $this->luas=$sawah->luas;
+        $this->hargabata=get_hargabata();
+        $this->bata= get_Nconvtobata($this->luas);
+        $this->lokasi=$sawah->lokasi;
+        $this->latlang=$sawah->latlang;
+        $this->b_barat=$sawah->b_barat;
+        $this->b_utara=$sawah->b_utara;
+        $this->b_timur=$sawah->b_timur;
+        $this->b_selatan=$sawah->b_selatan;
+        $this->namapenjual=$sawah->namapenjual;
+        $this->hargabeli=($sawah->hargabeli);
+        $this->tglbeli=Carbon::parse($sawah->tglbeli)->format("d/m/Y");
+        $this->namapembeli=$sawah->namapembeli;
+        $this->hargajual=($sawah->hargajual);
+        $this->tgljual=Carbon::parse($sawah->tgljual)->format("d/m/Y");
+        $this->nop=$sawah->nop;
+        $this->nilaipajak=($sawah->nilaipajak);
+        $this->img=null;
+        $this->tmpimg=$sawah->img;
+        $data=explode(",", $this->latlang);
+        $this->lt=$data[0];
+        $this->lg=$data[1];
+        $this->dispatch('getMAPltlg',lt:$this->lt,lg:$this->lg);
+
+    }
+
+    public function editsawah(){
+        $this->validate(
+            [ 
+                'nosawah' => 'required|string',
+                'namasawah' => 'required|string',
+                'luas' => 'required',
+                'lokasi' => 'required|string',
+                'latlang' => 'nullable|string',
+                'b_barat' => 'nullable|string',
+                'b_utara' => 'nullable|string',
+                'b_timur' => 'nullable|string',
+                'b_selatan' => 'nullable|string',
+                'namapenjual' => 'nullable|string',
+                'hargabeli' => 'nullable',
+                'tglbeli' => 'nullable',
+                'namapembeli' => 'nullable|string',
+                'hargajual' => 'nullable',
+                'tgljual' => 'nullable',
+                'nop' => 'nullable',
+                'nilaipajak' => 'nullable',
+                'img' => 'nullable|image|max:1024',
+            ]);
+        if(empty($this->hargabeli)){
+            $this->hargabeli='0';
+        }
+        if(empty($this->hargajual)){
+            $this->hargajual='0';
+        }
+        if(!empty($this->img)){
+            $this->newpath="data:image/png;base64,".base64_encode(file_get_contents($this->img->path()));
+        }else{
+            $this->newpath=Sawah::findOrFail($this->ids)->img;
+        }
+        //dd($this->luas);
+        $info=Sawah::updateOrCreate(['id' => $this->ids], [
+            'nosawah' => $this->nosawah,
+            'namasawah' => $this->namasawah,
+            'luas' => conv_inputmask($this->luas),
+            'lokasi' => $this->lokasi,
+            'latlang' => $this->latlang,
+            'b_barat' => $this->b_barat,
+            'b_utara' => $this->b_utara,
+            'b_timur' => $this->b_timur,
+            'b_selatan' => $this->b_selatan,
+            'namapenjual' => $this->namapenjual,
+            'hargabeli' => conv_inputmask($this->hargabeli),
+            'tglbeli' => Carbon::createFromFormat('d/m/Y', $this->tglbeli)->format("Y-m-d"),
+            'namapembeli' => $this->namapembeli,
+            'hargajual' => conv_inputmask($this->hargajual),
+            'tgljual' => Carbon::createFromFormat('d/m/Y', $this->tgljual)->format("Y-m-d"),
+            'nop' => $this->nop,
+            'nilaipajak' => conv_inputmask($this->nilaipajak),
+            'img' => $this->newpath,
+            'user_id' => Auth::user()->id
+        ]);
+        $this->alert('success', 'Sawah berhasil diupdate');
+        return redirect()->route('sawahs');
     }
 
     public function onAdd(){
         //return redirect()->route('sawahs.add');
         $this->mode='add';
+        $this->resetForm();
         $this->dispatch('run_autolocation');
         $this->dispatch('run_inputmask2');
     }
