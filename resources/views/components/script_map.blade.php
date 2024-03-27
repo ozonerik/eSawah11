@@ -1,5 +1,5 @@
 @push('js')
-<script data-navigate-once>
+<script>
 document.addEventListener('livewire:initialized', () => {
     initAutocomplete();
 })
@@ -10,8 +10,13 @@ Livewire.on('getMAPltlg', (e) => {
     console.log('getMAPltlg '+ e.lt+'-'+e.lg)
     showMaps(e.lt,e.lg,90,'{{ $mapid }}',true,'Location') 
 });
+Livewire.on('run_autolocation', () => {
+    $(document).ready(function(){
+        initAutocomplete();
+    });
+});
 </script>
-<script data-navigate-once>
+<script>
 function geo_getPosition(position) {
     let lt=position.coords.latitude;
     let lg=position.coords.longitude;

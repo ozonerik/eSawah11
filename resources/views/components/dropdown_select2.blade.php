@@ -41,7 +41,7 @@ document.addEventListener('livewire:initialized', function () {
     });
 });
 
-window.addEventListener('run_select2', event => {
+Livewire.on('run_select2', () => {
     $(document).ready(function(){
         $('#{{$ids}}').select2({
             theme: 'bootstrap4',

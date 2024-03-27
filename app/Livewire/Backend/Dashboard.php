@@ -28,6 +28,8 @@ class Dashboard extends Component
         if($mode=='edit'){
             //dd('edit');
             $this->dispatch('run_select2');
+            $this->dispatch('run_autolocation');
+            $this->dispatch('run_inputmask');
         }
         
     }

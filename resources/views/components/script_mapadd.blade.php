@@ -1,5 +1,5 @@
 @push('js')
-<script data-navigate-once>
+<script>
 Livewire.on('{{ $dispatchname }}', () => {
     navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
 });
@@ -8,7 +8,7 @@ Livewire.on('{{ $dispatchAddress }}', () => {
     initAutocomplete();
 });
 </script>
-<script data-navigate-once>
+<script>
 function geo_getPosition(position) {
     let lt=position.coords.latitude;
     let lg=position.coords.longitude;
