@@ -12,11 +12,11 @@
         <x-navbar />
         <x-sidebar>
             <x-navitem_menu name="Dashboard" routename="dashboard" :active="cek_currentroute(['dashboard'])" icon="fas fa-tachometer-alt" />
-            <x-navitem_tree icon="fas fa-mountain" name="Sawah" :open="cek_currentroute(['giss','sawahs','sawahs.add'])">
+            <x-navitem_tree icon="fas fa-mountain" name="Sawah" :open="cek_currentroute(['giss','sawahs'])">
                 @hasanyrole('admin|pro')
                 <x-navitem_menu name="GIS" routename="giss" :active="cek_currentroute(['giss'])" icon="fas fa-map-marked-alt" />
                 @endhasanyrole
-                <x-navitem_menu name="Daftar Sawah" routename="sawahs" :active="cek_currentroute(['sawahs','sawahs.add'])" icon="fas fa-map" />
+                <x-navitem_menu name="Daftar Sawah" routename="sawahs" :active="cek_currentroute(['sawahs'])" icon="fas fa-map" />
             </x-navitem_tree>
             <x-navitem_tree icon="fas fa-users" name="Pawongan" :open="cek_currentroute(['pawongans'])">
                 <x-navitem_menu name="Daftar Pawongan" routename="pawongans" :active="cek_currentroute(['pawongans'])" icon="fas fa-users" />

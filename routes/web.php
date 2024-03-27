@@ -6,8 +6,6 @@ use App\Livewire\Backend\Profile;
 use App\Livewire\Backend\Dashboard;
 use App\Livewire\Backend\Giss;
 use App\Livewire\Backend\Sawahs;
-use App\Livewire\Backend\SawahAdd;
-use App\Livewire\Backend\SawahEdit;
 use App\Livewire\Frontend\Home;
 use App\Livewire\Test;
 
@@ -27,8 +25,6 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::get('/result', Profile::class)->name('result');
     Route::get('/sawahs', Sawahs::class)->name('sawahs');
-    Route::get('/sawahs/add', SawahAdd::class)->name('sawahs.add');
-    Route::get('/sawahs/edit', SawahEdit::class)->name('sawahs.edit');
     Route::get('/profile', Profile::class)->name('profile');
     Route::get('/pawongans', Profile::class)->name('pawongans');
     Route::get('/lanjas', Profile::class)->name('lanjas');
