@@ -31,12 +31,12 @@ class Sawahs extends Component
     public $bata,$hargabata;
     public $lt,$lg,$ac,$mluas,$mkel;
 
-    public function onMode($value){
-        //return redirect()->route('sawahs.add');
-        //dd($value);
-        $this->mode=$value;
-        $this->dispatch('run_autolocation');
-        $this->dispatch('run_inputmask');
+    public function updatedImg($value){
+        if($value){
+            $this->filename=$value->getClientOriginalName();
+        }else{
+            $this->filename="Choose File";
+        }
     }
 
     #[On('getDragData')]
@@ -116,7 +116,65 @@ class Sawahs extends Component
         //return redirect()->route('sawahs.add');
         $this->mode='add';
         $this->dispatch('run_autolocation');
-        $this->dispatch('run_inputmask');
+        $this->dispatch('run_inputmask2');
+    }
+
+    public function updatedluas($value){
+        $this->bata= get_Nconvtobata(conv_inputmask($value));
+        $this->hargabeli= ($this->bata * conv_inputmask($this->hargabata));
+    }
+
+    public function addsawah(){
+        $this->validate(
+            [ 
+                'nosawah' => 'required|string',
+                'namasawah' => 'required|string',
+                'lokasi' => 'required|string',
+                'latlang' => 'nullable|string',
+                'b_barat' => 'nullable|string',
+                'b_utara' => 'nullable|string',
+                'b_timur' => 'nullable|string',
+                'b_selatan' => 'nullable|string',
+                'namapenjual' => 'nullable|string',
+                'namapembeli' => 'nullable|string',
+                'nop' => 'nullable|string',
+                'img' => 'nullable|image|max:1024',
+            ]);
+        if(empty($this->hargabeli)){
+            $this->hargabeli='0';
+        }
+        if(empty($this->hargajual)){
+            $this->hargajual='0';
+        }
+
+        if(!empty($this->img)){
+           $this->newpath="data:image/png;base64,".base64_encode(file_get_contents($this->img->path()));
+        }else{
+            $this->newpath='';
+        }  
+        $info=Sawah::updateOrCreate(['id' => $this->ids], [
+            'nosawah' => $this->nosawah,
+            'namasawah' => $this->namasawah,
+            'luas' => conv_inputmask($this->luas),
+            'lokasi' => $this->lokasi,
+            'latlang' => $this->latlang,
+            'b_barat' => $this->b_barat,
+            'b_utara' => $this->b_utara,
+            'b_timur' => $this->b_timur,
+            'b_selatan' => $this->b_selatan,
+            'namapenjual' => $this->namapenjual,
+            'hargabeli' => conv_inputmask($this->hargabeli),
+            'tglbeli' => Carbon::parse($this->tglbeli)->format("Y-m-d"),
+            'namapembeli' => $this->namapembeli,
+            'hargajual' => conv_inputmask($this->hargajual),
+            'tgljual' => Carbon::parse($this->tgljual)->format("Y-m-d"),
+            'nop' => $this->nop,
+            'nilaipajak' => conv_inputmask($this->nilaipajak),
+            'img' => $this->newpath,
+            'user_id' => Auth::user()->id
+        ]);
+        $this->alert('success', 'Sawah berhasil ditambahkan');
+        return redirect()->route('sawahs');
     }
 
     public function onDelete($id){
@@ -130,6 +188,7 @@ class Sawahs extends Component
     {
         return Sawah::onlyTrashed()->where('user_id',Auth::user()->id)->orderBy('deleted_at', 'DESC')->paginate($this->perPage,['*'], 'sawahtrashPage');
     }
+
     public function onTrashed(){
         $this->mode='trashed';
     }
@@ -138,7 +197,6 @@ class Sawahs extends Component
         Sawah::where('id',$id)->withTrashed()->restore();
         $this->alert('success', 'Sawah berhasil direstore');
     }
-    
     
     public function onDelForce($id){
         $this->ids=$id;

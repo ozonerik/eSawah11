@@ -7,7 +7,6 @@ Livewire.on('{{ $dispatchname }}', () => {
     navigator.geolocation.getCurrentPosition(geo_getPosition, geo_errorCallback, geo_options);
 });
 Livewire.on('getMAPltlg', (e) => {
-    console.log('getMAPltlg '+ e.lt+'-'+e.lg)
     showMaps(e.lt,e.lg,90,'{{ $mapid }}',true,'Location') 
 });
 Livewire.on('run_autolocation', () => {
