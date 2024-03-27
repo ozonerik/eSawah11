@@ -12,6 +12,11 @@ class Kalkulatorsawah extends Component
     public $cluas,$cbata,$clanjakw,$clanjarp;
 
     // Batas Awal Fungsi Kalkulator Sawah
+    public function mount(){
+        $this->resetKonversi();
+        $this->resetKalkulator();
+    }
+
     public function onHtluas(){
         $this->modecal="htluas";
     }
