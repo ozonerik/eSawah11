@@ -3,17 +3,19 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\Attributes\Url;
 
 class Search extends Component
 {
-    public $search_txt;
+    #[Url(as: 'q',except: '')]
+    public $search='';
 
     public function clearSearch(){
-        $this->search_txt='';
+        $this->search='';
     }
     
     public function get_search(){    
-        session()->flash('search', $this->search_txt);  
+        session()->flash('search', $this->search);  
         return redirect()->route('result'); 
     }
     

@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit.prevent="{{$action}}">
+    <form wire:submit="{{$action}}">
         <img alt="images" src="{{ asset('img/sawah.jpg') }}" class="rounded mx-auto d-block w-75" /> 
         <x-input_mask typemask="panjang" ids="p1" label="P1 (m)" types="text" name="p1" placeholder="Enter P1" disabled="false"/>
         <x-input_mask typemask="panjang" ids="l1" label="L1 (m)" types="text" name="l1" placeholder="Enter L1" disabled="false"/>

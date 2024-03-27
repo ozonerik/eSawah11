@@ -22,7 +22,7 @@
         <x-card_form name="Add Sawah" width="9" order="1" smallorder="1" closeto="onRead">
             <h4>Add Sawah Selected</h4>
             <x-slot:footer>
-            <form wire:submit.prevent="addsawah">
+            <form wire:submit="addsawah">
                 <x-input_form wajib="true" disabled="" ids="nosawah" label="No Surat" types="text" name="nosawah" placeholder="Enter No Surat" />
                 <x-input_form wajib="true" disabled="" ids="namasawah" label="Nama Sawah" types="text" name="namasawah" placeholder="Type Nama Sawah" />
                 <x-input_mask typemask="luas" wajib="true" disabled="" ids="luas" label="Luas Sawah (m2)" types="text" name="luas" placeholder="Type Luas Sawah" />
@@ -55,7 +55,7 @@
         <x-card_form name="Edit Sawah" width="9" order="1" smallorder="1" closeto="onRead">
             <h4>Edit Sawah</h4>
             <x-slot:footer>
-            <form wire:submit.prevent="editsawah">
+            <form wire:submit="editsawah">
                 <x-input_form wajib="true" disabled="" ids="nosawah" label="No Surat" types="text" name="nosawah" placeholder="Enter No Surat" />
                 <x-input_form wajib="true" disabled="" ids="namasawah" label="Nama Sawah" types="text" name="namasawah" placeholder="Type Nama Sawah" />
                 <x-input_mask typemask="luas" wajib="true" disabled="" ids="luas" label="Luas Sawah (m2)" types="text" name="luas" placeholder="Type Luas Sawah" />

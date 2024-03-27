@@ -10,7 +10,7 @@
         <livewire:kalkulatorsawah />
         @if($mode=='read')
         <x-card_section2 name="GIS - Sawah" type="primary" width="9" order="1" smallorder="1">
-            <form wire:submit.prevent="onHitung">
+            <form wire:submit="onHitung">
                 <x-input_map alertname="alert" mapid="gismap" height="500px" />
                 <x-input_mask typemask="lokasi" wajib="" disabled="" ids="lokasi" label="Lokasi" types="text" name="lokasi" placeholder="Get Lokasi" />
                 <x-inputlokasi_form action="onCurrentlokasi" labelbtn="Get My Location" wajib="" disabled="" ids="latlang" label="Koordinat" types="text" name="latlang" placeholder="Get Koordinat" />

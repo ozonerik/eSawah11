@@ -1,7 +1,7 @@
 <div>
-    <form class="form-inline" wire:submit.prevent="get_search">
+    <form class="form-inline" wire:submit="get_search">
         <div class="input-group input-group-sm">
-            <input class="form-control form-control-navbar" id="search" type="text" wire:model="search_txt" placeholder="Search..." aria-label="Search">   
+            <input class="form-control form-control-navbar" id="search" type="text" wire:model.live="search" placeholder="Search..." aria-label="Search">   
             <div class="input-group-append">
                 <button class="btn btn-navbar" type="submit">
                     <i class="fas fa-search"></i>

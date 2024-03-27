@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit.prevent="{{$action}}">
+    <form wire:submit="{{$action}}">
         <x-input_mask typemask="luas" ids="cluas" label="Luas Tanah (m2)" types="text" name="cluas" placeholder="Enter Luas Tanah (m)..." disabled="false"/>
         <x-input_mask typemask="bata" ids="cbata" label="Luas Tanah (bata)" types="text" name="cbata" placeholder="Enter Luas Tanah (bata)..." disabled="false"/>
         <x-input_mask typemask="harga" ids="conhgpadi" label="Harga 1kw Gabah Kering (Rp)" types="text" name="conhgpadi" placeholder="Enter Harga 1kw Gabah Kering" disabled="false"/>
