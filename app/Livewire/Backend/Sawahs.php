@@ -163,10 +163,12 @@ class Sawahs extends Component
         $this->img=null;
         $this->tmpimg=$sawah->img;
         $data=explode(",", $this->latlang);
-        $this->lt=$data[0];
-        $this->lg=$data[1];
-        $this->dispatch('getMAPltlg',lt:$this->lt,lg:$this->lg);
-
+        //dd( $data);
+        if(!empty($data[0])){
+            $this->lt=$data[0];
+            $this->lg=$data[1];
+            $this->dispatch('getMAPltlg',lt:$this->lt,lg:$this->lg);
+        }
     }
 
     public function editsawah(){
