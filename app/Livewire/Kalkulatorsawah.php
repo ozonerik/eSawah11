@@ -67,21 +67,21 @@ class Kalkulatorsawah extends Component
         $this->shargatanah= 0;
     }
     public function kalkulatorsawah(){
-        $p1=conv_inputmask($this->p1);
-        $l1=conv_inputmask($this->l1);
-        $p2=conv_inputmask($this->p2);
-        $l2=conv_inputmask($this->l2);
-        $la=conv_inputmask($this->la);
-        $m=conv_inputmask($this->m);
-        $hgpadi=conv_inputmask($this->hgpadi);
-        $lanja=conv_inputmask($this->lanja);
-        $shargabata=conv_inputmask($this->shargabata);
+        $p1=$this->p1;
+        $l1=$this->l1;
+        $p2=$this->p2;
+        $l2=$this->l2;
+        $la=$this->la;
+        $m=$this->m;
+        $hgpadi=$this->hgpadi;
+        $lanja=$this->lanja;
+        $shargabata=$this->shargabata;
         if(empty($p2)||empty($l2)){
             //$ls1=get_Nconluas($p1*$l1);
-            $this->ls1=get_Nconluas($p1*$l1);
-            $this->ls2=get_Nconluas($p1*$l1);
-            $this->ls3=get_Nconvtobata($p1*$l1);
-            $this->ls4=get_Nconvtobata($p1*$l1);
+            $this->ls1=get_Nconluas(conv_inputmask($p1)*conv_inputmask($l1));
+            $this->ls2=get_Nconluas(conv_inputmask($p1)*conv_inputmask($l1));
+            $this->ls3=get_Nconvtobata(conv_inputmask($p1)*conv_inputmask($l1));
+            $this->ls4=get_Nconvtobata(conv_inputmask($p1)*conv_inputmask($l1));
             $this->lanjakw= get_lanja($this->ls1,$lanja);
             $this->lanjarp= get_nlanja($this->ls1,$lanja,$hgpadi);
         }elseif(!empty($m)){
@@ -102,7 +102,7 @@ class Kalkulatorsawah extends Component
             $this->lanjakw= get_lanja($this->ls1,$lanja);
             $this->lanjarp= get_nlanja($this->ls1,$lanja,$hgpadi);
         }
-        $this->shargatanah= conv_inputmask(conv_inputmask($this->ls3) * conv_inputmask($shargabata)) ;
+        $this->shargatanah= get_hargatanah($this->ls3,$shargabata) ;
 
     }
     // Batas Akhir Fungsi Kalkulator Sawah
@@ -112,11 +112,11 @@ class Kalkulatorsawah extends Component
         $this->modecal="htconv";
     }
     public function updatedCluas($value){
-        $this->cbata= get_Nconvtobata(conv_inputmask($this->cluas));
+        $this->cbata= get_Nconvtobata($this->cluas);
         $this->konversisawah();
     }
     public function updatedCbata($value){
-        $this->cluas= get_NBatatoluas(conv_inputmask($this->cbata));
+        $this->cluas= get_NBatatoluas($this->cbata);
         $this->konversisawah();
     }
     public function updatedConhgpadi($value){
@@ -140,12 +140,12 @@ class Kalkulatorsawah extends Component
         $this->chargatanah=0;
     } 
     public function konversisawah(){
-        $conhgpadi=conv_inputmask($this->conhgpadi);
-        $conlanja=conv_inputmask($this->conlanja);
-        $chargabata=conv_inputmask($this->chargabata);
+        $conhgpadi=$this->conhgpadi;
+        $conlanja=$this->conlanja;
+        $chargabata=$this->chargabata;
         $this->clanjakw= get_lanja($this->cluas,$conlanja);
         $this->clanjarp= get_nlanja($this->cluas,$conlanja,$conhgpadi);
-        $this->chargatanah= conv_inputmask(conv_inputmask($this->cbata) * conv_inputmask($chargabata));
+        $this->chargatanah= get_hargatanah($this->cbata,$chargabata);
     }
     //batas akhir konversi sawah
     public function render()

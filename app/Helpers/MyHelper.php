@@ -58,6 +58,13 @@ if (!function_exists('conv_inputmask')) {
     }
 }
 
+if (!function_exists('get_hargatanah')) {
+    function get_hargatanah($bata,$harga){
+        $nilai=conv_inputmask($bata) * conv_inputmask($harga);
+        return conv_inputmask($nilai);
+    }
+}
+
 if (!function_exists('get_hargabata')) {
     function get_hargabata(){
         //$harga=1100000;
@@ -135,50 +142,50 @@ if (!function_exists('get_currentroute')) {
     }
 }
 
-if (!function_exists('get_convtobata')) {
-    function get_convtobata($value){
-        $v=floatval($value)/14.00;
+if (!function_exists('get_conbata')) {
+    function get_conbata($value){
+        $v=floatval(conv_inputmask($value))/14.00;
         $a = new \NumberFormatter("id-ID", \NumberFormatter::DECIMAL);
         $s=$a->format(round($v,2));
-        //$bata=$s." bata";
-        return $s;
+        $bata=$s." bata";
+        return $bata;
     }
 }
 
 if (!function_exists('get_Nconvtobata')) {
     function get_Nconvtobata($value){
-        $v=floatval($value)/14.00;
+        $v=floatval(conv_inputmask($value))/14.00;
         $s=round($v,2);
         $bata=$s;
-        return $bata;
+        return conv_inputmask($bata);
     }
 }
 
 if (!function_exists('get_conluas')) {
     function get_conluas($value){
-        $v=floatval($value);
-        //$a = new \NumberFormatter("id-ID", \NumberFormatter::DECIMAL);
-        //$s=$a->format(round($v,2));
-        //$cluas=$s." m2";
-        return $v;
+        $v=floatval(conv_inputmask($value));
+        $a = new \NumberFormatter("id-ID", \NumberFormatter::DECIMAL);
+        $s=$a->format(round($v,2));
+        $m2=$s." m2";
+        return $m2;
     }
 }
 
 if (!function_exists('get_Nconluas')) {
     function get_Nconluas($value){
-        $v=floatval($value);
+        $v=floatval(conv_inputmask($value));
         $s=round($v,2);
         $cluas=$s;
-        return $cluas;
+        return conv_inputmask($cluas);
     }
 }
 
 if (!function_exists('get_NBatatoluas')) {
     function get_NBatatoluas($value){
-        $v=floatval($value)*14.00;
+        $v=floatval(conv_inputmask($value))*14.00;
         $s=round($v,2);
         $luas=$s;
-        return $luas;
+        return conv_inputmask($luas);
     }
 }
 
@@ -186,14 +193,14 @@ if (!function_exists('get_NBatatoluas')) {
 if (!function_exists('get_formatindo')) {
     function get_formatindo($value){
         $a = new \NumberFormatter("id-ID", \NumberFormatter::DECIMAL);
-        $indo=$a->format($value);
+        $indo=$a->format(conv_inputmask($value));
         return $indo;
     }
 }
 
 if (!function_exists('get_convtorp')) {
     function get_convtorp($value){
-        $v=floatval($value);
+        $v=floatval(conv_inputmask($value));
         $s=round($v,0);
         $rp=get_floatttorp($s);
         return $rp;
@@ -202,21 +209,21 @@ if (!function_exists('get_convtorp')) {
 
 if (!function_exists('get_luaspersegi')) {
     function get_luaspersegi($p1,$l1,$p2,$l2){
-        $p1=floatval($p1);
-        $l1=floatval($l1);
-        $p2=floatval($p2);
-        $l2=floatval($l2);
+        $p1=floatval(conv_inputmask($p1));
+        $l1=floatval(conv_inputmask($l1));
+        $p2=floatval(conv_inputmask($p2));
+        $l2=floatval(conv_inputmask($l2));
         $v=(($p1+$p2)/2)*(($l1+$l2)/2);
         $luas=round($v,2);
-        return $luas;
+        return conv_inputmask($luas);
     }
 }
 
 if (!function_exists('get_luassegi3')) {
     function get_luassegi3($a,$b,$c){
-        $a=floatval($a);
-        $b=floatval($b);
-        $c=floatval($c);
+        $a=floatval(conv_inputmask($a));
+        $b=floatval(conv_inputmask($b));
+        $c=floatval(conv_inputmask($c));
         $s=($a+$b+$c)/2;
         $v=sqrt($s*($s-$a)*($s-$b)*($s-$c));
         $luas=round($v,2);
@@ -226,73 +233,60 @@ if (!function_exists('get_luassegi3')) {
 
 if (!function_exists('get_sisiMsegi3')) {
     function get_sisiMsegi3($p1,$l2,$sdA){
-        $p1=floatval($p1);
-        $l2=floatval($l2);
-        $sdA=floatval($sdA);
+        $p1=floatval(conv_inputmask($p1));
+        $l2=floatval(conv_inputmask($l2));
+        $sdA=floatval(conv_inputmask($sdA));
         $m=sqrt( ($p1*$p1) + ($l2*$l2) - (2*$p1*$l2*cos(deg2rad($sdA))) );
         $sisiM=round($m,2);
-        return $sisiM;
+        return conv_inputmask($sisiM);
     }
 }
 
 if (!function_exists('get_luassegi4')) {
     function get_luassegi4($p1,$l1,$p2,$l2,$m){
-        $p1=floatval($p1);
-        $l1=floatval($l1);
-        $p2=floatval($p2);
-        $l2=floatval($l2);
-        $m=floatval($m);
+        $p1=floatval(conv_inputmask($p1));
+        $l1=floatval(conv_inputmask($l1));
+        $p2=floatval(conv_inputmask($p2));
+        $l2=floatval(conv_inputmask($l2));
+        $m=floatval(conv_inputmask($m));
         $ls1=floatval(get_luassegi3($p1,$l1,$m));
         $ls2=floatval(get_luassegi3($p2,$l2,$m));
         $v=($ls1+$ls2);
         $luas=round($v,2);
-        return $luas;
+        return conv_inputmask($luas);
     }
 }
 
 if (!function_exists('get_lanja')) {
     function get_lanja($meter,$kw){
         $a = new \NumberFormatter("id-ID", \NumberFormatter::DECIMAL);
-        $kw=floatval($kw);
-        $meter=floatval($meter);
+        $kw=floatval(conv_inputmask($kw));
+        $meter=floatval(conv_inputmask($meter));
         $bata=round(floatval($meter/14.00),2);
         $lanja=$bata/100;
         $val=round($lanja*$kw,2);
         //$nlanjakw=$a->format($val);
         //$lanjatext=$nlanjakw." kw";
-        return $val;
+        return conv_inputmask($val);
     }
 }
 
 if (!function_exists('get_nlanja')) {
     function get_nlanja($meter,$kw,$harga){
         $a = new \NumberFormatter("id-ID", \NumberFormatter::DECIMAL);
-        $kw=floatval($kw);
-        $harga=floatval($harga);
-        $meter=floatval($meter);
+        $kw=floatval(conv_inputmask($kw));
+        $harga=floatval(conv_inputmask($harga));
+        $meter=floatval(conv_inputmask($meter));
         $bata=round(floatval($meter/14.00),2);
         $lanja=$bata/100;
         $nlanjarp=round($lanja*$kw*$harga,2);
-        //$lanjarp=$a->format($nlanjarp);
-        //$nlanjatext=get_floatttorp($nlanjarp);
-        return $nlanjarp;
-    }
-}
-
-if (!function_exists('hitung_hargatanah')) {
-    function hitung_hargatanah($meter,$harga){
-        $a = new \NumberFormatter("id-ID", \NumberFormatter::DECIMAL);
-        $harga=floatval($harga);
-        $meter=floatval($meter);
-        $bata=round(floatval($meter/14.00),2);
-        $nlanjarp=round($bata*$harga);
-        return $nlanjarp;
+        return conv_inputmask($nlanjarp);
     }
 }
 
 if (!function_exists('get_floatttorp')) {
     function get_floatttorp($val){
-        $val = floatval($val);
+        $val = floatval(conv_inputmask($val));
         $a = new NumberFormatter("id-ID", NumberFormatter::CURRENCY);
         $a->setAttribute( $a::FRACTION_DIGITS, 0 );
         $result=$a->formatCurrency($val,"IDR");

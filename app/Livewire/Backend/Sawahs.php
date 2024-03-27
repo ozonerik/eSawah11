@@ -239,8 +239,8 @@ class Sawahs extends Component
     }
 
     public function updatedluas($value){
-        $this->bata= get_Nconvtobata(conv_inputmask($value));
-        $this->hargabeli= ($this->bata * conv_inputmask($this->hargabata));
+        $this->bata= get_Nconvtobata($value);
+        $this->hargabeli= get_hargatanah($this->bata,$this->hargabata);
     }
 
     public function addsawah(){
