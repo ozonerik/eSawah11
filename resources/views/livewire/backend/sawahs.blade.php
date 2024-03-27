@@ -27,8 +27,8 @@
                 <x-input_form wajib="true" disabled="" ids="namasawah" label="Nama Sawah" types="text" name="namasawah" placeholder="Type Nama Sawah" />
                 <x-input_mask typemask="luas" wajib="true" disabled="" ids="luas" label="Luas Sawah (m2)" types="text" name="luas" placeholder="Type Luas Sawah" />
                 <x-input_mask typemask="harga" disabled="false" ids="hargabata" label="Harga Sawah Per Bata (Rp)" types="text" name="hargabata" placeholder="Harga Per Bata Sawah (Rp)" />
-                <x-input_mask typemask="bata" wajib="" disabled="true" ids="bata" label="Luas Sawah (bata)" types="text" name="bata" placeholder="Luas Sawah (bata)" />                <div wire:ignore id="alert"></div>
-                <div wire:ignore id="mappsawah" style="height: 400px;" class="w-100 rounded bg-blank mb-3"></div>
+                <x-input_mask typemask="bata" wajib="" disabled="true" ids="bata" label="Luas Sawah (bata)" types="text" name="bata" placeholder="Luas Sawah (bata)" />                
+                <x-input_map alertname="alert" mapid="mappsawah" height="400px" />
                 <x-input_mask typemask="lokasi" wajib="true" disabled="" ids="lokasi" label="Lokasi Sawah" types="text" name="lokasi" placeholder="Type Lokasi Sawah" />
                 <x-inputlokasi_form action="onCurrentlokasi" labelbtn="Get My Location" wajib="" disabled="" ids="latlang" label="Koordinat Sawah" types="text" name="latlang" placeholder="Get Koordinat Sawah" />
                 <x-input_form disabled="" ids="b_barat" label="Batas Barat/Kulon" types="text" name="b_barat" placeholder="Type Batas Barat Sawah" />
@@ -60,8 +60,8 @@
                 <x-input_form wajib="true" disabled="" ids="namasawah" label="Nama Sawah" types="text" name="namasawah" placeholder="Type Nama Sawah" />
                 <x-input_mask typemask="luas" wajib="true" disabled="" ids="luas" label="Luas Sawah (m2)" types="text" name="luas" placeholder="Type Luas Sawah" />
                 <x-input_mask typemask="harga" disabled="false" ids="hargabata" label="Harga Sawah Per Bata (Rp)" types="text" name="hargabata" placeholder="Harga Per Bata Sawah (Rp)" />
-                <x-input_mask typemask="bata" wajib="" disabled="true" ids="bata" label="Luas Sawah (bata)" types="text" name="bata" placeholder="Luas Sawah (bata)" />                <div wire:ignore id="alert"></div>
-                <div wire:ignore id="mappsawah" style="height: 400px;" class="w-100 rounded bg-blank mb-3"></div>
+                <x-input_mask typemask="bata" wajib="" disabled="true" ids="bata" label="Luas Sawah (bata)" types="text" name="bata" placeholder="Luas Sawah (bata)" />                
+                <x-input_map alertname="alert" mapid="mappsawah" height="400px" />
                 <x-input_mask typemask="lokasi" wajib="true" disabled="" ids="lokasi" label="Lokasi Sawah" types="text" name="lokasi" placeholder="Type Lokasi Sawah" />
                 <x-inputlokasi_form action="onCurrentlokasi" labelbtn="Get My Location" wajib="" disabled="" ids="latlang" label="Koordinat Sawah" types="text" name="latlang" placeholder="Get Koordinat Sawah" />
                 <x-input_form disabled="" ids="b_barat" label="Batas Barat/Kulon" types="text" name="b_barat" placeholder="Type Batas Barat Sawah" />
