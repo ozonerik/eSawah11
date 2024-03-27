@@ -9,14 +9,14 @@
         <x-input_mask typemask="panjang" ids="m" label="M (m)" types="text" name="m" placeholder="Enter M" disabled="false"/>
         <x-input_mask typemask="harga" ids="hgpadi" label="Harga 1kw Gabah Kering (Rp)" types="text" name="hgpadi" placeholder="Enter Harga 1kw Gabah Kering" disabled="false"/>
         <x-input_mask typemask="kwintal" ids="lanja" label="Lanja/100 bata (kw)" types="text" name="lanja" placeholder="Enter Kwintal Lanja" disabled="false"/>
-        <x-input_mask typemask="harga" disabled="false" ids="hargabata" label="Harga Tanah Per Bata (Rp)" types="text" name="hargabata" placeholder="Harga Per Bata Sawah (Rp)" />
+        <x-input_mask typemask="harga" disabled="false" ids="shargabata" label="Harga Tanah Per Bata (Rp)" types="text" name="shargabata" placeholder="Harga Per Bata Sawah (Rp)" />
         <x-input_mask typemask="luas" ids="ls1" label="Luas(umum) (m2) " types="text" name="ls1" placeholder="Luas...." disabled="true"/>
         <x-input_mask typemask="bata" ids="ls3" label="Luas(umum) (bata)" types="text" name="ls3" placeholder="Luas...." disabled="true"/>
         <x-input_mask typemask="luas" ids="ls2" label="Luas(rumus) (m2)" types="text" name="ls2" placeholder="Luas...." disabled="true"/>
         <x-input_mask typemask="bata" ids="ls4" label="Luas(rumus) (bata)" types="text" name="ls4" placeholder="Luas...." disabled="true"/>
         <x-input_mask typemask="kwintal" ids="lanjakw" label="Nilai Lanja/Thn (kw)" types="text" name="lanjakw" placeholder="Nilai Lanja (kw)" disabled="true"/>
         <x-input_mask typemask="harga" ids="lanjarp" label="Nilai Lanja/Thn (Rp)" types="text" name="lanjarp" placeholder="Nilai Lanja (Rp)" disabled="true"/>
-        <x-input_mask typemask="harga" ids="hargatanah" label="Harga Jual/Beli Tanah (Rp)" types="text" name="hargatanah" placeholder="Harga Jual/Beli Tanah (Rp)" disabled="true"/>
+        <x-input_mask typemask="harga" ids="shargatanah" label="Harga Jual/Beli Tanah (Rp)" types="text" name="shargatanah" placeholder="Harga Jual/Beli Tanah (Rp)" disabled="true"/>
         <div class="form-group">
             <button type="button" wire:click="resetKalkulator" class="btn btn-success float-left">Reset</button>
             <button type="submit" class="btn btn-primary float-right">Hitung</button>

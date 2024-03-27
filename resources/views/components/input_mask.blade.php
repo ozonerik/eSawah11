@@ -1,7 +1,8 @@
 @push('js')
 <script>
 Livewire.on('run_inputmask', () => {
-    $(document).ready(function(){       
+    $(document).ready(function(){   
+        console.log('run_inputmask');
         if('{{$typemask}}'=='noppbb'){
             $('#{{ $ids }}').inputmask({'alias':'noppbb'});
         }
