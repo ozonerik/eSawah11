@@ -58,7 +58,7 @@ class Dashboard extends Component
         $this->mode = $mode;
         if($mode=='read'){
             //dd('read');
-            $this->dispatch('run_select2'); $this->dispatch('run_select2');
+            $this->dispatch('run_select2');
             $this->dispatch('run_autolocation');
             $this->dispatch('run_inputmask');
         }
