@@ -102,7 +102,7 @@ class Kalkulatorsawah extends Component
             $this->lanjakw= get_lanja($this->ls1,$lanja);
             $this->lanjarp= get_nlanja($this->ls1,$lanja,$hgpadi);
         }
-        $this->shargatanah= ($this->ls3 * $shargabata) ;
+        $this->shargatanah= conv_inputmask(conv_inputmask($this->ls3) * conv_inputmask($shargabata)) ;
 
     }
     // Batas Akhir Fungsi Kalkulator Sawah
@@ -140,14 +140,12 @@ class Kalkulatorsawah extends Component
         $this->chargatanah=0;
     } 
     public function konversisawah(){
-        $cluas=($this->cluas);
-        $cbata=($this->cbata);
         $conhgpadi=conv_inputmask($this->conhgpadi);
         $conlanja=conv_inputmask($this->conlanja);
         $chargabata=conv_inputmask($this->chargabata);
-        $this->clanjakw= get_lanja($cluas,$conlanja);
-        $this->clanjarp= get_nlanja($cluas,$conlanja,$conhgpadi);
-        $this->chargatanah= ($cbata * $chargabata);
+        $this->clanjakw= get_lanja($this->cluas,$conlanja);
+        $this->clanjarp= get_nlanja($this->cluas,$conlanja,$conhgpadi);
+        $this->chargatanah= conv_inputmask(conv_inputmask($this->cbata) * conv_inputmask($chargabata));
     }
     //batas akhir konversi sawah
     public function render()
