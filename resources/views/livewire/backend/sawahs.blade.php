@@ -16,7 +16,8 @@
             <button wire:click="onTrashed" class="btn btn-sm btn-success" data-toggle="tooltip" title="Trash" @if(empty($Restoresawah->total())) disabled @endif><i class="fa fa-archive mr-2"></i>Trash</button>
         </x-slot>    
         </x-card_tablesawah>
-        @elseif($mode=='trashed')
+        @endif
+        @if($mode=='trashed')
         <x-card_tabletrash type="danger" width="9" order="1" smallorder="1" title="Restore Sawah" :data="$Restoresawah" :thead="['No Surat','Nama Sawah','Luas(m2)','Lokasi']" :tbody="['nosawah','namasawah','luas','lokasi']" :tbtn="['restore','del']" search="Search..."/>
         @endif
     

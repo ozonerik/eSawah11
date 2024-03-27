@@ -12,7 +12,7 @@ class Dashboard extends Component
 {
     
     #[Layout('layouts.app')] 
-    public $user,$luas,$tanggal,$result,$lokasi;
+    public $user,$luas,$tgl1,$tgl2,$result,$lokasi,$bata;
     public $user_multi=[];
     public $area=0;
     public $keliling=0;
@@ -60,28 +60,35 @@ class Dashboard extends Component
             //dd('read');
             $this->dispatch('run_select2');
             $this->dispatch('run_autolocation');
-            $this->dispatch('run_inputmask');
         }
         if($mode=='add'){
             //dd('edit');
             $this->dispatch('run_select2');
             $this->dispatch('run_autolocation');
-            $this->dispatch('run_inputmask');
+            //$this->dispatch('run_inputmask');
+            $this->dispatch('run_inputmask2');
         }
         
     }
 
     public function mount(){
         $this->user = User::get();
-        //$this->dispatch('run_select2');  
+        $this->tgl2='26/03/2024';  
     }
 
     public function updatedLuas($value){
         $this->result=$value;
     }
 
-    public function updatedTanggal($value){
+    public function updatedBata($value){
         $this->result=$value;
+    }
+
+    public function updatedTgl1($value){
+        $this->result=$value;
+    }
+    public function updatedTgl2($value){
+        //$this->result=$value;
     }
 
     public function render()

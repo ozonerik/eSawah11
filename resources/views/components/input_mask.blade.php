@@ -1,26 +1,25 @@
 @push('js')
 <script>
-Livewire.on('run_inputmask', () => {
-    $(document).ready(function(){   
-        console.log('run_inputmask');
-        if('{{$typemask}}'=='noppbb'){
-            $('#{{ $ids }}').inputmask({'alias':'noppbb'});
-        }
-        if('{{$typemask}}'=='harga'){
-            $('#{{ $ids }}').inputmask({'alias':'harga'});
-        }
-        if('{{$typemask}}'=='luas'){
-            $('#{{ $ids }}').inputmask({'alias':'luas'});
-        }
-        if('{{$typemask}}'=='kwintal'){
-            $('#{{ $ids }}').inputmask({'alias':'kwintal'});
-        }
-        if('{{$typemask}}'=='bata'){
-            $('#{{ $ids }}').inputmask({'alias':'bata'});
-        }
-        if('{{$typemask}}'=='tanggal'){
-            $('#{{ $ids }}').inputmask({'alias':'tanggal'});
-            $('#{{ $ids }}').datepicker({
+Livewire.on('run_inputmask2', () => {
+    $(document).ready(function(){
+        document.querySelectorAll('input[type-mask="noppbb"]').forEach((noppbb) => {
+            $(noppbb).inputmask({'alias':'noppbb'});
+        });
+        document.querySelectorAll('input[type-mask="harga"]').forEach((harga) => {
+            $(harga).inputmask({'alias':'harga'});
+        });
+        document.querySelectorAll('input[type-mask="luas"]').forEach((luas) => {
+            $(luas).inputmask({'alias':'luas'});
+        });
+        document.querySelectorAll('input[type-mask="kwintal"]').forEach((kwintal) => {
+            $(kwintal).inputmask({'alias':'kwintal'});
+        });
+        document.querySelectorAll('input[type-mask="bata"]').forEach((bata) => {
+            $(bata).inputmask({'alias':'bata'});
+        });
+        document.querySelectorAll('input[type-mask="tanggal"]').forEach((tanggal) => {
+            $(tanggal).inputmask({'alias':'tanggal'});
+            $(tanggal).datepicker({
                     autoclose:true,
                     format:'dd/mm/yyyy',
                     orientation:'bottom',
@@ -28,25 +27,24 @@ Livewire.on('run_inputmask', () => {
                     language:'id',
                     todayHighlight:true,
                     todayBtn:true,
-                }).datepicker('update', '{{ $this->$name }}').on('changeDate', function(e) {
-                    @this.set('{{ $name }}', this.value);
-                });
-        }
-        if('{{$typemask}}'=='derajat'){
-            $('#{{ $ids }}').inputmask({'alias':'derajat'});
-        }
-        if('{{$typemask}}'=='panjang'){
-            $('#{{ $ids }}').inputmask({'alias':'panjang'});
-        }
-        if('{{$typemask}}'=='desimal'){
-            $('#{{ $ids }}').inputmask({'alias':'desimal'});
-        }
-        if('{{$typemask}}'=='nomor'){
-            $('#{{ $ids }}').inputmask({'alias':'nomor'});
-        }
-        if('{{$typemask}}'=='telp'){
-            $('#{{ $ids }}').inputmask({'alias':'telp'});
-        }
+                })
+        });
+        document.querySelectorAll('input[type-mask="derajat"]').forEach((derajat) => {
+            $(derajat).inputmask({'alias':'derajat'});
+        });
+        document.querySelectorAll('input[type-mask="panjang"]').forEach((panjang) => {
+            $(panjang).inputmask({'alias':'panjang'});
+        });
+        document.querySelectorAll('input[type-mask="desimal"]').forEach((desimal) => {
+            $(desimal).inputmask({'alias':'desimal'});
+        });
+        document.querySelectorAll('input[type-mask="nomor"]').forEach((nomor) => {
+            $(nomor).inputmask({'alias':'nomor'});
+        });
+        document.querySelectorAll('input[type-mask="telp"]').forEach((telp) => {
+            $(telp).inputmask({'alias':'telp'});
+        });
+            
     });
 });
 </script>
@@ -54,22 +52,22 @@ Livewire.on('run_inputmask', () => {
 <div class="form-group" wire:ignore>
     <label for="{{ $ids }}" class="@if(!empty($wajib)) text-danger  @endif">{{ $label }}</label>
     @if($typemask == 'noppbb')
-    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'noppbb'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    <input type-mask="noppbb" wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'noppbb'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
     @endif
     @if($typemask == 'harga')
-    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'harga'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    <input type-mask="harga" wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'harga'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
     @endif
     @if($typemask == 'luas')
-    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" type-inputmask="luas" data-inputmask="'alias':'luas'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    <input type-mask="luas" wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" type-inputmask="luas" data-inputmask="'alias':'luas'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
     @endif
     @if($typemask == 'kwintal')
-    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'kwintal'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    <input type-mask="kwintal" wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'kwintal'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
     @endif
     @if($typemask == 'bata')
-    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'bata'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    <input type-mask="bata" wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'bata'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
     @endif
     @if($typemask == 'tanggal')
-    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'tanggal'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    <input type-mask="tanggal" onchange="@this.set('{{ $name }}', this.value)" wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'tanggal'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
         @push('js')
         <script>
             $(document).ready(function(){
@@ -81,27 +79,27 @@ Livewire.on('run_inputmask', () => {
                     language:'id',
                     todayHighlight:true,
                     todayBtn:true,
-                }).datepicker('update', '{{ $this->$name }}').on('changeDate', function(e) {
+                })/* .datepicker('update', '{{ $this->$name }}').on('changeDate', function(e) {
                     @this.set('{{ $name }}', this.value);
-                });
+                }); */
             });
         </script>
         @endpush
     @endif
     @if($typemask == 'derajat')
-    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'derajat'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    <input type-mask="derajat" wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'derajat'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
     @endif
     @if($typemask == 'panjang')
-    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'panjang'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    <input type-mask="panjang" wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'panjang'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
     @endif
     @if($typemask == 'desimal')
-    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'desimal'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    <input type-mask="desimal" wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'desimal'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
     @endif
     @if($typemask == 'nomor')
-    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'nomor'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    <input type-mask="nomor" wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'nomor'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
     @endif
     @if($typemask == 'telp')
-    <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'telp'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    <input type-mask="telp" wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'telp'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
     @endif
     @if($typemask == 'text')
     <input wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
