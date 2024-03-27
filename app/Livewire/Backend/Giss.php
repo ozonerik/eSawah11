@@ -14,6 +14,7 @@ class Giss extends Component
     public $lt,$lg,$ac;
     public $mluas=0;
     public $mkel=0;
+    public $hargabata,$hargatanah;
     
     public function mount(){
         $this->resetForm();
@@ -66,8 +67,10 @@ class Giss extends Component
         $this->keliling=0;
         $this->hgpadi=get_hargapadi();
         $this->lanja=get_nilailanja();
+        $this->hargabata=get_hargabata();
         $this->lanjakw=0;
         $this->lanjarp=0;
+        $this->hargatanah=0;
     }
 
     public function updatedLuas($value){
@@ -86,6 +89,10 @@ class Giss extends Component
         //dd($value);
         $this->onHitung();
     }
+    public function updatedHargabata($value){
+        //dd($value);
+        $this->onHitung();
+    }
 
     public function onHitung(){
             $luas=$this->luas;
@@ -94,6 +101,7 @@ class Giss extends Component
             $lanja=conv_inputmask($this->lanja);
             $this->lanjakw= get_lanja($luas,$lanja);
             $this->lanjarp= get_nlanja($luas,$lanja,$hgpadi);
+            $this->hargatanah= ($this->luasbata * conv_inputmask($this->hargabata));
     }
 
     public function onReset(){

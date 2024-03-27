@@ -19,8 +19,10 @@
                 <x-input_mask typemask="panjang" wajib="" disabled="" ids="keliling" label="Keliling (m)" types="text" name="keliling" placeholder="Get Keliling (m)" />
                 <x-input_mask typemask="harga" wajib="true" ids="hgpadi" label="Harga 1kw Gabah Kering (Rp)" types="text" name="hgpadi" placeholder="Enter Harga 1kw Gabah Kering" disabled="false"/>
                 <x-input_mask typemask="kwintal" wajib="true" ids="lanja" label="Lanja/100 bata (kw)" types="text" name="lanja" placeholder="Enter Kwintal Lanja" disabled="false"/>
+                <x-input_mask typemask="harga" wajib="true" disabled="false" ids="hargabata" label="Harga Sawah Per Bata (Rp)" types="text" name="hargabata" placeholder="Harga Per Bata Sawah (Rp)" />
                 <x-input_mask typemask="kwintal" ids="lanjakw" label="Nilai Lanja/Thn (kw)" types="text" name="lanjakw" placeholder="Nilai Lanja (kw)" disabled="true"/>
                 <x-input_mask typemask="harga" ids="lanjarp" label="Nilai Lanja/Thn (Rp)" types="text" name="lanjarp" placeholder="Nilai Lanja (Rp)" disabled="true"/>
+                <x-input_mask typemask="harga" ids="hargatanah" label="Harga Jual/Beli Tanah (Rp)" types="text" name="hargatanah" placeholder="Harga Jual/Beli Tanah (Rp)" disabled="true"/>
                 <button wire:click="onReset" type="button" class="btn btn-success float-left">Reset</button>
                 <button type="submit" class="btn btn-primary float-right">Hitung</button>
             </form>
