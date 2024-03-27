@@ -22,7 +22,8 @@ class Dashboard extends Component
     {
         $this->mode = $mode;
         if($mode=='read'){
-            dd('read');
+            //dd('read');
+            $this->dispatch('run_select2'); $this->dispatch('run_select2');
         }
         if($mode=='edit'){
             //dd('edit');
@@ -32,7 +33,8 @@ class Dashboard extends Component
     }
 
     public function mount(){
-        $this->user = User::get();  
+        $this->user = User::get();
+        //$this->dispatch('run_select2');  
     }
 
     public function updatedLuas($value){
@@ -45,7 +47,6 @@ class Dashboard extends Component
 
     public function render()
     {
-        $this->dispatch('run_select2');
         return view('livewire.backend.dashboard');
     }
 }
