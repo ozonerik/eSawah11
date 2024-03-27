@@ -100,7 +100,7 @@ class Giss extends Component
             $this->lanjakw= get_lanja($this->luas,$lanja);
             $this->lanjarp= get_nlanja($this->luas,$lanja,$hgpadi);
             //dd( conv_inputmask($this->luasbata));
-            $this->hargatanah= get_hargatanah($this->luasbat,$this->hargabata);
+            $this->hargatanah= get_hargatanah($this->luasbata,$this->hargabata);
     }
 
     public function onReset(){
