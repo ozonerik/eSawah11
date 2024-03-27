@@ -7,8 +7,9 @@
         <li class="breadcrumb-item active">GIS</li>
     </x-content_header>
     <div class="row mx-1">
+        <livewire:kalkulatorsawah />
         @if($mode=='read')
-        <x-card_section2 name="GIS - Sawah" type="primary" width="12" order="1" smallorder="1">
+        <x-card_section2 name="GIS - Sawah" type="primary" width="9" order="1" smallorder="1">
             <form wire:submit.prevent="onHitung">
                 <div wire:ignore id="alert"></div>
                 <div wire:ignore id="gismap" style="height:500px" class="w-100 rounded bg-blank"></div>

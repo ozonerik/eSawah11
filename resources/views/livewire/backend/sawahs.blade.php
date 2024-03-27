@@ -8,7 +8,6 @@
     </x-content_header>
     <div class="row mx-1">
         <livewire:kalkulatorsawah />
-
         @if($mode=='read')
         <x-card_tablesawah type="primary" width="9" order="1" smallorder="1" title="Daftar Sawah" :data="$Sawah" :thead="['No Surat','Nama Sawah','Luas(m2)','Lokasi','Photo Sawah']" :tbody="['nosawah','namasawah','luas','lokasi','img']" :tbtn="['edit','del']" search="Search...">
         <x-slot:menu>
