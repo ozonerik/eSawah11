@@ -2,6 +2,9 @@
 <script>
 Livewire.on('run_inputmask2', () => {
     $(document).ready(function(){
+        document.querySelectorAll('input[type-mask="nik"]').forEach((nik) => {
+            $(nik).inputmask({'alias':'nik'});
+        });
         document.querySelectorAll('input[type-mask="noppbb"]').forEach((noppbb) => {
             $(noppbb).inputmask({'alias':'noppbb'});
         });
@@ -51,6 +54,9 @@ Livewire.on('run_inputmask2', () => {
 @endpush
 <div class="form-group" wire:ignore>
     <label for="{{ $ids }}" class="@if(!empty($wajib)) text-danger  @endif">{{ $label }}</label>
+    @if($typemask == 'nik')
+    <input type-mask="nik" wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'nik'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
+    @endif
     @if($typemask == 'noppbb')
     <input type-mask="noppbb" wire:ignore onkeyup="@this.set('{{ $name }}', this.value)" data-inputmask="'alias':'noppbb'"  @if(!empty($wajib)) requiered @endif @if($disabled=="true") disabled @endif id="{{ $ids }}" type="{{ $types }}" wire:model.live="{{ $name }}" class="form-control @if($errors->has( $name )) is-invalid @endif"  placeholder="{{ $placeholder }}" >
     @endif

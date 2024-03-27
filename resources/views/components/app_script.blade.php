@@ -28,6 +28,17 @@
 <script src="https://ljagis.github.io/leaflet-measure/leaflet-measure.js"></script>
 <script>
 Inputmask.extendAliases({
+    'nik': {
+        'autoUnmask': true, 
+        'onBeforeMask': function (value) {
+            value=0;
+            return value;
+        },
+        'mask': ['99.99.99.999999.9999'],
+        'decimalProtect':true,
+        'rightAlign': false,
+        'removeMaskOnSubmit':true
+      },
     'noppbb': {
         'autoUnmask': true, 
         'onBeforeMask': function (value) {
