@@ -62,12 +62,12 @@
                             @endforeach
                             <td>
                                 @if( in_array('restore',$tbtn) &&  in_array('del',$tbtn) )
-                                <button wire:click="onResDel({{ $row->id }})" class="btn btn-sm btn-success w-100" data-toggle="tooltip" title="Restore" ><i class="fas fa-trash-restore-alt"></i></button>         
-                                <button wire:click="onDelForce({{ $row->id }})" class="btn btn-sm btn-danger mt-1 w-100" data-toggle="tooltip" title="Hapus"><i class="fas fa-trash-alt"></i></button>
+                                <button wire:click="onResDel({{ $row->id }})" class="btn btn-sm btn-success" style="width:35px" data-toggle="tooltip" title="Restore" ><i class="fas fa-trash-restore-alt"></i></button>         
+                                <button wire:click="onDelForce({{ $row->id }})" class="btn btn-sm btn-danger ml-0 ml-md-1 mt-1 mt-md-0" style="width:35px" data-toggle="tooltip" title="Hapus"><i class="fas fa-trash-alt"></i></button>
                                 @elseif(in_array('restore',$tbtn))
-                                <button wire:click="onResDel({{ $row->id }})" class="btn btn-sm btn-success w-100" data-toggle="tooltip" title="Restore" ><i class="fas fa-trash-restore-alt"></i></button>
+                                <button wire:click="onResDel({{ $row->id }})" class="btn btn-sm btn-success" style="width:35px" data-toggle="tooltip" title="Restore" ><i class="fas fa-trash-restore-alt"></i></button>
                                 @elseif(in_array('del',$tbtn))
-                                <button wire:click="onDelForce({{ $row->id }})" class="btn btn-sm btn-danger w-100" data-toggle="tooltip" title="Hapus"><i class="fas fa-trash-alt"></i></button>
+                                <button wire:click="onDelForce({{ $row->id }})" class="btn btn-sm btn-danger" style="width:35px" data-toggle="tooltip" title="Hapus"><i class="fas fa-trash-alt"></i></button>
                                 @endif
                             </td>
                         </tr>

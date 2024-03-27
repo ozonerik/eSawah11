@@ -10,7 +10,6 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Livewire\Attributes\On; 
-use Illuminate\Support\Facades\Crypt;
 
 class Sawahs extends Component
 {
