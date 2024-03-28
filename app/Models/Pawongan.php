@@ -13,6 +13,7 @@ class Pawongan extends Model
         'nik',
         'nama',
         'alamat',
+        'latlang',
         'telp',
         'photo',
         'user_id',

@@ -75,7 +75,7 @@
                             <td>
                                 @if( in_array('edit',$tbtn) &&  in_array('del',$tbtn) )
                                 <button wire:click="onEdit({{ $row->id }})" class="btn btn-sm btn-success " style="width:35px" data-toggle="tooltip" title="Edit" ><i class="fas fa-edit"></i></button>         
-                                <button wire:click="onDelete({{ $row->id }})" class="btn btn-sm btn-danger ml-0 ml-md-1 mt-1 mt-sm-0" style="width:35px" data-toggle="tooltip" title="Hapus"><i class="fas fa-trash-alt"></i></button>
+                                <button wire:click="onDelete({{ $row->id }})" class="btn btn-sm btn-danger ml-0 mt-1 mt-lg-0" style="width:35px" data-toggle="tooltip" title="Hapus"><i class="fas fa-trash-alt"></i></button>
                                 @elseif(in_array('edit',$tbtn))
                                 <button wire:click="onEdit({{ $row->id }})" class="btn btn-sm btn-success" style="width:35px" data-toggle="tooltip" title="Edit" ><i class="fas fa-edit"></i></button>
                                 @elseif(in_array('del',$tbtn))

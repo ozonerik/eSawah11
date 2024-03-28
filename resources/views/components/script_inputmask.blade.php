@@ -1,5 +1,5 @@
 <script>
-Livewire.on('run_inputmask2', () => {
+Livewire.on('run_inputmask', () => {
     $(document).ready(function(){
         document.querySelectorAll('input[type-mask="nik"]').forEach((nik) => {
             $(nik).inputmask({'alias':'nik'});

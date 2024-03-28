@@ -1,3 +1,9 @@
+@php
+    $isMeasure = (isset($eventMeasure) ?? false) ? $eventMeasure : false;
+    $isArea = (isset($area) ?? false) ? $area : false;
+    $isLength = (isset($length) ?? false) ? $length : false;
+@endphp
+
 <script>
 document.addEventListener('livewire:initialized', () => {
     initAutocomplete();
@@ -83,14 +89,16 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
             center: [$lat, $long],
             zoom: 18,
         });
-        measureControl = new L.Control.Measure({ 
-            position: 'topright', 
-            primaryLengthUnit: 'meters',
-            secondaryLengthUnit: 'kilometers',
-            primaryAreaUnit: 'sqmeters',
-            secondaryAreaUnit: 'hectares'
-        });
-        measureControl.addTo(map_init);
+        if('{{ $isMeasure }}'){
+            measureControl = new L.Control.Measure({ 
+                position: 'topright', 
+                primaryLengthUnit: 'meters',
+                secondaryLengthUnit: 'kilometers',
+                primaryAreaUnit: 'sqmeters',
+                secondaryAreaUnit: 'hectares'
+            });
+            measureControl.addTo(map_init);
+        }
 
         //https://stackoverflow.com/questions/9394190/leaflet-map-api-with-google-satellite-layer
         googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
@@ -127,13 +135,16 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
             map_init.fitBounds(featureGroup.getBounds());
         }
 
-        map_init.on('measurefinish', function(hasil) {
-            let ls=hasil.area.toFixed(2);
-            let kl=hasil.length.toFixed(2);
-            Livewire.dispatch('{{ $eventMeasure }}',{ data:{'ls':ls, 'kl':kl}});
-            @this.set('{{ $area }}', ls);
-            @this.set('{{ $length }}', kl);
-        });
+        if('{{ $isMeasure }}'){
+            map_init.on('measurefinish', function(hasil) {
+                let ls=hasil.area.toFixed(2);
+                let kl=hasil.length.toFixed(2);
+                Livewire.dispatch('{{ $isMeasure }}',{ data:{'ls':ls, 'kl':kl}});
+                @this.set('{{ $isArea }}', ls);
+                @this.set('{{ $isLength }}', kl);
+            });
+        }
+
     }
 }
 </script>

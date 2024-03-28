@@ -10,6 +10,7 @@ use App\Livewire\Backend\Result;
 use App\Livewire\Backend\Appconfigs;
 use App\Livewire\Backend\Infos;
 use App\Livewire\Backend\Users;
+use App\Livewire\Backend\Pawongans;
 use App\Livewire\Frontend\Home;
 use App\Livewire\Test;
 
@@ -30,7 +31,7 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::get('/search', Result::class)->name('result');
     Route::get('/sawahs', Sawahs::class)->name('sawahs');
     Route::get('/profile', Profile::class)->name('profile');
-    Route::get('/pawongans', Profile::class)->name('pawongans');
+    Route::get('/pawongans', Pawongans::class)->name('pawongans');
     Route::get('/lanjas', Profile::class)->name('lanjas');
     Route::get('/bayarlanjas', Profile::class)->name('bayarlanjas');
     Route::group(['middleware' => ['role:pro']], function () {

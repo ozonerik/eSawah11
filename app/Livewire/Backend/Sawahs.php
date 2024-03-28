@@ -137,7 +137,7 @@ class Sawahs extends Component
         //return redirect()->route('sawahs.edit','s='.$id);
         $this->mode='edit';
         $this->dispatch('run_autolocation');
-        $this->dispatch('run_inputmask2');
+        $this->dispatch('run_inputmask');
         $this->ids=$id;
         $sawah = Sawah::findOrFail($id);
         $this->nosawah=$sawah->nosawah;
@@ -234,7 +234,7 @@ class Sawahs extends Component
         $this->mode='add';
         $this->resetForm();
         $this->dispatch('run_autolocation');
-        $this->dispatch('run_inputmask2');
+        $this->dispatch('run_inputmask');
     }
 
     public function updatedluas($value){
