@@ -105,10 +105,10 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
         if($dragable!==''){
             marker = new L.marker([$lat, $long], {
                 draggable: 'true'
-            }).addTo(map_init).bindPopup($popup).openPopup();
+            }).addTo(map_init).bindPopup('<center>'+$popup+'<br>( '+$lat+','+$long+' )</center>').openPopup();
         }else{
             marker = new L.marker([$lat, $long], {
-            }).addTo(map_init).bindPopup($popup).openPopup();
+            }).addTo(map_init).bindPopup('<center>'+$popup+'<br>( '+$lat+','+$long+' )</center>').openPopup();
         }
         
         marker.on('dragend', function(event) {

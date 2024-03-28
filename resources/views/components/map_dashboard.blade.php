@@ -53,7 +53,7 @@
         }).addTo(map_init);
 
         marker = new L.marker([$lat, $long], {icon: redIcon
-        }).addTo(map_init).bindPopup('Your Location').openPopup();
+        }).addTo(map_init).bindPopup('<center>'+'Your Location'+'<br>( '+$lat+','+$long+' )</center>').openPopup();
 
         circle = L.circle([$lat, $long], { radius: $ac });
         var featureGroup = L.featureGroup([marker, circle]).addTo(map_init);
@@ -63,7 +63,7 @@
         letaksawah.forEach((letak) => {
             if(letak.latlang!==null){
                 let kordinat =letak.latlang.split(",");
-                marksawah = new L.marker(kordinat, {icon: greenIcon}).addTo(map_init).bindPopup(letak.namasawah);
+                marksawah = new L.marker(kordinat, {icon: greenIcon}).addTo(map_init).bindPopup('<center>'+letak.namasawah+'<br>( '+letak.latlang+' )</center>');
             }
         });
 
