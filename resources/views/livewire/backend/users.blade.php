@@ -1,3 +1,6 @@
+@push('js')
+<x-script_select2 />
+@endpush
 <div>
     <x-content_header name="Users" >
         <li class="breadcrumb-item active">Settings</li>

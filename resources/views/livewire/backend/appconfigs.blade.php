@@ -1,3 +1,6 @@
+@push('js')
+<x-script_inputmask />
+@endpush
 <div>
     <x-content_header name="Referensi" >
         <li class="breadcrumb-item active">Settings</li>

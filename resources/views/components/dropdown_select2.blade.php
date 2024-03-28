@@ -3,7 +3,7 @@
 
     @if($typeselect=='single')
     <div wire:ignore>
-        <select wire:model.live="{{$name}}" name="{{$name}}" id="{{$ids}}" class="form-control @if($errors->has( $name )) is-invalid @endif" style="width:100%">
+        <select wire:model.live="{{$name}}"  onchange="@this.set('{{ $name }}', this.value)" type-select="select2" name="{{$name}}" id="{{$ids}}" class="form-control @if($errors->has( $name )) is-invalid @endif" style="width:100%">
             <option value="">Please Choose...</option> 
             @foreach ($data as $row)
             <option value="{{$row->$values}}" > {{$row->$showval}}</option>
@@ -14,7 +14,7 @@
 
     @if($typeselect=='multi')
     <div class="select2bs4-blue" wire:ignore>
-        <select wire:model.live="{{$name}}" name="{{$name}}" multiple="multiple" id="{{$ids}}" style="width:100%" data-dropdown-css-class="select2bs4-blue" class="form-control @if($errors->has( $name )) is-invalid @endif" >
+        <select wire:model.live="{{$name}}"  onchange="@this.set('{{ $name }}', this.value)" type-select="select2" name="{{$name}}" multiple="multiple" id="{{$ids}}" style="width:100%" data-dropdown-css-class="select2bs4-blue" class="form-control @if($errors->has( $name )) is-invalid @endif" >
             <option value="">Please Choose...</option> 
             @foreach ($data as $row)
             <option value="{{$row->$values}}" > {{$row->$showval}}</option>
@@ -25,34 +25,3 @@
 
     @if($errors->has( $name ))<div class="invalid-feedback">{{ $errors->first($name) }}</div>@endif
 </div>
-@push('js')
-<script>
-document.addEventListener('livewire:initialized', function () {
-    $(document).ready(function(){
-        $('#{{$ids}}').select2({
-            theme: 'bootstrap4',
-            placeholder: "Please Choose...",
-            allowClear: 'true'
-        })
-        $('#{{$ids}}').change(function (e) {
-            let data = $(this).val();
-            @this.set('{{$name}}', data);
-        });
-    });
-});
-
-Livewire.on('run_select2', () => {
-    $(document).ready(function(){
-        $('#{{$ids}}').select2({
-            theme: 'bootstrap4',
-            placeholder: "Please Choose...",
-            allowClear: 'true'
-        })
-        $('#{{$ids}}').change(function (e) {
-            let data = $(this).val();
-            @this.set('{{$name}}', data);
-        });
-    });
-});
-</script>
-@endpush

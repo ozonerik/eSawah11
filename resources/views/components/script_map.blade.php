@@ -1,4 +1,3 @@
-@push('js')
 <script>
 document.addEventListener('livewire:initialized', () => {
     initAutocomplete();
@@ -138,4 +137,3 @@ function showMaps($lat, $long, $ac, $iddiv, $dragable,$popup){
     }
 }
 </script>
-@endpush
