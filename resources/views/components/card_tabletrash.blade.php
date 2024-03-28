@@ -77,9 +77,6 @@
             </div>
         </div>
         <div class="card-footer clearfix">
-            <div class="float-left">
-                <small>Showing {{ $data->firstItem() }} to {{ $data->lastItem() }} of {{ $data->total() }} entries</small>
-            </div>
             {{ $data->links() }} 
         </div>
     </div>
