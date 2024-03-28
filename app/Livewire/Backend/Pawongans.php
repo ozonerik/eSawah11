@@ -58,7 +58,7 @@ class Pawongans extends Component
     // Batas Awal Fungsi Tabel
     public function getPawonganProperty(){
         $searchQuery = trim($this->search);
-        $requestData = ['nama', 'alamat'];
+        $requestData = ['nama', 'alamat','telp'];
         return Pawongan::where(function($q) use($requestData, $searchQuery) {
             foreach ($requestData as $field)
             $q->orWhere($field, 'like', "%{$searchQuery}%");
