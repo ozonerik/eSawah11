@@ -8,6 +8,7 @@ use App\Livewire\Backend\Giss;
 use App\Livewire\Backend\Sawahs;
 use App\Livewire\Backend\Result;
 use App\Livewire\Backend\Appconfigs;
+use App\Livewire\Backend\Infos;
 use App\Livewire\Backend\Users;
 use App\Livewire\Frontend\Home;
 use App\Livewire\Test;
@@ -38,7 +39,7 @@ Route::group(['middleware' => ['auth','verified']], function () {
     Route::group(['middleware' => ['role:admin']], function () {
         Route::get('/referensi', Appconfigs::class)->name('referensi');
         Route::get('/users', Users::class)->name('users');
-        Route::get('/infos', Profile::class)->name('infos');
+        Route::get('/infos', Infos::class)->name('infos');
         Route::get('/giss', Giss::class)->name('giss');
     });
 });

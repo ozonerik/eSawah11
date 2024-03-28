@@ -51,7 +51,7 @@
                                 <td>
                                 @if($val=="images"||$val=="photos"||$val=="img"||$val=="photo"||$val=="image")
                                         @if(!empty($row->$val))
-                                        <img alt="images" src="{{ asset('storage/'.$row->$val) }}" class="img-thumbnail rounded float-left" style="max-height:150px"/> 
+                                        <img alt="images" src="{{ $row->$val }}" class="img-thumbnail rounded float-left" style="max-height:150px"/> 
                                         @else
                                         <img alt="images" src="{{ asset('img/image.png') }}" class="img-thumbnail rounded float-left" style="max-height:150px"/> 
                                         @endif
